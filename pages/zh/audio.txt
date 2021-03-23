@@ -1,0 +1,41 @@
+====录音====
+
+目前使用alsa提供的接口，录音一般为WAV。
+
+====条件====
+准备一条带MIC的耳机（注意个别耳机线序不对，笔者测试了三星手机耳机、小米手机耳机是可以的。苹果耳机由于线序不同是不行的）插入耳机座，运行如下命令后会把声音录到内存中。
+
+<code bash>
+ root@Widora:/# arecord -f cd /tmp/rec.wav
+</code>
+执行后将持续录音，停止请按"ctrl + C"组合键。 
+==播放==
+如下命令可回放刚才的录音。 
+<code bash>
+root@Widora:/# aplay /tmp/rec.wav
+</code>
+
+====听音乐====
+一般的音乐文件都是wav和mp3格式，wav使用如上的aplay命令，而mp3则需要用madplay命令，例如：
+<code bash>
+root@Widora:/# madplay /tmp/test.mp3
+</code>
+
+====alsamixer音频调节工具====
+alsa提供了字符画的音频调节工具，前提是需要串口终端支持，例如putty和minicom就可以很好的支持字符画。进入后可以使用上下左右等进行选择和调整。
+<code bash>
+root@Widora:/# alsamixer
+</code> 
+
+====amixer命令====
+使用amixer命令同样可以实现对alsa进行音频调节。
+
+设定Headphone输出音量:
+<code bash>
+root@Widora:/# amixer set Headphone 85%
+</code> 
+开启3D音效到95%:
+<code bash>
+root@Widora:/# amixer set 3D on
+root@Widora:/# amixer set 3D 95%
+</code> 

@@ -1,0 +1,44 @@
+~~NOTOC~~
+=====UBOOT=====
+源代码：[[https://github.com/widora/u-boot-mt7688]]
+^ 版本 ^ 链接 ^ 变更 ^
+| 1.0.9 | {{ :zh:uboot-mt7688-1.0.9-reduce-128mram-4baddr.bin |}} \\ {{ :zh:uboot-mt7688-1.0.9-reduce-128mram-3baddr.bin |}} \\ {{ :zh:uboot-mt7688-1.0.9-reduce-64mram-3baddr.bin |}} | 改善uboot的波特率 |
+| 1.0.8 | {{ :zh:uboot-mt7688-1.0.8-reduce-128mram-4baddr.bin |}}   \\ {{ :zh:uboot-mt7688-1.0.8-reduce-64mram-3baddr.bin |}}    \\ {{ :zh:uboot-mt7688-1.0.8-reduce-128mram-3baddr.bin |}}   \\ {{ :zh:uboot-mt7688-1.0.8-reduce-64mram-4baddr.bin |}}        | Uboot启动时间减小约1秒 |
+| 1.0.8 | {{::uboot-mt7688-1.0.8-blink-64mram-4baddr.bin| BIT5,64MB ram,4B mode}} \\ {{ ::uboot-mt7688-1.0.8-blink-128mram-3baddr.bin |BIT3,128MB ram,16M/32M flash,3B mode}} \\ {{ zh:uboot-mt7688-1.0.8-blink-128mram-4baddr.bin |BIT3,128MB ram,32M flash 4B mode}} | 1.网口由5口更改为单口Port0 \\ <wrap hi>BIT3.0(32+128)配置请用这个版本</wrap> |
+| 1.0.7 | {{ ::uboot-mt7688-0.1.7-blink.bin |}} \\ {{ ::uboot-mt7688-0.1.7-blink-32m4b-64mram.bin |}} | Widora通刷U-boot。默认刷机IP为192.168.1.111  \\ 1. 较之前版本修改菜单“5”后进入所有GPIO测试状态的LED闪烁形式为交替闪烁。 \\ 2. 修改了进入web升级的动作，只要开机按住WPS，会自动进入web升级状态，明显的标志是WLED等闪大约10次。 \\ 3. 将系统时钟由575M修改为580M。 |
+=====OpenWrt=====
+源码仓库：[[https://github.com/widora/openwrt_widora]]
+====固件说明====
+
+20180412：即将合并wllll分支到master，以后需要5口的固件也是编译master即可，需要在uboot的env中添加：ethmode=wllll或lllll  \\
+用户名：root，密码：12345678（也适用于ssh) \\
+默认固件支持单网口和五网口。 \\
+OpenWrt-Chaos Calmer,内核版本3.18.29 \\
+默认LAN网关IP为192.168.8.1 \\
+默认AP名字为Widora-xxxx（xxxx是MAC地址后四位） \\
+Wi-Fi driver by mango,支持AP、STA、AP+STA、Monitor、Elian、airkiss、ATE \\
+TF卡，支持vfat，ext3，ext4等文件系统，自动挂载至/tmp/mounts/ \\
+USB，支持U盘，摄像头，声卡，USB转串口等设备 \\
+串口驱动支持UART0-2 \\
+音频，ALSA支持aplay和arecord，支持madplay，录音放音可同时，各种采样率 \\
+默认开启airplay，苹果手机、itunes音乐直接推送。如果需要DLNA需要menuconfig中开启，DLNA有些小BUG。 \\
+支持mjpg-streamer（网络监控）。 \\
+最多4路，（由于pwm2－3与uart2存在复用关系，需要修改dts方可完整使用4路PWM） \\
+GPIO：用户空间可命令操控 \\
+I2C:带I2Cdetect，i2cget，I2cset，i2cdump \\
+进系统后长按WPS大于2秒可恢复出厂设置 \\
+====固件已知问题====
+  1. 音频驱动有些小问题待修改
+  2. 微信配网成功后，WIDORA并没有发送回馈，导致微信一直停留在配网界面。过后会修复。但并不影响配网功能
+  3. LUCI扫描周围热点加入网络时，会使wireless配置文件混乱
+
+^ 版本 ^ 下载链接 ^ 说明 ^
+| 0.1.9 | BIT5: \\ {{ :zh:openwrt-ramips-mt7688-widora3264-0.1.9-20190812.bin |}} \\ BIT3,BIT4,NEO,BIT5.1: \\ {{ :zh:openwrt-ramips-mt7688-widora16128-0.1.9-20190812.bin |}} \\ {{ :zh:openwrt-ramips-mt7688-widora32128-0.1.9-20190812.bin |}} \\ {{ :zh:openwrt-ramips-mt7688-widora864-0.1.9-20190812.bin |}} |     |
+| 0.1.8 | BIT5: \\ {{ ::openwrt-ramips-mt7688-widora3264-0.1.8-20180813.bin |}} \\ BIT3,BIT4,NEO: \\ {{ ::openwrt-ramips-mt7688-widora16128-0.1.8-20180813.bin |}} \\ {{ ::openwrt-ramips-mt7688-widora32128-0.1.8-20180813.bin |}} \\ {{ :zh:openwrt-ramips-mt7688-widora864-0.1.8-20180813.bin |}} | 删掉widora_mode命令（各种模式容易让人困惑），增加两个：ethmode和wifimode命令[[netmode]] \\ 网口兼容5口和1口情况 \\ 增加了各种特殊符号、中文、英文逗号的SSID支持 \\ 增加了系统硬件看门狗，除了3B地址模式的32M FLASH均正常。（BIT3，NEO可以改成4B地址模式，看[[bit3_3bto4b]]，BIT4由于设计固定无法支持4B模式） \\ 已知问题：[[https://www.widora.io/topic/580/|非常频繁的nr会导致wifi驱动不可用]] |
+| 0.1.7 | {{ ::openwrt-mt7688-widora16m-0.1.7-20180405.bin |}} \\ {{ ::openwrt-mt7688-widora32m-0.1.7.-20180405.bin |}} | 修复i2c \\ 局域网br-lan的IP修改为：192.168.8.1 \\ 防火墙外网INPUT规则修改为ACCEPT，此后只要是局域网内想访问WIDORA，统一用widora.local代替IP即可 \\ 修改widora_mode脚本以更好的适应aac微信配网命令 \\ 关闭了dnsmasq的局域网内rebind \\ 增加widora_mode命令 \\ 新增aac命令，运行后进入配网状态 \\ {{ ::1489233470343-img_1049.png?300 |}} \\ WIFI驱动升级到1.2版本，稳定性大幅提高 \\ 修复webui配置界面的bug |
+| 0.1.6 | | 过渡版本 |
+| 0.1.5 | | 过渡版本 |
+| 0.1.4 | | 1、connect2ap命令增加了网段检测  \\ 2、增加了web方式配置wifi，默认页面为192.168.1.1 \\ 3、音频播放支持WM8960 D类功放输出及耳机输出，音量独立，通过alsamixer命令可以调节  |
+| 0.1.3 | | 1、修复音频播放低采样率单声道的问题 |
+| 0.1.2 | | 1、修复音频bug，支持录音放音同时，支持非mmap，支持其他采样率 |
+| 0.1.1 | | 1、加快apcli0联网速度 \\ 2、增加elian支持 \\ 3、增加airkiss支持 |

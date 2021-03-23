@@ -1,0 +1,11 @@
+F1C200的SPI位置复用了SDC1，虽然SDC1只有1-BIT物理数据线，但实际是可以BOOT。
+
+[[https://widora.io/accessories|雷龙SD芯片]]支持1BIT方式，所以这个小板用来将SD芯片的引脚线序调整为TINY200背面SPI的线序。
+
+工程： {{ ::spiflash位置使用sdio1bit芯片.zip |}}
+
+为了能在TINY200的SPI-FLASH位置使用雷龙SD芯片，于是有了这么个小板（工程源文件）
+
+<wrap hi>从20200722起，只要购买TINY200板子的都默认带一片这个小板。</wrap>
+
+{{ ::1bit.jpg?400 |}}

@@ -1,0 +1,26 @@
+====模式简介====
+网口模式和WI-FI模式介绍如下（如果不支持以下命令请将固件升级到最新）：
+===0.1.8及以后===
+查看网络模式命令ethmode,（不受恢复出厂设置影响）：
+^ ethmode命令 ^ 网口状态 ^
+| ethmode l | 单网口0，LAN |
+| ethmode w | 单网口0，WAN |
+| ethmode wllll | 五网口，Port0为WAN，其余为LAN |
+| ethmode lllll | 五网口，均为LAN |
+
+设置WI-FI模式命令wifimode：
+^ wifimode命令 ^ 状态 ^
+| wifimode ap | 仅AP热点，AP为LAN |
+| wifimode sta | 仅STA（apcli0），STA为WAN |
+| wifimode apsta | 以上两者共存，AP为LAN，STA为WAN |
+
+<wrap hi>20180405以前的固件，默认网关地址br-lan192.168.1.1，以后的固件为192.168.8.1</wrap> \\
+
+===0.1.7===
+^ MODE ^  REPEATER   ^ CLIENT  ^ ROUTER ^ PPPOE ^
+| LAN | eth0 ap apcli0	 | eth0 ap | ap | ap |
+| WAN | none | apcli0 | eth0 | eth0 |
+  "widora_mode repeater" or "widora_mode repeater ssid key" or "widora_mode repeater ssid" 
+  "widora_mode client" or "widora_mode client ssid key" or "widora_mode client ssid" 
+  "widora_mode router" 
+  "widora_mode pppoe" or "widora_mode pppoe name key" 

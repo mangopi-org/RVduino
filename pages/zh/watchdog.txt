@@ -1,0 +1,55 @@
+注意：适用于20180629以后的固件
+====查看看门狗====
+ubus call system watchdog
+<code bash>
+root@Widora:~# ubus call system watchdog
+{
+        "status": "running",
+        "timeout": 30,
+        "frequency": 5
+}
+root@Widora:~# 
+</code>
+
+如何验证？最暴利的方法就是查看门狗计数器是否在<wrap hi>循环的倒计时</wrap>。
+reg r 10000128
+<code bash>
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x741d
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x708e
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x6eb6
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x6d15
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x6b53
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x69a7
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x67f1
+root@Widora:~# reg r 10000128
+add:0x10000128 = 0x7127
+root@Widora:~# 
+</code>
+====停止系统喂狗====
+ubus call system watchdog '{"stop": true}'
+<code bash>
+root@Widora:~# ubus call system watchdog '{"stop": true}'
+{
+        "status": "stopped",
+        "timeout": 30,
+        "frequency": 5
+}
+</code>
+停止后，默认是30秒系统重启
+====恢复系统喂狗====
+<code bash>
+root@Widora:~# ubus call system watchdog '{"stop": false}'
+{
+        "status": "running",
+        "timeout": 30,
+        "frequency": 5
+}
+</code>
+

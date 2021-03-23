@@ -1,0 +1,342 @@
+<html>
+
+<div id="mainCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mainCarousel" data-slide-to="1"></li>
+        <li data-target="#mainCarousel" data-slide-to="2"></li>
+        <li data-target="#mainCarousel" data-slide-to="3"></li>
+        <li data-target="#mainCarousel" data-slide-to="4"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="img" style="background-image:url(/assets/uploads/files/1551182378534-box.jpg)">&nbsp;</div>
+          <div class="container">
+            <div class="carousel-caption" style="text-align:center">
+              <h1>Invention Platform for AIOT</h1>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="img" style="background-image:url(/assets/uploads/files/1546611932511-1140450-2.jpg)">&nbsp;</div>
+          <div class="container">
+            <div class="carousel-caption" style="text-align:right">
+              <h1>NEO - Amazing Open Source Hardware!</h1>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="img" style="background-image:url(/assets/uploads/files/1546612112128-1140450-3.jpg)">&nbsp;</div>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>AIR Wi-Fi + Bluetooth = &hearts;</h1>
+                ESP32 inside!!</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="img" style="background-image:url(/assets/uploads/files/1546612778852-1140450-5.jpg)">&nbsp;</div>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>We work hard！</h1>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="img" style="background-image:url(/assets/uploads/files/1546613006820-1140450-6.jpg)">&nbsp;</div>
+          <div class="container">
+            <div class="carousel-caption" style="text-align:center">
+              <h1>BIT Module!</h1>
+              <p><br/>MT7688AN, MT7628DAN,small and stable.</p>
+            </div>
+          </div>
+        </div>
+    </div><!-- /.carousel -->
+  </div>
+
+
+
+
+    <style>
+        .products {
+            padding: 0px 0px;
+            position: relative;
+            width: 100%;
+            background-color: #e0e0ed;
+        }
+
+        .products:after {
+            content: '';
+            pointer-events: none;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            height: 200%;
+            width: 200%;
+            -webkit-transform: scale(0.5);
+            transform: 0.5;
+            transform-origin: 0 0;
+            -webkit-transform: 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .products h3 {
+            font-size: 24px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .products ul {
+            margin: 45px auto 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .products ul li {
+            width: 240px;
+            height: 340px;
+            flex: 0 0 240px;
+            margin-bottom: 40px;
+            box-shadow: 0px 2.5px 6px 0 rgba(19, 25, 33, 0.04);
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .products ul li .logo {
+            width: 100px;
+            height: 100px;
+            margin-top: 30px;
+        }
+
+        .products ul li .name {
+            margin-top: 28px;
+            font-size: 20px;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .products ul li .desc {
+            margin-top: 21px;
+            font-size: 15px;
+            font-weight: 300;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.6);
+        }
+.products ul li .desc:hover  {
+    color: #e74a3c
+}
+        .products ul li .relate {
+         position:absolute;
+         bottom:50px;
+            text-align: center;
+        }
+        .products ul li .relate i {
+            width: 40px;
+            height: 40px;
+            margin-right: 25px;
+            font-size: 24px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: inline-block;
+        }
+  .products ul li .relate i:hover  {
+    color: #e74a3c
+}
+        .products ul li .relate i:last-child {
+            margin-right: 0px;
+        }
+
+        .products ul li .relate .back {
+            background-image: url("/assets/uploads/files/1553517429960-unknown.png");
+        }
+    </style>    
+
+<section class="products">
+      <h2 style="text-align:center">PRODUCTS:</h2>
+<ul>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1555304775060-bit3-removebg-200.png"/>
+<div class="name"><a href="http://dev.widora.io/brief_bit3"> BIT3 BIT3.1</a></div>
+                <div class="desc">MT7688AN </br> Small and beautiful </br>
+Stamp half hole </br> Driven by OpenWrt</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1555305198523-bit4-removebg-200.png"/>
+<div class="name"><a href="http://dev.widora.io/brief_bit"> BIT4</a></div>
+                <div class="desc">MT7688AN </br> Small </br>
+1.27mm pin header connector </br> Driven by OpenWrt</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1555303477255-bit5-200.png 2x"/>
+<div class="name"><a href="http://dev.widora.io/bit5"> BIT5 </a></div>
+                <div class="desc">MT7628DAN </br> Gold finger and art design</br>
+Very easy to use</br> Driven by OpenWrt</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1555303736803-neo-seer-200.png"/>
+                <div class="name"><a href="http://dev.widora.io/brief_neo">NEO-Seer</a></div>
+                <div class="desc">MT7688AN </br> Integrated board design </br>
+Built-in console and audio </br> Driven by OpenWrt</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+               <img class="logo"  srcset="/assets/uploads/files/1555304012667-airv-removebg-200.png 2x"/>
+                <div class="name"><a href="http://dev.widora.io/airv"> AIRV </a></div>
+                <div class="desc">kendryte K210 </br> Compatible with Pi zero W </br> Built-in wifi and battery circuit </br> Arduino style API</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1555304578052-box.png"/>
+                <div class="name">Geek-Box / Matrix-Core</div>
+                <div class="desc">Extremely beautiful design </br> Capacitive touch and IPS screen </br> Your geek heart</div>
+            </li>
+</div>
+<div class="col-md-3 col-sm-6">
+            <li>
+                <img class="logo"  srcset="/assets/uploads/files/1556953522874-bitk210.png"/>
+<div class="name"><a href="http://dev.widora.io/bitk210">BITK210</a></div>
+                <div class="desc">kendryte K210</br> Small and Artistic
+ </div>
+            </li>
+</div>
+    <div class="col-md-3 col-sm-6">
+                <li>
+                    <img class="logo"  srcset="/assets/uploads/files/1561261325967-airv2-2.jpg"/>
+                    <div class="name"><a href="http://dev.widora.io/airv2">AIRV2</a></div>
+                    <div class="desc">kendryte K210 </br> Compatible with Pi zero </br> Built-in BITK210 and battery circuit </br> Arduino style API</div>
+                </li>
+    </div>
+</ul>
+</section>
+
+
+
+
+
+<style>
+.container div.pv80, .container-fluid div.pv80 {
+    padding-top: 80px;
+    padding-bottom: 80px
+
+}
+
+.container div.pv80-const, .container-fluid div.pv80-const {
+    padding-top: 80px;
+    padding-bottom: 80px
+}
+div.service-icons {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    padding: 0 10%
+}
+
+@media screen and (max-width: 1040px) {
+    div.service-icons {
+        -ms-flex-pack: distribute;
+        justify-content: space-around
+    }
+}
+
+@media screen and (min-width: 760px) {
+    div.service-icons {
+        padding: 0 5%
+    }
+}
+
+div.service-icons a {
+    margin-top: 40px;
+    width: 24%
+}
+
+div.service-icons a svg {
+    max-width: 188px
+}
+
+
+@media screen and (max-width: 500px) {
+    div.service-icons a {
+        width: 100%
+    }
+}
+
+div.service-icons a:hover {
+    text-decoration: none
+}
+
+div.service-icons a:hover h3, div.service-icons a:hover h4 {
+    color: #e74a3c
+}
+
+div.service-icons a:hover svg * {
+    stroke: #e74a3c
+}
+
+div.service-icons a svg {
+    padding-top: 10px
+}
+
+div.service-icons a h4 {
+    margin-bottom: 20px;
+    opacity: 1
+}
+
+div.service-icons h3, div.service-icons h4, div.service-icons svg * {
+    -webkit-transition: stroke 0.3s, color 0.3s;
+    -o-transition: stroke 0.3s, color 0.3s;
+    transition: stroke 0.3s, color 0.3s
+}
+
+</style>
+
+<div style="background-color: #d0faff;height:400px">
+    <div class="pv80">
+      <h2 style="text-align:center">OUR SERVICES:</h2>
+      <div class="row service-icons icons-draw">
+<a href="#" class="block service-icon">            <svg id="bsp-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 130"><style>.st2,.st3{fill:none;stroke:#332d37;stroke-width:2;stroke-miterlimit:10}.st3{stroke-linecap:round;stroke-linejoin:round}</style><g transform="translate(-12, -6) scale(1.1)"><path class="st3" d="M46 73V18a6 6 0 0 1 6-6h124a6 6 0 0 1 6 6v55M46 26h136"/><circle class="st3" cx="53" cy="19" r="3"/><circle class="st3" cx="63" cy="19" r="3"/><circle class="st3" cx="73" cy="19" r="3"/><circle class="st2" cx="55" cy="35" r="5"/><circle class="st2" cx="95" cy="35" r="5"/><path class="st2" d="M60 35h31"/><circle class="st2" cx="122" cy="88" r="5"/><circle class="st2" cx="133" cy="35" r="5"/><circle class="st2" cx="173" cy="35" r="5"/><path class="st2" d="M138 35h31"/><circle class="st2" cx="55" cy="62" r="5"/><circle class="st2" cx="55" cy="88" r="5"/><circle class="st2" cx="77" cy="81" r="5"/><circle class="st2" cx="78" cy="62" r="5"/><circle class="st2" cx="67" cy="44" r="5"/><circle class="st2" cx="146" cy="44" r="5"/><path class="st2" d="M72 44h69"/><circle class="st2" cx="112" cy="53" r="5"/><circle class="st2" cx="173" cy="53" r="5"/><circle class="st2" cx="100" cy="62" r="5"/><circle class="st2" cx="167" cy="80" r="5"/><circle class="st2" cx="173" cy="97" r="5"/><circle class="st2" cx="132" cy="99" r="5"/><circle class="st2" cx="80" cy="111" r="5"/><path class="st2" d="M117 53h51M105 62h29M50 44h9M134 83h9M77 53h24M157 97h12M93 88h24"/><g opacity=".3"><circle class="st2" cx="66" cy="97" r="5"/><circle class="st2" cx="94" cy="97" r="5"/><path class="st2" d="M71 97h19"/><circle class="st2" cx="141" cy="110" r="5"/><circle class="st2" cx="163" cy="110" r="5"/><path class="st2" d="M146 110h12"/><circle class="st2" cx="89" cy="71" r="5"/><circle class="st2" cx="149" cy="71" r="5"/><path class="st2" d="M94 71h51"/><circle class="st2" cx="63" cy="75" r="5"/><circle class="st2" cx="161" cy="62" r="5"/><circle class="st2" cx="111" cy="108" r="5"/><path class="st2" d="M140 90h21"/></g></g></svg>
+
+            <h4>Software</h4>
+</a>
+<a href="#" class="block service-icon">            <svg id="prototype-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 130"><style>.st2,.st3,.st4{fill:none;stroke:#332d37;stroke-width:2;stroke-miterlimit:10}.st3{stroke-linecap:round;stroke-linejoin:round}.st4{stroke-dasharray:4,2}</style><g transform="translate(-12, -6) scale(1.1)"><path class="st3" d="M114 41h23v24h-23z"/><path class="st2" d="M108 63v2h-2"/><path class="st4" d="M104 65H81"/><path class="st2" d="M80 65h-2v-2"/><path class="st4" d="M78 61V44"/><path class="st2" d="M78 43v-2h2"/><path class="st4" d="M82 41h23"/><path class="st2" d="M106 41h2v2"/><path class="st4" d="M108 45v17"/><path class="st3" d="M50 106v6c0 .552.449 1 1 1h57V29H58"/><path class="st3" d="M58 23h56v96H51a7 7 0 0 1 0-14h7V9h-7a7 7 0 0 0-7 7M44 112V16M137 45h22l12-12M137 53h28l6-6"/><circle class="st2" cx="175" cy="43" r="5"/><circle class="st2" cx="175" cy="29" r="5"/><path class="st3" d="M137 61h22l12 12"/><circle class="st2" cx="175" cy="77" r="5"/><circle class="st2" cx="175" cy="101" r="5"/><circle class="st2" cx="134" cy="92" r="5"/><path class="st3" d="M120 65v13l10 10M130 65v7l10 10h16l15.5 15.5"/><path class="st4" d="M102 68v10l-9 9M59 53h16M90 68v4L77 85H58"/><g><path class="st2" d="M87 97c1.38 0 2.63-.56 3.536-1.464M92 92c0-1.38-.56-2.63-1.464-3.536M87 87c-1 0-2.63.56-3.536 1.464M82 92c0 1 .56 2.63 1.464 3.536"/></g></g></svg>
+
+            <h4>Product Develop&shy;ment</h4>
+</a><a href="#" class="block service-icon">            <svg id="hardware-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 130"><style>.st3{fill:none;stroke:#332d37;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10}</style><g transform="translate(-12, -6) scale(1.1)"><path class="st3" d="M145 29H83a5 5 0 0 0-5 5v62a5 5 0 0 0 5 5h44.929a5 5 0 0 0 3.535-1.464l17.072-17.072A5 5 0 0 0 150 78.93V34a5 5 0 0 0-5-5z"/><path class="st3" d="M146 34v44.929a.997.997 0 0 1-.293.708l-17.07 17.07a.997.997 0 0 1-.708.293H110"/><circle class="st3" cx="87" cy="38" r="5"/><circle class="st3" cx="87" cy="52" r="5"/><circle class="st3" cx="87" cy="92" r="5"/><circle class="st3" cx="101" cy="38" r="5"/><path class="st3" d="M89 8a3 3 0 0 0-3 3v9a3 3 0 1 0 6 0v-9a3 3 0 0 0-3-3zM106 8a3 3 0 0 0-3 3v9a3 3 0 1 0 6 0v-9a3 3 0 0 0-3-3zM122 8a3 3 0 0 0-3 3v9a3 3 0 1 0 6 0v-9a3 3 0 0 0-3-3zM139 8a3 3 0 0 0-3 3v9a3 3 0 1 0 6 0v-9a3 3 0 0 0-3-3z"/><g><path class="st3" d="M89 107a3 3 0 0 0-3 3v9a3 3 0 0 0 6 0v-9a3 3 0 0 0-3-3zM106 107a3 3 0 0 0-3 3v9a3 3 0 0 0 6 0v-9a3 3 0 0 0-3-3zM122 107a3 3 0 0 0-3 3v9a3 3 0 0 0 6 0v-9a3 3 0 0 0-3-3zM139 107a3 3 0 0 0-3 3v9a3 3 0 1 0 6 0v-9a3 3 0 0 0-3-3z"/></g><g><path class="st3" d="M57 90a3 3 0 0 0 3 3h9a3 3 0 0 0 0-6h-9a3 3 0 0 0-3 3zM57 73a3 3 0 0 0 3 3h9a3 3 0 0 0 0-6h-9a3 3 0 0 0-3 3zM57 57a3 3 0 0 0 3 3h9a3 3 0 0 0 0-6h-9a3 3 0 0 0-3 3zM57 40a3 3 0 0 0 3 3h9a3 3 0 0 0 0-6h-9a3 3 0 0 0-3 3z"/></g><g><path class="st3" d="M156 90a3 3 0 0 0 3 3h9a3 3 0 1 0 0-6h-9a3 3 0 0 0-3 3zM156 73a3 3 0 0 0 3 3h9a3 3 0 1 0 0-6h-9a3 3 0 0 0-3 3zM156 57a3 3 0 0 0 3 3h9a3 3 0 1 0 0-6h-9a3 3 0 0 0-3 3zM156 40a3 3 0 0 0 3 3h9a3 3 0 1 0 0-6h-9a3 3 0 0 0-3 3z"/></g></g></svg>
+
+            <h4>Hard&shy;ware Design</h4>
+</a><a href="#" class="block service-icon">            <svg id="intelligence-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 130"><style>.st2{fill:none;stroke:#332d37;stroke-width:2;stroke-miterlimit:10}</style><g transform="translate(-12, -6) scale(1.1)"><circle class="st2" cx="127" cy="117" r="5"/><circle class="st2" cx="136" cy="49" r="5"/><circle class="st2" cx="93" cy="54" r="5"/><circle class="st2" cx="94" cy="70" r="5"/><circle class="st2" cx="93" cy="40" r="5"/><circle class="st2" cx="99" cy="88" r="5"/><circle class="st2" cx="108" cy="51" r="5"/><circle class="st2" cx="108" cy="20" r="5"/><circle class="st2" cx="118" cy="62" r="5"/><circle class="st2" cx="136" cy="35" r="5"/><path class="st2" d="M127 112V19c0-6.627-8.283-12-18.5-12-6.886 0-12.881 2.446-16.066 6.066A50.362 50.362 0 0 0 90 13c-16.303 0-30.067 7.829-34.497 18.563C43.893 36.625 36 46.564 36 58c0 15.232 14.004 27.803 32.14 29.734C68.981 93.537 73.962 98 80 98h26c6.627 0 12-5.373 12-12v-7L97 58M127 18v-4c1.12-2.375 4.2-4 7-4 3.316 0 6.087 2.308 6.81 5.404 8.35 2.053 15.226 6.22 19.267 11.56C167.383 31.363 172 37.81 172 45c0 1.715-.267 3.387-.766 5H173c6.627 0 12 5.373 12 12v13c0 6.421-5.047 11.649-11.389 11.97.255.978.389 1.992.389 3.03 0 8.284-8.507 15-19 15s-19-6.716-19-15V53M140 31l11-11"/><circle class="st2" cx="150" cy="42" r="5"/><path class="st2" d="M154 38l9-9"/><circle class="st2" cx="145" cy="62" r="5"/><circle class="st2" cx="159" cy="69" r="5"/><circle class="st2" cx="145" cy="82" r="5"/><circle class="st2" cx="161" cy="85" r="5"/><path class="st2" d="M149 58l21-21M164 69h8l12-12M149 86l4 4v5l-8 8M165 89l7 7M118 9v48M108 46v-9L84 13M104 16l-6-6M68 88h26M89 36L70 17M39 68h21l11 11h14l5-5"/><circle class="st2" cx="76" cy="67" r="5"/><circle class="st2" cx="55" cy="47" r="5"/><circle class="st2" cx="79" cy="47" r="5"/><path class="st2" d="M72 63l-7-7H36M55 32v10M75 43L58.5 26.5"/></g></svg>
+
+            <h4>Smart Device Systems</h4>
+</a>      
+</div>
+</div>
+</div>
+
+
+
+</html>

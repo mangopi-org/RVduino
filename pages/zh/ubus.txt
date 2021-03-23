@@ -1,0 +1,64 @@
+ubus是openwrt用来实现进程间通信的一种消息总线机制，其数据格式类似json。守护进程dbusd以server/client的方式统一管理进程间的通信，进程可以通过ubus向其他进程发送数据、调用服务,或则向dbus订阅特定消息。 
+
+=== 1. ubus中每个对象都用路径(object path)的方式来表达, 命令ubus list 可以列出所有注册对象: ===
+<code bash>
+   root@Widora:/# ubus list
+   dhcp
+   iwinfo
+   log
+   network
+   network.device
+   network.interface
+   network.interface.lan
+   network.interface.loopback
+   network.wireless
+   rpc-sys
+   service
+   session
+   system
+   uci
+</code>
+=== 2. 加上-v选项可以列出指定对象可调用的具体方法(method): ===
+<code bash>
+   root@Widora:/# ubus list network.interface.lan -v
+   'network.interface.lan' @3fcd0eda
+           "up":{}
+           "down":{}
+           "status":{}
+           "prepare":{}
+           "dump":{}
+           "add_device":{"name":"String","link-ext":"Boolean"}
+           "remove_device":{"name":"String","link-ext":"Boolean"}
+           "notify_proto":{}
+           "remove":{}
+           "set_data":{}
+</code>
+=== 3. 调用对象方法：通过ubus向特定对象发送方法名和参数, 对象接收到后会返回要求的状态数据或执行结果。===
+比如调用network.wireless对象status方法(无需参数), 会返回无线网络的状态：
+<code bash>
+   root@Widora:/# ubus call network.wireless status
+   {
+        "radio0": {
+                "up": true,
+                "pending": false,
+                "autostart": true,
+                "disabled": false,
+                "config": {
+                        "variant": "mt7628",
+                        "country": "CN",
+                        "hwmode": "11bgn",
+                        "htmode": "HT20",
+                        "channel": "auto",
+                        "disabled": false
+                },
+                "interfaces": [
+                        {
+                                "section": "ap",
+                                "ifname": "ra0",
+                                "config": {
+                                        "mode": "ap",
+                                        "ifname": "ra0",
+                                        "ssid": "Widora-86D9",
+     ... ...
+   }
+</code>

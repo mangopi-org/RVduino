@@ -1,0 +1,41 @@
+=====刷机工具DFU-UTIL=====
+此部分会用到{{ ::mpi-r-tools.zip |}}压缩包中的dfu-util.exe
+
+1. 让MPi-R处于FEL模式。
+
+2. 运行from-fel-to-dfu.bat脚本，双击运行。或者在Windows命令行运行脚本中的命令。
+
+3. 此时，MPi-R会打印一些log，当看到这些时，表明MPi-R已处于DFU模式。
+  DFU waiting on SPI-NOR...
+  musb-hdrc: peripheral reset irq lost!
+  DFU waiting on SPI-NOR...
+  SF: Detected w25q128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+  
+4. {{ ::dfu20210209165210.png |}}
+
+5. 准备好NAND镜像，然后在Windows命令行中通过如下命令刷机。
+   ./dfu-util.exe -R -a all -D output\images\sysimage-nand.img
+
+刷机log：
+<code>
+mango@DESKTOP MINGW64 /d/share/windows/mpi-R-tools
+$ ./dfu-util.exe -R -a all -D ../../sysimage-nand.img
+dfu-util 0.9
+
+Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+Copyright 2010-2016 Tormod Volden and Stefan Schmidt
+This program is Free Software and has ABSOLUTELY NO WARRANTY
+Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+Opening DFU capable USB device...
+ID 1f3a:1010
+Run-time device DFU version 0110
+Claiming USB DFU Interface...
+Setting Alternate Setting #0 ...
+Determining device status: state = dfuIDLE, status = 0
+dfuIDLE, continuing
+DFU mode device DFU version 0110
+Device returned transfer size 4096
+Copying data from PC to DFU device
+Download        [==                       ]  11%     15249408 bytes
+</code>

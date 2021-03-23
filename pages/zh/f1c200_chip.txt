@@ -1,0 +1,31 @@
+===== F1C200s =====
+框图：
+{{ :zh:20181218173535dc.jpg?600 |}}
+
+CPU芯片要点：
+  * ARM9 CPU architecture 400M
+  * Memory SIP 64MB DDR1
+  * SD2.0, eMMC 4.41
+  * Video H.264/MPEG1 1920x1080@30fps decoding，MJPEG 1280x720@30fps encoding
+  * Audio，集成2xDAC和1xADC，DAC最大支持192kHz，ADC最大支持48kHz
+  * 1路I2S/PCM interface
+  * Display RGB interface up to 1280x720@60fps
+  * TV CVBS output, support NTSC/PAL
+  * USB OTG
+  * SDIO
+  * IR
+  * 3 x TWI
+  * 2 x SPI
+  * 3 x UART
+  * Melis or  Linux SDK OS
+  * Package QFN88, 10mm x 10mm
+芯片介绍： http://www.allwinnertech.com/index.php?c=product&a=index&id=74
+
+最新芯片手册：{{ ::allwinner_f1c200s_datasheet_v1_1.pdf |}}
+
+最新寄存器手册：{{ ::allwinner_f1c200s_user_manual_v1_2.pdf |}}
+
+
+
+
+

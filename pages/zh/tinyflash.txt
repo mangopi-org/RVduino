@@ -1,0 +1,38 @@
+=====USB方式NorFlash刷机=====
+如果MPi-R板背面是Winbond的W25Q128（16MB nor flash），那么就要用fel刷机。
+
+查看芯片信息sunxi-fel ver \\
+AWUSBFEX soc=00001663(F1C100s) 00000001 ver=0001 44 08 scratchpad=00007e00 00000000 00000000
+
+显示spiflash的信息sunxi-fel spiflash-info \\
+Manufacturer: Winbond (EFh), model: 40h, size: 16777216 bytes.
+
+烧写一体镜像文件：sunxi-fel.exe -p spiflash-write 0 sysimage-nor.bin
+100% [================================================] 16777 kB,   55.0 kB/s
+
+
+
+
+
+
+按偏移烧写各个数据：
+<code>
+sunxi-fel -p spiflash-write 0x000000 u-boot-sunxi-with-spl.bin
+sunxi-fel -p spiflash-write 0x110000 zImage
+sunxi-fel -p spiflash-write 0x100000 suniv-f1c100s-xxxxx.dtb
+sunxi-fel -p spiflash-write 0x510000 jffs2.bin
+</code>
+更多用法：sunxi-fel -h
+
+
+按照偏移将各个数据打包成一体镜像文件（linux下）：
+<code>
+dd if=/dev/zero bs=1MiB count=16 | tr "\000" "\377" > flash_16m.bin
+
+###合并u-boot, whycan.bmp.gz, dtb,kernel, rootfs 到 flash_16m.bin ###
+dd if=notrunc if=u-boot-sunxi-with-spl.bin                 of=flash_16m.bin seek=0
+dd if=notrunc if=whycan.bmp.gz                             of=flash_16m.bin bs=$((0x060000)) seek=1
+dd if=notrunc if=suniv-f1c100s-xxxxx-480272.dtb    of=flash_16m.bin bs=$((0x100000)) seek=1
+dd if=notrunc if=zImage                                    of=flash_16m.bin bs=$((0x110000)) seek=1
+dd if=notrunc if=jffs2.bin                                 of=flash_16m.bin bs=$((0x510000)) seek=1
+</code>

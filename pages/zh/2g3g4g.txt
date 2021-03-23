@@ -1,0 +1,9 @@
+===========
+{{ :zh:widora挂4g模块上网.pdf |}}
+
+{{ :zh:ec20.zip |}}
+
+{{ :zh:simcom.zip |}}
+
+针对AIR720的rndis做法参考： https://sns.widora.io/topic/612/mt7688-air720-4g简单测试 
+如需AT接口，还需要多挂载出usb-serial，参考： http://ask.openluat.com/article/37 

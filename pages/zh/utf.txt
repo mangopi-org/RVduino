@@ -1,0 +1,33 @@
+====简介====
+
+Widora出厂固件默认支持了VFAT，EXFAT，EXT4等文件系统格式。如果U盘或TF卡不是这几种格式，请格式化成此种格式。  \\
+一般U盘对应的设备文件在/dev/下sda，sdb，sdc这些，而SD卡则是mmcblk0，mmcblk0p1等。 \\
+
+====挂载====
+
+插入U盘，默认串口控制台会打印如下： 
+<code bash>
+root@Widora:/# [ 2531.690000] usb 1-1: new high-speed USB device number 2 usingm
+[ 2531.840000] usb-storage 1-1:1.0: USB Mass Storage device detected            
+[ 2531.850000] scsi host0: usb-storage 1-1:1.0                                  
+[ 2532.850000] scsi 0:0:0:0: Direct-Access     SanDisk  Cruzer Blade     1.27 P6
+[ 2532.860000] sd 0:0:0:0: [sda] 15330304 512-byte logical blocks: (7.84 GB/7.3)
+[ 2532.870000] sd 0:0:0:0: [sda] Write Protect is off                           
+[ 2532.870000] sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doA
+[ 2532.900000]  sda: sda1                                                       
+[ 2532.910000] sd 0:0:0:0: [sda] Attached SCSI removable disk                   
+[ 2533.190000] FAT-fs (sda1): Volume was not properly unmounted. Some data may .
+</code>
+U盘会自动挂载至“/tmp/mounts/“目录：
+<code bash>
+root@Widora:/# cd /tmp/mounts/                                                  
+root@Widora:/tmp/mounts# ls                                                     
+USB-A1 
+</code>
+此时进入USB-A1可以看到U盘的文件列表：
+<code bash>
+root@Widora:/tmp/mounts# cd USB-A1/                                             
+root@Widora:/tmp/run/mountd/sda1# ls       
+test 1.mp3 
+</code>
+TF卡挂载同理，也会挂载至”/tmp/mounts/“目录。

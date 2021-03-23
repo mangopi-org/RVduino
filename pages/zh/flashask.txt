@@ -1,0 +1,21 @@
+====刷机常碰到的问题====
+
+
+
+1、IP为0.0.0.0
+{{ ::屏幕快照_2018-05-23_下午6.02.04.png?400 |}}
+此情况是由于20180420的Openwrt固件存在bug，通过uboot_env工具搞乱了env分区。修复方法如下：
+  * uboot启动过程中，按"4"进入uboot的命令行。
+  * setenv bootcmd tftp
+  * setenv bootdelay 2
+  * setenv ethaddr 00:AA:BB:CC:DD:10
+  * setenv ipaddr 192.168.1.111
+  * setenv serverip 192.168.1.100
+  * setenv ethmode
+  * saveenv
+之后重启，进入uboot的[[flash|刷机模式]]，刷最新固件。
+
+
+
+
+

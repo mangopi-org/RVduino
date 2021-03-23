@@ -1,0 +1,44 @@
+利用vsftpd可以把widora-neo配置成一个简单的FTP服务器，通过FTP可以很方便地与电脑和手机互传文件。
+====1.安装vsftpd====
+安装vsftpd:
+   opkg update
+   opkg install vsftpd
+====2.配置/etc/vsftpd.conf文件====
+这里给出一个仅允许本机用户登陆的典型配置:
+   ### refer to: https://help.ubuntu.com/community/vsftpd
+   listen=YES
+   anonymous_enable=NO
+   ### local enable and root set MUST be in right order
+   local_enable=YES
+   local_root=/tf/music
+   write_enable=YES
+   local_umask=022
+   check_shell=NO
+   dirmessage_enable=YES
+   ftpd_banner=Widora-NEO
+   session_support=NO
+   syslog_enable=YES
+   ### if you need TLS/SSL options, configure vsftpd accordingly before compiling.
+   ### set max_per_ip big enough as some clients will need.
+   max_clients=200
+   max_per_ip=20
+   accept_timeout=60
+
+====3.配置/etc/firewall开放ftp端口====
+需要对相应的网络接口开放21端口,可以在firewall中增加一个rule配置：
+   config rule
+        option name Allow-wan-FTP
+        option src wan
+        option dest_port 21
+        option proto tcp
+        option target ACCEPT      
+
+====4.启动vsftpd====
+设置完成后重新启动:
+  /etc/init.d/vsftpd enable
+  /etc/init.d/vsftpd restart
+====5.其他====
+   -vsftpd和minidln有时会有冲突，最好不要同时运行。
+   -FTP存储(SD卡或U盘)的文件系统最好采用ext4格式.
+   -默认安装的vsftp是不支持SSL的，需要的话要在编译的时候加上这个选项。
+   -客户端软件 andriod上有AndFTP, iOS上有BUZZ_player.

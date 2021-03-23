@@ -1,0 +1,8 @@
+====可以使用例如SecureCRT、Filezilla进行文件传输===
+
+
+
+  opkg update
+  opkg install vsftpd openssh-sftp-server
+
+第一个命令是获取服务器上最新的软件列表,第二个命令是安装vsftpd,和openssh-sftp-server

@@ -1,0 +1,126 @@
+~~NOTOC~~
+<WRAP center round important 70%>
+===固件控制台/LUCI页登录用户名：root 密码：12345678 ===
+小伙伴们拿到WIDORA后为了得到最佳体验，请第一时间[[flash|刷机]]到[[firmware|最新版本固件]]，顺便[[backup|备份WI-FI校准数据]]
+</WRAP>
+
+
+=====《跟着佐大玩转Widora》视频教程连载=====
+
+  - [[https://www.bilibili.com/video/av35899656|如何搭建Widora OpenWrt开发环境]]
+  - [[https://www.bilibili.com/video/av36011142|跟着佐大玩转Widora-如何编译U-Boot]]
+  - [[https://www.bilibili.com/video/av36340736|跟着佐大玩转Widora-如何在U-Boot下烧写系统、U-Boot、EEPROM]]
+  - [[https://www.bilibili.com/video/av36871974|跟着佐大玩转Widora-如何备份、烧写EEPROM]] 
+  - [[https://www.bilibili.com/video/av41749809|跟着佐大玩转Widora-Widora如何联网?]]
+=====开发篇(文字版)=====
+<WRAP group>
+<WRAP half column>
+==== ①认识一下 ====
+  * [[mt7688|7688芯片]]
+  * [[brief_neo|NEO]]
+  * [[bit5|BIT5金手指模组★★★★★]]
+  * [[brief_bit3|BIT3邮票孔模组★★★★]]
+  * [[brief_bit|BIT4排针模组★★★]]
+  * [[:brief_bit_comp|BIT3、4、5型号对比]]
+  * [[:qa_neobit|QA]]
+  * [[:soft|SDK环境简介]]
+</WRAP>
+
+<WRAP half column>
+==== ②开发之前 ====
+  * [[:firmware|Uboot和OpenWrt固件]]
+  * [[:flash|刷机]]
+  * [[:flashask|刷机常见问题]]
+  * [[:resave|救砖]]
+  * [[:compile|编译]]
+  * [[:git|GIT常用命令]]
+  * [[:version|启动LOG]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ③基础操作 ====
+  * [[:uart_console|串口控制台]]
+  * [[:connect_net|让硬件联网]]
+  * [[:telnet_ssh|Telnet、SSH登录]]
+  * [[:scp|SCP网络文件传输]]
+  * [[:sftp|SFTP文件传输]]
+  * [[:backup|备份WI-FI校准数据，非常重要]]
+  * [[:factory|恢复出厂设置]]
+  * [[:openwrt|安装卸载软件]]
+</WRAP>
+
+<WRAP half column>
+==== ④外设编程 ====
+  * [[:iot_router|IOT模式与5口路由模式]]
+  * [[:gpio|GPIO]]
+  * [[:uart|UART]]
+  * [[:485|RS485]]
+  * [[:pwm|PWM]]
+  * [[:i2c|I2C]]
+  * [[:spi|SPI]]
+  * [[:usb|USB]]
+  * [[:ant|天线]]
+  * [[:ant1or2|BIT5的单、双天线切换]]
+  * [[:reg|REG工具]]
+  * [[:wifi|Wi-Fi]]
+  * [[:watchdog|看门狗]]
+  * [[:temp|芯片自身温度]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ⑤系统进阶 ====
+  * [[:mtd|FLASH分区]]
+  * [[:utf|U盘和TF卡]]
+  * [[:extmount|ROOTFS扩容]]
+  * [[:customize|系统定制化]]
+  * [[:startup|程序自启动init脚本]]
+  * [[:ntp|应用NTP网络时间同步服务]]
+  * [[:uci|uci系统]]
+  * [[:proc|procd系统进程管理]]
+  * [[:netifd|netifd网络配置守护进程]]
+  * [[:ubus|ubus进程间通信]]
+
+</WRAP>
+<WRAP half column>
+==== ⑥网络进阶 ====
+  * [[:wan_lan|WAN、LAN、NAT]]
+  * [[:netmode|网络模式]]
+  * [[:w_n_config|WIRELESS和NETWORK配置]]
+  * [[:firewall|防火墙FIREWALL配置]]
+  * [[:iwpriv|iwpriv常用命令]]
+  * [[:ap_client|ap_client]]
+  * [[:proxy|反向代理]]
+  * [[:testnet|检测网线插拔]]
+  * [[:mt76|成长中的mt76开源wifi驱动]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ⑦更多玩法 ====
+  * [[:usb_cam|USB摄像头]]
+  * [[:motion|motion动态画面监控]]
+  * [[:audio|基本音频玩法]]
+  * [[:mpd|MPD音乐播放器]]
+  * [[:espeak|eSpeak语音合成]]
+  * [[:airplay_dlna|AIRPLAY和DLNA]]
+  * [[:airkiss_elian|快速配网]]
+  * [[:port5|5网口模式]]
+  * [[:ser2net|网络转串口]]
+  * [[:vsftpd|FTP服务器vsftpd]]
+  * [[:ips|IPS液晶屏]]
+  * [[:2G3G4G|2G/3G/4G模块]]
+  * [[:biroll|试验平衡车]]
+</WRAP>
+
+<WRAP half column>
+==== ⑧量产指导 ====
+  * [[:bit_ref|BIT外围设计]]
+  * [[:bit3_3bto4b|BIT32CY 3B/4B地址切换]]
+  * [[:emmc|EMMC存储]]
+</WRAP>
+</WRAP>

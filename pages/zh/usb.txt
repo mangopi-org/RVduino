@@ -1,0 +1,59 @@
+==== 1. 用lsusb命令查看USB设备的详细信息 ====
+1.1 先用lsusb命令列出所有usb设备：
+   root@Widora32:~# lsusb
+   Bus 001 Device 003: ID 05a3:9310 ARC International
+   Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+   Bus 001 Device 005: ID 1a40:0101 Terminus Technology Inc. 4-Port HUB
+   Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+1.2 再用lsusb -D 命令列出指定设备信息：(前提是已经安装了usbutils包)
+   root@Widora32:~#  lsusb -D /dev/bus/usb/001/003
+   Device: ID 05a3:9310 ARC International  
+   Device Descriptor:
+     bLength                18
+     bDescriptorType         1
+    bcdUSB               2.00
+    bDeviceClass          239 Miscellaneous Device
+    bDeviceSubClass         2 ?
+    bDeviceProtocol         1 Interface Association
+    bMaxPacketSize0        64
+    idVendor           0x05a3 ARC International   
+    idProduct          0x9310
+    bcdDevice            0.00
+    iManufacturer           2 HD Camera Manufacturer
+    iProduct                1 USB 2.0 Camera
+    iSerial                 0
+    bNumConfigurations      1
+    Configuration Descriptor:
+      bLength                 9
+      bDescriptorType         2
+      wTotalLength          963
+     ...
+结果包括了USB设备描述符、配置描述符、接口描述符、端点描述符等详细信息。其中idVendor和idProduct是比较重要的信息，分别是指供应商ID（VID）和产品识别码（PID）。
+
+1.3 用lsusb -v  命令可以列出所有usb设备的详细信息。
+==== 2. 使用USB Audio设备 ====
+openwrt通过snd-usb-audio内核模块实现对USB Audio设备的支持,在Widora-NEO上可以直接将usb声卡或带mic的usb摄像头等连接到usb口，通过ls /dev命令可以查看这些USB Audio设备是否已经被识别出：
+
+{{:usbaudio_dev.jpg}}
+
+运行alsamixer命令后进入ALSA字符控制界面，再按下F6键就可以选择其中的设备来进行调节:
+
+{{:usbaudio_select.jpg}}
+
+在播放或录音命令中指定设备号：
+   aplay -D plughw:2,0 im_widora.wav
+当然，你也可以用设备名, 用ls /proc/asound 命令可以显示这些设备名：
+
+{{:proc_cards.jpg}}
+
+可以选用其中一个：
+   aplay -D plughw:'I2S' /home/im_widora.wav
+==== 3. 利用USB来扩展各种通用接口 ====
+Widora的USB HOST可以同时挂载多个USB HUB和USB DEVICE。 
+通过FTDI芯片可以实现从USB到UART,I2C,BIT_BANG,SPI,JTAG等各种通用接口的扩展, 在Widora上将FTDI 芯片设置成BIT_BANG模式, 可以实现8位并口的快速输出, 甚至可以推动480x320的彩屏播放动画。 
+通过libusb库编程可以方便地实现与其他USB设备间高效通信。
+
+{{:widora_usb_ftdi.jpg?400 |}}
+
+
+

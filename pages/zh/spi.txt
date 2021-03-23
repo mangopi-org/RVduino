@@ -1,0 +1,8 @@
+
+１．Widora-Neo(bit)的spi接口有两个片选,其中CS0已经被flash占用, CS1可以用作它途.
+
+２．spi目前的驱动只支持 half_duplex 传输方式, 并且每次传输的最大字节数为36bytes.  
+
+３．可以在C语言环境下进行spi配置和传输操作, 先打开 /dev/spidev32766.1设备节点, 然后用ioctl()函数来进行操作.
+比如: 用 ioctl(fd,SPI_IOC_WR_MODE, &spi_mode) 对spi的工作模式进行配置,用ioctl(fd,SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed) 对时钟频率进行设置,  
+ 最后用ioctl(fd, SPI_IOC_MESSAGE(n), xfer)函数来发送和接收数据. 由于是半双工方式, 因此xfer[n].rx_buf和xfer[n].tx_buf中只有一个有效, 默认.tx_buf 或.rx_buf 为NULL的那个无效. 每次ioctl进行SPI_IOC_MESSAGE传输操作的发送和接收字段总长不能超过36bytes(这个正好是spi硬件的最大buffer), 比如SPI_IOC_MESSAGE(4)如果是3次有效发送+1次有效接收, 那么这些发送和接收的字段总长不能超过36bytes, 不然ioctl会返回错误.

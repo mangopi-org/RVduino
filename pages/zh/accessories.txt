@@ -1,0 +1,52 @@
+~~NOTOC~~
+<WRAP group>
+<WRAP half column>
+=====LCD=====
+电阻触摸屏480*272 
+  * {{ ::kd50g10-40nc-a3.pdf |5寸电阻屏}}
+
+
+
+
+电容触摸屏800*480 触摸型号GT911
+  * {{ ::rv500j01z.pdf |}}     
+  * {{ ::rv07050-03010pt.pdf |}}
+  * 触摸屏配置参数 {{ ::gt911_config_20200910_095353.zip |}}
+
+
+</WRAP>
+
+<WRAP half column>
+=====CAMERA=====
+{{ :zh:ov2640ds.pdf |}}  CSI接口  
+
+适用范围：MPi-R2，R3
+
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+=====贴片SD芯片=====
+存储类型：SLC
+
+相当于一片高质量的SD卡，不过是芯片版本
+
+适用范围：MPi-R2，R3，MPi1
+
+
+{{ ::csnp1gcr01-amw二代.pdf |}}
+
+{{ ::csnpxgxr01_rohs_2.0_报告.pdf |}}
+
+测试数据：https://sns.widora.io/topic/543
+</WRAP>
+
+<WRAP half column>
+
+</WRAP>
+</WRAP>
+
+
+
+

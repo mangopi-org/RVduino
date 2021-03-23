@@ -1,0 +1,57 @@
+通过修改配置文件/etc/config/firewall可以调整防火墙策略和规则。firewall配置文件主要含有以下几个段(config section):
+==== 1. default段：默认基本配置 ====
+默认基本配置的选项有：
+   syn_flood      是否启用防洪水攻击。可选: 0--关闭，1--启用。
+   input          输入策略  可选: ACCEPT--接受，REJECT--拒绝。
+   output         输出策略  可选: ACCEPT--接受，REJECT--拒绝。
+   forward        转发策略  可选: ACCEPT--拒绝，REJECT--拒绝。
+   disable_ipv6   是否禁用IPv6防火墙策略 可选: 1--禁用，0--启用。
+这里input是指接收的数据包的目的IP地址属于当前域的情况；output指发送的数据包的源IP地址属于当前域的情况；forward是指数据包通过当前域进行转发的情况。
+==== 2. zone段：域配置 ====
+域(zone)是一组网络接口，域可作为IP转发的源地或目的地来进行相应配置。这里主要是对wan域和lan域的策略进行配置，选项有：
+   name       域名称
+   network    （列表） 被绑定到此域的网络接口，比如lan,wan,wan6
+   input      输入策略  可选: ACCEPT--接受，REJECT--拒绝。
+   output     输出策略  可选: ACCEPT--接受，REJECT--拒绝。
+   forward    转发策略  可选: ACCEPT--接受，REJECT--拒绝。
+   masq       是否设置传输伪装   可选: 1--是，0--否。如果是wan口，必须设置为1。
+   mtu_fix    是否设置MTU的MSS钳制  可选: 1--是，0--否。如果是wan口，设置为1。
+==== 3. forwarding段：转发配置 ====
+配置2个域之间的路由转发。选项有：
+   src      转发来源域，一般为lan域
+   dest     转发目的域, 一般为wan域
+==== 4. rule段：规则配置 ====
+Rule段可以对特定的端口或主机设置基本的"接受/拒绝"规则，其主要选项有：
+  src         数据包源地址所属域(zone)
+  src_ip      数据包源IP地址 
+  src_port    源地址端口号
+  dest        数据包目的地所属域(zone)
+  dest_ip     数据包目的地IP地址 
+  dest_port   目的地端口号
+  proto       数据包的协议类型
+  target      设置防火规则, 可选：ACCEPT, REJECT, DROP, MARK, NOTRACK
+
+例子,允许wan域进行SSH连接:
+  config rule
+        option name Allow-wan-SSH
+        option src wan
+        option dest_port 22
+        option proto tcp
+        option target ACCEPT
+==== 5. redirect段：端口转发配置 ====
+如果从外域来访的数据包符合转发规则, 那么数据包将会被转发到目的域中指定的地址和端口。主要选项有：
+   src          数据包源地址所属域(zone)
+   src_ip       数据包源IP地址
+   src_mac      数据包源MAC地址
+   src_port     数据包源端口
+   proto        数据包的协议类型
+   dest         数据包目的地址所属域(zone)
+   dest_ip      数据包目的IP地址
+   dest_port    数据包目的端口
+   dest_mac     数据包目的MAC地址
+
+
+
+
+最后执行命令/etc/init.d/firewall restart 使修改后的配置生效。
+更详细的配置参见: https://openwrt.org/docs/guide-user/firewall/firewall_configuration

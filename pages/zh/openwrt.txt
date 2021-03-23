@@ -1,0 +1,48 @@
+====1.修改软件源配置文件====
+软件源配置文件/etc/opkg/distfeeds.conf包含了base、package、luci、routing、telephone、management等类型软件包的源路径。
+如果要更新某个类型的软件包，那么需要将其前面的#号去掉。默认情况下它们都被注释掉了。package软件源一般都必须选中，因为其他软件包可能会依赖于package软件源。
+
+====2.更新软件源====
+命令：opkg update
+顺利的话运行log如下图：（有时候不行就检查一下是否是没有联网，点背的话可能赶上openwrt.org网站抽风，等一会儿就好）
+{{ ::opkgupdate.png |}}
+
+====3.搜索软件====
+如何搜索想要的软件，比如我们要搜索python，使用命令：opkg list | grep python 
+
+====4.安装软件====
+安装软件，比如python。使用命令：opkg install python 
+<code bash>
+root@Widora:/etc/opkg# opkg install python
+Installing python (2.7.9-6) to root...
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/python_2.7.9-  6_ramips_24kec.ipk.
+Installing python-light (2.7.9-6) to root...
+......
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/python-pydoc_2.7.9-6_ramips_24k.
+Installing python-sqlite3 (2.7.9-6) to root...
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/python-sqlite3_2.7.9-6_ramips_2.
+Installing libsqlite3 (3081101-1) to root...
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/libsqlite3_3081101-1_ramips_24k.
+Installing python-unittest (2.7.9-6) to root...
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/python-unittest_2.7.9-6_ramips_.
+Installing python-xml (2.7.9-6) to root...
+Downloading http://dl.widora.io/chaos_calmer/15.05.1/ramips/mt7688/packages/packages/python-xml_2.7.9-  6_ramips_24kec.
+Configuring python-base.
+Configuring libffi.
+......
+Configuring python-unittest.
+Configuring python-xml.
+Configuring python.
+Configuring python3-asyncio.
+</code>
+
+====5.卸载软件====
+卸载软件，比如卸载python，使用命令：opkg remove python 
+
+====6. 列出已安装的软件====
+使用命令 opkg list-installed 会列出所有安装的软件包，这包括固件自带的和后来通过opkg install命令安装的所有软件。
+
+====7.依赖失败====
+安装软件常见的问题是内核版本不一致，依赖检查失败，如下图：
+{{ ::opkgtrouble.png |}}
+这种情况下就不能用opkg安装了，需要在OpenWrt源码中将此软件包重新编译，后续会讲到编译方法。

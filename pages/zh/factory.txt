@@ -1,0 +1,9 @@
+===恢复出厂设置====
+这个是说NEO在我们操作过程中，不小心搞坏了系统里的文件或者配置等等，OpenWrt有一个好处：你所有的更改，都被记录到了一个差量化的文件系统中，这就是overlay的作用。恢复出厂设置的原理就是将overlay分区格式化就好了。好在系统还提供了转用命令。跟着如下操作：
+<code bash>
+root@Widora:/# firstboot -y 
+/dev/mtdblock6 is mounted as /overlay, only erasing files 
+root@Widora:/# reboot
+</code>
+
+注意：20170506之后的代码增加了系统中按住WPS按钮超过3秒即可恢复出厂设置的功能。

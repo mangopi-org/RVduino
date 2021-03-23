@@ -1,0 +1,332 @@
+====uboot版本====
+uboot的LOG中可以找到如下打印：
+  Widora by mango,V1.0.7    
+代表是1.0.7版本
+  Ralink UBoot Version: 4.3.0.0  
+表示该uboot基于联发科的4300版本构建
+
+====Linux内核版本====
+Linux内核解压缩完打印的第一句就可以找到linux版本：
+  [    0.000000] Linux version 3.18.29 (mango@localhost) (gcc version 4.8.3 (Open7
+Linux3.18.29版本
+
+====WIFI驱动版本====
+WIFI驱动作为一个独立加载的软件栈，有自己的版本：
+  [   24.050000] |--------------------------------------------------------|       
+  [   24.050000] |------------Widora wifi driver--version:1.2-------------|       
+  [   24.060000] |Copyright 2016-2017 by YuanChenMang. All rights reserved|       
+  [   24.070000] |       This Driver licensing-only runs on Widora!       |       
+  [   24.070000] |  Found bug? Please contact widora@qq.com , thanks!     |       
+  [   24.080000] |--------------------------------------------------------|    
+代表是1.2版本
+  [   13.610000] PandoraBox MT76X8 AP Driver Version-4.1.0.0(May 17 2017 15:16:06.
+表示该驱动基于Pandorabox的4.1.0.0版本构建
+
+====OpenWrt版本====
+<code bash>
+   _       ___     __                                                             
+  | |     / (_)___/ /___  _________ _                                             
+  | | /| / / / __  / __ \/ ___/ __ `/                                             
+  | |/ |/ / / /_/ / /_/ / /  / /_/ /                                              
+  |__/|__/_/\__,_/\____/_/   \__,_/                                               
+   -----------------------------------------------------                          
+   CHAOS CALMER (Chaos Calmer, r49378) Version:0.1.7 by mango                     
+   -----------------------------------------------------                          
+  * 1 1/2 oz Gin            Shake with a glassful                               
+  * 1/4 oz Triple Sec       of broken ice and pour                              
+  * 3/4 oz Lime Juice       unstrained into a goblet.                           
+  * 1 1/2 oz Orange Juice                                                       
+  * 1 tsp. Grenadine Syrup                                                      
+   -----------------------------------------------------  
+</code>
+可以看到我们维护的版本是：0.1.7，而CHAOS CALMER则是OpenWrt的CC15.05代号，基于此版本构建。
+
+
+====完整启动LOG====
+  
+<code bash>
+Widora by mango,V1.0.8
+
+Board: Ralink APSoC DRAM:  128 MB
+relocate_code Pointer at: 87fb4000
+flash manufacture id: ef, device id 40 19
+find flash: W25Q256FV
+*** Warning - bad CRC, using default environment
+
+============================================ 
+Ralink UBoot Version: 4.3.0.0
+-------------------------------------------- 
+ASIC 7628_MP (Port5<->None)
+DRAM component: 1024 Mbits DDR, width 16
+DRAM bus: 16 bit
+Total memory: 128 MBytes
+Flash component: SPI Flash
+Date:Jun 12 2018  Time:15:16:26
+============================================ 
+icache: sets:512, ways:4, linesz:32 ,total:65536
+dcache: sets:256, ways:4, linesz:32 ,total:32768 
+
+ ##### The CPU freq = 580 MHZ #### 
+ estimate memory size =128 Mbytes
+RESET MT7628 PHY!!!!!! ONLY 0
+MT7688 gpio init : wled and wdt by mango
+
+if you press the WPS button will automatically enter the Update mode
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Please choose the operation: 
+   1: Load system code to SDRAM via TFTP. 
+   2: Load system code then write to Flash via TFTP. 
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   5: Entr ALL LED test mode.
+   6: Entr Web failsafe mode.
+   7: Load Boot Loader code then write to Flash via Serial. 
+   9: Load Boot Loader code then write to Flash via TFTP. 
+ 0 
+   
+3: System Boot system code via Flash.
+## Booting image at bc050000 ...
+   Image Name:   MIPS OpenWrt Linux-3.18.29
+   Image Type:   MIPS Linux Kernel Image (lzma compressed)
+   Data Size:    1150305 Bytes =  1.1 MB
+   Load Address: 80000000
+   Entry Point:  80000000
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ... OK
+No initrd
+## Transferring control to Linux (at address 80000000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+[    0.000000] Linux version 3.18.29 (mango@mangodeMBP.lan) (gcc version 4.8.3 (OpenWrt/Linaro GCC 4.8-2014.04 r49378) ) #7 Mon Aug 20 18:37:41 CS8
+[    0.000000] Board has DDR2
+[    0.000000] Analog PMU set to hw control
+[    0.000000] Digital PMU set to hw control
+[    0.000000] SoC Type: MediaTek MT7688 ver:1 eco:2
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 00019655 (MIPS 24KEc)
+[    0.000000] MIPS: machine is WIDORA-NEO
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 08000000 @ 00000000 (usable)
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x00000000-0x07ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00000000-0x07ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x00000000-0x07ffffff]
+[    0.000000] Primary instruction cache 64kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: console=ttyS0,115200 rootfstype=squashfs,jffs2
+[    0.000000] PID hash table entries: 512 (order: -1, 2048 bytes)
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Writing ErrCtl register=00043090
+[    0.000000] Readback ErrCtl register=00043090
+[    0.000000] Memory: 126272K/131072K available (2544K kernel code, 124K rwdata, 520K rodata, 196K init, 185K bss, 4800K reserved)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS:256
+[    0.000000] intc: using register map from devicetree
+[    0.000000] CPU Clock: 580MHz
+[    0.000000] clocksource_of_init: no matching clocksources found
+[    0.000000] Calibrating delay loop... 385.84 BogoMIPS (lpj=1929216)
+[    0.060000] pid_max: default: 32768 minimum: 301
+[    0.060000] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.070000] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.070000] pinctrl core: initialized pinctrl subsystem
+[    0.080000] NET: Registered protocol family 16
+[    0.100000] mt7621_gpio 10000600.gpio: registering 32 gpios
+[    0.110000] mt7621_gpio 10000600.gpio: registering 32 gpios
+[    0.110000] mt7621_gpio 10000600.gpio: registering 32 gpios
+[    0.120000] Switched to clocksource MIPS
+[    0.120000] NET: Registered protocol family 2
+[    0.130000] TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.130000] TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.140000] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.140000] TCP: reno registered
+[    0.150000] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.150000] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.160000] NET: Registered protocol family 1
+[    0.170000] futex hash table entries: 256 (order: -1, 3072 bytes)
+[    0.180000] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.190000] jffs2: version 2.2 (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    0.200000] msgmni has been set to 246
+[    0.210000] io scheduler noop registered
+[    0.210000] io scheduler deadline registered (default)
+[    0.220000] drivers/phy/phy-ralink-usb.c:ralink_usb_phy_probe[336]
+[    0.220000] drivers/phy/phy-ralink-usb.c:ralink_usb_phy_probe[350]
+[    0.230000] Serial: 8250/16550 driver, 3 ports, IRQ sharing disabled
+[    0.240000] console [ttyS0] disabled
+[    0.240000] 10000c00.uartlite: ttyS0 at MMIO 0x10000c00 (irq = 28, base_baud = 2500000) is a 16550A
+[    0.250000] console [ttyS0] enabled
+[    0.250000] console [ttyS0] enabled
+[    0.260000] bootconsole [early0] disabled
+[    0.260000] bootconsole [early0] disabled
+[    0.270000] 10000d00.uart1: ttyS1 at MMIO 0x10000d00 (irq = 29, base_baud = 2500000) is a 16550A
+[    0.280000] 10000e00.uart2: ttyS2 at MMIO 0x10000e00 (irq = 30, base_baud = 2500000) is a 16550A
+[    0.290000] spi-mt7621 10000b00.spi: sys_freq: 193333333
+[    0.300000] m25p80 spi32766.0: w25q256 (32768 Kbytes)
+[    0.300000] m25p80 spi32766.0: using chunked io
+[    0.310000] 4 ofpart partitions found on MTD device spi32766.0
+[    0.310000] Creating 4 MTD partitions on "spi32766.0":
+[    0.320000] 0x000000000000-0x000000030000 : "u-boot"
+[    0.320000] 0x000000030000-0x000000040000 : "u-boot-env"
+[    0.330000] 0x000000040000-0x000000050000 : "factory"
+[    0.340000] 0x000000050000-0x000002000000 : "firmware"
+[    0.400000] 2 uimage-fw partitions found on MTD device firmware
+[    0.410000] 0x000000050000-0x000000168da1 : "kernel"
+[    0.420000] 0x000000168da1-0x000002000000 : "rootfs"
+[    0.420000] mtd: device 5 (rootfs) set to be root filesystem
+[    0.430000] 1 squashfs-split partitions found on MTD device rootfs
+[    0.440000] 0x000000620000-0x000002000000 : "rootfs_data"
+[    0.450000] ralink_soc_eth 10100000.ethernet eth0: ralink at 0xb0100000, irq 5
+[    0.460000] mt7621_wdt 10000100.watchdog: Initialized
+[    0.470000] TCP: cubic registered
+[    0.470000] NET: Registered protocol family 17
+[    0.480000] bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
+[    0.490000] 8021q: 802.1Q VLAN Support v1.8
+[    0.500000] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    0.510000] Freeing unused kernel memory: 196K (8031f000 - 80350000)
+[    1.770000] init: Console is alive
+[    1.780000] init: - watchdog -
+[    4.110000] usbcore: registered new interface driver usbfs
+[    4.120000] usbcore: registered new interface driver hub
+[    4.120000] usbcore: registered new device driver usb
+[    4.130000] reg_opt_init
+[    4.140000] exFAT: Version 1.2.9
+[    4.180000] SCSI subsystem initialized
+[    4.190000] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    4.200000] ehci-platform: EHCI generic platform driver
+[    4.370000] U2PHY P0 set SRCTRL calibration value: 7
+[    4.370000] ehci-platform 101c0000.ehci: EHCI Host Controller
+[    4.380000] ehci-platform 101c0000.ehci: new USB bus registered, assigned bus number 1
+[    4.380000] ehci-platform 101c0000.ehci: irq 26, io mem 0x101c0000
+[    4.410000] ehci-platform 101c0000.ehci: USB 2.0 started, EHCI 1.00
+[    4.410000] hub 1-0:1.0: USB hub found
+[    4.420000] hub 1-0:1.0: 1 port detected
+[    4.420000] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    4.430000] ohci-platform: OHCI generic platform driver
+[    4.440000] ohci-platform 101c1000.ohci: Generic Platform OHCI controller
+[    4.440000] ohci-platform 101c1000.ohci: new USB bus registered, assigned bus number 2
+[    4.450000] ohci-platform 101c1000.ohci: irq 26, io mem 0x101c1000
+[    4.520000] hub 2-0:1.0: USB hub found
+[    4.520000] hub 2-0:1.0: 1 port detected
+[    4.540000] MTK MSDC device init.
+[    4.580000] mtk-sd: MediaTek MT6575 MSDC Driver
+[    4.580000] sdhci: Secure Digital Host Controller Interface driver
+[    4.590000] sdhci: Copyright(c) Pierre Ossman
+[    4.590000] sdhci-pltfm: SDHCI platform and OF driver helper
+[    4.600000] usbcore: registered new interface driver usb-storage
+[    4.840000] init: - preinit -
+[    5.440000] rt305x-esw 10110000.esw: link changed 0x00
+[    5.620000] random: procd urandom read with 8 bits of entropy available
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[    8.870000] mount_root: loading kmods from internal overlay
+[    9.220000] block: attempting to load /etc/config/fstab
+[    9.220000] block: unable to load configuration (fstab: Entry not found)
+[    9.230000] block: no usable configuration
+[    9.240000] mount_root: jffs2 not ready yet, using temporary tmpfs overlay
+[    9.260000] procd: - early -
+[    9.270000] procd: - watchdog -
+[    9.970000] procd: - ubus -
+[   11.000000] procd: - init -
+Please press Enter to activate this console.
+[   12.030000] NET: Registered protocol family 10
+[   12.110000] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   12.130000] i2c /dev entries driver
+[   12.330000] PandoraBox MT76X8 AP Driver Version-4.1.0.0(Jul 24 2018 11:42:54).
+[   12.370000] i2c-mt7621 10000900.i2c: clock 100 kHz
+[   12.400000] Linux video capture interface: v2.00
+[   12.430000] Enable Ralink GDMA Controller Module 
+[   12.440000] GDMA IP Version=3
+[   12.480000] *******Enter codec_wm8960_i2c_probe********
+[   12.490000] soc-audio soc-audio: ASoC: machine MTK APSoC I2S should use snd_soc_register_card()
+[   12.490000] wm8960 0-001a: No platform data supplied
+[   12.500000] ****** wm8960_preinit ******
+[   13.010000] soc-audio soc-audio: wm8960-hifi <-> mt76xx-i2s mapping ok
+[   13.020000] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   13.050000] nf_conntrack version 0.5.0 (1976 buckets, 7904 max)
+[   13.110000] usbcore: registered new interface driver uvcvideo
+[   13.120000] USB Video Class driver (1.1.1)
+[   13.140000] xt_time: kernel timezone is -0000
+[   13.160000] PPP generic driver version 2.4.2
+[   13.170000] NET: Registered protocol family 24
+ETHMODE
+3
+[   18.930000] device eth0 entered promiscuous mode
+[   18.950000] br-lan: port 1(eth0) entered forwarding state
+[   18.950000] br-lan: port 1(eth0) entered forwarding state
+[   20.950000] br-lan: port 1(eth0) entered forwarding state
+[   23.530000] =====================================================
+[   23.530000] Channel 1 : Busy Time = 0, Skip Channel = FALSE
+[   23.540000] Channel 2 : Busy Time = 0, Skip Channel = FALSE
+[   23.540000] Channel 3 : Busy Time = 0, Skip Channel = FALSE
+[   23.550000] Channel 4 : Busy Time = 0, Skip Channel = FALSE
+[   23.550000] Channel 5 : Busy Time = 0, Skip Channel = FALSE
+[   23.560000] Channel 6 : Busy Time = 0, Skip Channel = FALSE
+[   23.570000] Channel 7 : Busy Time = 0, Skip Channel = FALSE
+[   23.570000] Channel 8 : Busy Time = 0, Skip Channel = FALSE
+[   23.580000] Channel 9 : Busy Time = 2244, Skip Channel = FALSE
+[   23.580000] Channel 10 : Busy Time = 0, Skip Channel = FALSE
+[   23.590000] Channel 11 : Busy Time = 0, Skip Channel = FALSE
+[   23.590000] Channel 12 : Busy Time = 0, Skip Channel = TRUE
+[   23.600000] Channel 13 : Busy Time = 397, Skip Channel = TRUE
+[   23.610000] =====================================================
+[   23.610000] Rule 3 Channel Busy time value : Min Channel Busy  ==> Select Channel 1 
+[   23.620000] Min Channel Busy = 0
+[   23.620000] BW        = 40
+[   23.650000] |--------------------------------------------------------|
+[   23.660000] |------------Widora wifi driver--version:1.4-------------|
+[   23.670000] |Copyright 2016-2018 by WIDORA TECH.  All rights reserved|
+[   23.670000] |       This Driver licensing-only runs on Widora HW!    |
+[   23.680000] |  Found bug? Please contact widora@qq.com , thanks!     |
+[   23.690000] |--------------------------------------------------------|
+[   23.790000] br-lan: port 1(eth0) entered disabled state
+[   23.800000] device eth0 left promiscuous mode
+[   23.800000] br-lan: port 1(eth0) entered disabled state
+[   23.860000] IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+[   23.910000] device eth0 entered promiscuous mode
+[   23.920000] br-lan: port 1(eth0) entered forwarding state
+[   23.920000] br-lan: port 1(eth0) entered forwarding state
+[   25.250000] device ra0 entered promiscuous mode
+[   25.250000] br-lan: port 2(ra0) entered forwarding state
+[   25.260000] br-lan: port 2(ra0) entered forwarding state
+[   25.920000] br-lan: port 1(eth0) entered forwarding state
+[   26.250000] jffs2_scan_eraseblock(): End of filesystem marker found at 0x0
+[   26.300000] jffs2_build_filesystem(): unlocking the mtd device... done.
+[   26.300000] jffs2_build_filesystem(): erasing all blocks after the end marker... 
+[   27.260000] br-lan: port 2(ra0) entered forwarding state
+
+Widora login: root
+Password: 
+
+
+BusyBox v1.23.2 (2018-07-19 19:20:30 CST) built-in shell (ash)
+
+ _       ___     __
+| |     / (_)___/ /___  _________ _
+| | /| / / / __  / __ \/ ___/ __ `/
+| |/ |/ / / /_/ / /_/ / /  / /_/ /
+|__/|__/_/\__,_/\____/_/   \__,_/
+ -----------------------------------------------------
+ CHAOS CALMER (Chaos Calmer, r49378) Ver:0.1.8-20180813 by WIDORA
+ -----------------------------------------------------
+root@Widora:~# [   62.360000] random: nonblocking pool is initialized
+[  150.230000] done.
+[  150.230000] jffs2: notice: (1418) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of .
+
+                                         
+</code>              

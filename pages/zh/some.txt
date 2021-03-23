@@ -1,0 +1,11 @@
+====MT7688 QT4.8.3====
+
+MT7688 QT
+{{ :qt-4.8.tar |}}
+
+{{ ::widora_qt-notitle.bin |}}
+
+{{ :widora_qt.bin |}}
+
+MT7688应用层UART测试工具源码
+{{ ::uart_test.c.txt |}}

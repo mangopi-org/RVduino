@@ -1,0 +1,44 @@
+所用到的文件：{{ ::mpi-r-tools.zip |}}
+
+=====打驱动=====
+===针对FEL===
+安装zadig后打开，选择"Device"->"Create New Device"
+{{ ::create_new_device.png |}}
+
+按图中填写信息
+{{ ::fel_driver.png |}}
+
+然后点击"Install Driver"
+===针对DFU===
+再次选择"Device"->"Create New Device"
+{{ ::create_new_device.png |}}
+
+按图中填写信息
+{{ ::dfu_driver.png |}}
+然后点击"Install Driver"
+
+
+
+=====刷机工具SUNXI-FEL=====
+该工具是全志soc在所有flash中无法boot时，芯片自动进入FEL刷机状态，通过USB通信。
+
+这部分会用到压缩包中的sunxi-fel.exe
+===Windows===
+1. 不插TF卡，按住BOOT按钮后插入USB线；或者先插入USB，保持按住BOOT按钮姿势时短按下RST键，可主动进入USB刷机模式，电脑检测到新的usb烧写设备。
+
+3. sunxi-fel使用时必须在命令行下，例如可以安装个git工具（https://git-scm.com/downloads）代替windows自带的终端。
+正常工作的FEL设备，我们可以通过命令测试它：
+  $ ./sunxi-fel.exe -l
+  USB device 001:034   Allwinner F1C100s
+
+===Linux===
+1. 安装依赖
+  apt-get install libusb-1.0-0-dev
+或
+  yum install libusbx-devel
+  
+2. 将 {{ ::sunxi-fel.zip |}} 解压后放到/usr/local/bin/下
+
+3. 使用注意：如果不是root用户，使用时加sudo。 如果Linux是在虚拟机中，需要虚拟机设置将USB设备直通给Linux。
+
+

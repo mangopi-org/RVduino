@@ -1,0 +1,238 @@
+<code>
+U-Boot SPL 2020.07 (Feb 09 2021 - 14:11:05 +0800)
+DRAM: 64 MiB
+Trying to boot from MMC1
+Card did not respond to voltage select!
+spl: mmc init failed with error: -95
+Trying to boot from MMC2
+Card did not respond to voltage select!
+spl: mmc init failed with error: -95
+Trying to boot from sunxi SPI
+SPI-NAND: GigaDevice GD5F1GQ4UAYIG
+SPI-NAND: U-Boot address: 53248
+
+
+U-Boot 2020.07 (Feb 09 2021 - 14:11:05 +0800) Allwinner Technology
+
+CPU:   Allwinner F Series (SUNIV)
+Model: Allwinner F1C100s Generic Device
+DRAM:  64 MiB
+MMC:   mmc@1c0f000: 0, mmc@1c10000: 1
+Setting up a 800x480 lcd console (overscan 0x0)
+In:    serial
+Out:   serial
+Err:   serial
+Allwinner mUSB OTG (Peripheral)
+Hit any key to stop autoboot:  0 
+Card did not respond to voltage select!
+Card did not respond to voltage select!
+unrecognized JEDEC id bytes: ff, c8, f1
+Failed to initialize SPI flash at 0:0 (error -2)
+List of MTD devices:
+* spi-nand0
+  - device: spi-nand@1
+  - parent: spi@1c05000
+  - driver: spi_nand
+  - type: NAND flash
+  - block size: 0x20000 bytes
+  - min I/O: 0x800 bytes
+  - OOB size: 64 bytes
+  - OOB available: 31 bytes
+  - 0x000000000000-0x000008000000 : "spi-nand0"
+=========================
+Boot Device: spi
+Boot Slot 0: empty
+Boot Slot 1: spi-nand
+=========================
+DFU waiting on SPI-NAND...
+musb-hdrc: peripheral reset irq lost!
+Booting from SPI-NAND...
+Reading 5767168 byte(s) (2816 page(s)) at offset 0x00080000
+## Loading kernel from FIT Image at 81000000 ...
+   Using 'conf@0' configuration
+   Trying 'kernel@0' kernel subimage
+     Description:  Linux kernel
+     Type:         Kernel Image
+     Compression:  uncompressed
+     Data Start:   0x810000cc
+     Data Size:    4309064 Bytes = 4.1 MiB
+     Architecture: ARM
+     OS:           Linux
+     Load Address: 0x80000000
+     Entry Point:  0x80000000
+     Hash algo:    crc32
+     Hash value:   fe355332
+   Verifying Hash Integrity ... crc32+ OK
+## Loading fdt from FIT Image at 81000000 ...
+   Using 'conf@0' configuration
+   Trying 'fdt@0' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x8141c1f8
+     Data Size:    15655 Bytes = 15.3 KiB
+     Architecture: ARM
+     Hash algo:    crc32
+     Hash value:   7947cec8
+   Verifying Hash Integrity ... crc32+ OK
+   Booting using the fdt blob at 0x8141c1f8
+   Loading Kernel Image
+   Loading Device Tree to 80ff9000, end 80fffd26 ... OK
+Cannot setup simplefb: node not found
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.4.92 (widora@Ubuntu) (gcc version 8.4.0 (Buildroot -g22245a5-dirty)) #1 Tue Feb 9 13:09:08 CST 2021
+[    0.000000] CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=0005317f
+[    0.000000] CPU: VIVT data cache, VIVT instruction cache
+[    0.000000] OF: fdt: Machine model: Widora MangoPi R3
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x83000000
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16256
+[    0.000000] Kernel command line: console=ttyS0,115200 rootwait init=/preinit root=/dev/mtdblock2 rootfstype=squashfs overlayfsdev=/dev/mtdblock3 net.ifnames=0 vt.global_cursor_default=0
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 38736K/65536K available (6144K kernel code, 248K rwdata, 1676K rodata, 1024K init, 225K bss, 10416K reserved, 16384K cma-reserved)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] random: get_random_bytes called from start_kernel+0x254/0x444 with crng_init=0
+[    0.000051] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 89478484971ns
+[    0.000142] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns
+[    0.000906] Console: colour dummy device 80x30
+[    0.001012] Calibrating delay loop... 203.16 BogoMIPS (lpj=1015808)
+[    0.070263] pid_max: default: 32768 minimum: 301
+[    0.070803] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.070860] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.072773] CPU: Testing write buffer coherency: ok
+[    0.074889] Setting up static identity map for 0x80100000 - 0x80100058
+[    0.076096] devtmpfs: initialized
+[    0.088203] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.088270] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    0.092642] pinctrl core: initialized pinctrl subsystem
+[    0.095157] NET: Registered protocol family 16
+[    0.098899] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.101300] cpuidle: using governor menu
+[    0.145496] SCSI subsystem initialized
+[    0.145882] usbcore: registered new interface driver usbfs
+[    0.146042] usbcore: registered new interface driver hub
+[    0.146199] usbcore: registered new device driver usb
+[    0.146704] mc: Linux media interface: v0.10
+[    0.146845] videodev: Linux video capture interface: v2.00
+[    0.146985] pps_core: LinuxPPS API ver. 1 registered
+[    0.147006] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.147072] PTP clock support registered
+[    0.148177] ion_parse_dt_heap_common: id 4 type 4 name cma align 1000
+[    0.149150] Advanced Linux Sound Architecture Driver Initialized.
+[    0.151609] clocksource: Switched to clocksource timer
+[    0.183445] thermal_sys: Registered thermal governor 'step_wise'
+[    0.184254] NET: Registered protocol family 2
+[    0.185784] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.185872] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.185927] TCP bind hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.185975] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.186238] UDP hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.186298] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.186818] NET: Registered protocol family 1
+[    0.189444] NetWinder Floating Point Emulator V0.97 (double precision)
+[    0.191341] Initialise system trusted keyrings
+[    0.192103] workingset: timestamp_bits=30 max_order=14 bucket_order=0
+[    0.214476] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.215133] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    0.323922] Key type asymmetric registered
+[    0.323962] Asymmetric key parser 'x509' registered
+[    0.324144] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 249)
+[    0.324169] io scheduler mq-deadline registered
+[    0.324187] io scheduler kyber registered
+[    0.340324] suniv-f1c100s-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver
+[    0.365855] Serial: 8250/16550 driver, 8 ports, IRQ sharing disabled
+[    0.372011] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pa not found, using dummy regulator
+[    0.373370] printk: console [ttyS0] disabled
+[    0.393702] 1c25400.serial: ttyS0 at MMIO 0x1c25400 (irq = 27, base_baud = 6250000) is a 16550A
+[    0.827100] printk: console [ttyS0] enabled
+[    0.836884] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pd not found, using dummy regulator
+[    0.857962] panel-simple panel: panel supply power not found, using dummy regulator
+[    0.867623] SCSI Media Changer driver v0.25 
+[    0.873591] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pc not found, using dummy regulator
+[    0.886483] spi-nand spi0.0: GigaDevice SPI NAND was found.
+[    0.892187] spi-nand spi0.0: 128 MiB, block size: 128 KiB, page size: 2048, OOB size: 64
+[    0.901835] 4 fixed-partitions partitions found on MTD device spi0.0
+[    0.908195] Creating 4 MTD partitions on "spi0.0":
+[    0.913120] 0x000000000000-0x000000080000 : "u-boot"
+[    0.923147] 0x000000080000-0x000000600000 : "kernel.itb"
+[    0.931508] random: fast init done
+[    0.955013] 0x000000600000-0x000004600000 : "rom"
+[    1.188349] 0x000004800000-0x000007800000 : "overlay"
+[    1.366030] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.372682] ehci-platform: EHCI generic platform driver
+[    1.378336] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    1.384646] ohci-platform: OHCI generic platform driver
+[    1.390376] usbcore: registered new interface driver usb-storage
+[    1.397474] usb_phy_generic usb_phy_generic.0.auto: usb_phy_generic.0.auto supply vcc not found, using dummy regulator
+[    1.411137] i2c /dev entries driver
+[    1.415454] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pd not found, using dummy regulator
+[    1.429124] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pe not found, using dummy regulator
+[    1.440155] sun4i-csi 1cb0000.csi: Packed (RAW) format enabled.
+[    1.448032] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout=16 sec, nowayout=0)
+[    1.458096] suniv-f1c100s-pinctrl 1c20800.pinctrl: 1c20800.pinctrl supply vcc-pf not found, using dummy regulator
+[    1.496187] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB
+[    1.505612] usbcore: registered new interface driver usbhid
+[    1.511186] usbhid: USB HID core driver
+[    1.515470] sunxi-cedar 1c0e000.video-codec: sunxi cedar version 0.01alpha
+[    1.522798] sunxi-cedar 1c0e000.video-codec: cedar-ve the get irq is 20
+[    1.534613] debugfs: Directory '1c23c00.codec' with parent 'F1C100s Audio Codec' already present!
+[    1.548475] sun4i-codec 1c23c00.codec: Codec <-> 1c23c00.codec mapping ok
+[    1.564716] NET: Registered protocol family 17
+[    1.569279] Key type dns_resolver registered
+[    1.574800] Loading compiled-in X.509 certificates
+[    1.593197] sun4i-drm soc:display-engine: bound 1e00000.display-frontend (ops 0xc073b278)
+[    1.602264] sun4i-drm soc:display-engine: bound 1e60000.display-backend (ops 0xc073aab8)
+[    1.611837] sun4i-drm soc:display-engine: bound 1c0c000.lcd-controller (ops 0xc0739658)
+[    1.620313] sun4i-drm soc:display-engine: bound 1c0a000.tv-encoder (ops 0xc073a378)
+[    1.628092] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    1.634740] [drm] No driver support for vblank timestamp query.
+[    1.642543] [drm] Initialized sun4i-drm 1.0.0 20150629 for soc:display-engine on minor 0
+[    1.651466] [drm] kms: can't enable cloning when we probably wanted to.
+[    1.723222] Console: switching to colour frame buffer device 100x30
+[    1.762093] sun4i-drm soc:display-engine: fb0: sun4i-drmdrmfb frame buffer device
+[    1.770599] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    1.788424] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    1.795270] ALSA device list:
+[    1.798258]   #0: F1C100s Audio Codec
+[    1.802617] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    1.811234] cfg80211: failed to load regulatory.db
+[    1.825341] VFS: Mounted root (squashfs filesystem) readonly on device 31:2.
+[    1.837997] random: crng init done
+[    1.846786] devtmpfs: mounted
+[    1.856333] Freeing unused kernel memory: 1024K
+[    1.860987] Run /preinit as init process
+[    5.580162] overlayfs: upper fs does not support tmpfile.
+[    5.585769] overlayfs: upper fs does not support xattr, falling back to index=off and metacopy=off.
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Populating /dev using udev: [    6.797378] udevd[91]: starting version 3.2.9
+[    7.157627] udevd[92]: starting eudev-3.2.9
+[    9.301515] ov2640 0-0030: Product ID error fa:fa
+[    9.337729] Goodix-TS 0-005d: 0-005d supply AVDD28 not found, using dummy regulator
+[    9.345836] Goodix-TS 0-005d: 0-005d supply VDDIO not found, using dummy regulator
+[    9.493922] Goodix-TS 0-005d: ID 911, version: 1060
+[    9.553649] input: Goodix Capacitive TouchScreen as /devices/platform/soc/1c27000.i2c/i2c-0/0-005d/input/input0
+done
+Initializing random number generator: OK
+Saving random seed: OK
+Starting network: OK
+Starting uMTPrd: [   10.581250] file system registered
+[   10.888730] read descriptors
+[   10.891934] read strings
+OK
+
+Welcome to Widora MangoPi R3
+mangopi-r3 login: [   12.120060] configfs-gadget gadget: high-speed config #1: c
+[   31.841690] vcc3v0: disabling
+[   31.844695] vcc3v3: disabling
+[   31.847664] vcc5v0: disabling
+root
+# 
+</code>

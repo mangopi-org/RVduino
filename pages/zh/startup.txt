@@ -1,0 +1,44 @@
+====1. 程序自启动init脚本====
+为了让程序在系统启动时自动加载，我们可以编写一个init脚本，步骤如下：
+  - 程序需命令方式调用执行。
+  - 在/etc/init.d/目录下建立自启动脚本，并赋予可执行权限。
+  - 在/etc/rc.d/目录下建立上一步启动脚本的链接,这个链接也可以自动生成。
+
+例子：
+在 /etc/init.d/下建立一个脚本 coolpy:
+   #!/bin/sh /etc/rc.common
+   #---/etc/init.d/coolpy
+   START=85
+   start() {
+        /usb/coolpy &
+   }
+   stop() {
+        killall coolpy
+   }
+
+执行命令 /etc/init.d/coolpy enable 后查看/etc/rc.d目录, 会发现已自动生成链接文件S85coolpy。
+系统重启后，/etc/rc.d目录下的脚本将会根据编号Sxx的顺序依次启动。如果不想让它自启动，只要执行一下/etc/init.d/coolpy disable就可以了，此时会发现/etc/rc.d目录下的S85coolpy文件已被删除。
+
+====2. 基于procd的自启动init脚本====
+有时候我们希望系统能监控自启动的程序，当程序意外退出时系统会尝试重启进程，这时我们可以使用基于procd的自启动init脚本。将上面的例子修改成如下：
+
+   #!/bin/sh /etc/rc.common
+   #---/etc/init.d/coolpy
+   START=85
+   USE_PROCD=1
+   start_service () {
+      procd_open_instance
+      procd_set_param respawn
+      procd_set_param command /usb/coolpy
+      procd_close_instance
+   }
+   stop_service() {
+      echo 'coolpy stops!'
+   }
+   restart() {
+      stop
+      start
+   }
+
+其中procd_set_param respawn告诉系统在程序意外退出后尝试重启。要注意的是所运行的程序不能为守护进程。
+参见：https://wiki.openwrt.org/inbox/procd-init-scripts

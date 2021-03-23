@@ -1,0 +1,5 @@
+加速度计ADXL345，陀螺仪L3G4200D和L298N_电机驱动模块组合成简单的试验平衡车(待完善).
+
+试验代码参考：https://github.com/widora/ctest/tree/master/widora_BiRoll
+{{:wbiroll.jpg?700}}
+

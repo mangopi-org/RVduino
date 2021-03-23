@@ -1,0 +1,69 @@
+=====I2C=====
+固件内置了i2ctools软件包
+ 
+===1. 用i2cdetect -l 命令来列出所有I2C总线===
+<code bash>
+root@Widora:/# i2cdetect -l
+i2c-0   i2c          10000900.i2c                 I2C adapt
+</code>
+
+===2. 用i2cdetect -F 0 来查看I2C 0号总线启用的功能===
+<code bash>
+root@Widora:/# i2cdetect -F 0
+Functionalities implemented by /dev/i2c-0:
+I2C                              yes
+SMBus Quick Command              yes
+SMBus Send Byte                  yes
+SMBus Receive Byte               yes
+SMBus Write Byte                 yes
+SMBus Read Byte                  yes
+SMBus Write Word                 yes
+SMBus Read Word                  yes
+SMBus Process Call               yes
+SMBus Block Write                yes
+SMBus Block Read                 no
+SMBus Block Process Call         no
+SMBus PEC                        yes
+I2C Block Write                  yes
+I2C Block Read                   yes
+</code>
+
+===3. 查看I2C 0号总线上挂载的设备===
+<code bash>
+root@Widora:/# i2cdetect -y 0
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- UU -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- UU -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+</code>
+其中标识为UU的设备（地址分别为0x1a和0x34）表示内核已经加载了相应的驱动，而地址为0x48的I2C设备尚未被内核所驱动。
+
+===4. 在sysfs文件中可查看已被内核驱动的I2C设备的名称===
+<code bash>
+root@Widora:/# ls /sys/bus/i2c/devices
+0-001a  0-0034  i2c-0
+root@Widora:/# cat /sys/bus/i2c/devices/0-001a/name
+wm8960
+root@Widora:/# cat /sys/bus/i2c/devices/0-0034/name
+codec_wm8960
+</code>
+
+===5. 用i2cdump -y 0 0x48 W 命令来读取地址为0x48的I2C设备(LM75温度传感器)所有寄存器中的内容===
+<code bash>
+root@Widora:/# i2cdump -y 0 0x48 W
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef
+00: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+10: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+20: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+30: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+40: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+50: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+60: 1e 00 4b 00 ff ff ff ff 1e 00 4b 00 ff ff ff ff    ?.K.....?.K.....
+</code>
+
+===6. 用i2cget -y 0 0x48 0 w 命令来读取地址为0x48的I2C设备0号寄存器中的内容===

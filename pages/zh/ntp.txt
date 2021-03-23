@@ -1,0 +1,33 @@
+NTP（Network Time Protocol，网络时间协议）是通过网络来同步时间的一种协议，网络时间由NTP服务器来提供。 通过修改配置文件/etc/config/system来设置本机所在时区,并指定NTP服务器。可以参考如下设置：
+
+   config system
+        option hostname Widora32
+        option timezone CST-8
+   config timeserver ntp
+        list server     0.cn.pool.ntp.org
+        list server     1.cn.pool.ntp.org
+        list server     2.cn.pool.ntp.org
+        list server     3.cn.pool.ntp.org
+        list server     0.openwrt.pool.ntp.org
+        list server     1.openwrt.pool.ntp.org
+        list server     2.openwrt.pool.ntp.org
+        list server     3.openwrt.pool.ntp.org
+        option enabled 1
+        option enable_server 0
+
+各选项说明：
+      timezone      	 本机所在时区, Asian/Shanghai CST-8
+      list server     	 NTP服务器列表,可以增删
+      enabled        	 是否启用网络时间同步， 1--启用； 0--停止。
+      enable_server        0--本机仅作为授时客户端；1--本机设置为NTP中继服务器。
+ 
+如果ntpd未启动，依次执行下面的命令来启动：
+   /etc/init.d/sysntpd enable    （设置开机启动）
+   /etc/init.d/sysntpd start     （启动）
+
+如果你需要立即同步时间，那么直接执行ntpd命令，比如：
+   ntpd -n -d -q -p 1.cn.pool.ntp.org
+连接NTP服务器和同步时间可能需要等待一些时间,直到出现" setting time to ...",此时时间同步完成。
+{{:ntpd.jpg}}
+
+最后执行date命令查看当前时间。

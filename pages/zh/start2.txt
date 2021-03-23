@@ -1,0 +1,108 @@
+<WRAP center round important 70%>
+=== 重要！BIT3.1模组配置调整计划 ===
+详情请看：[[bit31diff]]
+</WRAP>
+
+
+<html>
+
+
+
+<style type="text/css">
+        .company {
+            padding: 50px 0px;
+            position: relative;
+            width: 100%;
+            background: #fff;
+        }
+
+        .company .company-desc {
+            width: 1092px;
+            margin: 0px auto;
+            font-size: 24px;
+            line-height: 1.5;
+            color: #4d4d4d;
+            padding-left: 20px;
+            border-left: 12px solid #00dd73;
+            font-weight: 300;
+        }
+</style>
+   
+    <div>
+    <section class="company">
+        <div class="company-desc">
+            <img src="https://widora.io/_media/logo.png"> </img>
+            <p>歪朵拉科技是<span class="emp">专注于提供AIoT开源方案和平台</span>的创业公司，成立于 2017 年 7 月 7 日</p>
+            <p>我们致力于<span class="emp">高性价比AIoT技术孵化和输出</span>，为全球的各类物联网和新硬件创业者提供研发、工程、供应等服务，是多家创新公司背后的技术支持者，我们也一直在尝试提供这一领域的标准化的开发工具和统一的基础平台 </br>
+             <span class="emp">歪朵拉——让开发变得更简单</span></p>
+
+        </div>
+    </section>
+    
+    <section class="products">
+        <h3>产品 | 平台</h3>
+        <ul>
+
+                <li>
+                    <img class="logo"  srcset="_media/bit5.png"/> 
+                    <div class="name"><a href="/bit5">BIT5.0 BIT5.1模组</a></div>
+                    <div class="desc">MT7688AN/MT7628DAN </br> 金手指封装，方便量产 </br> 高性价比网关御用方案 </br> 运行OpenWrt </div>
+                </li>
+                
+                <li>
+                                <img class="logo"  srcset="_media/bit3-1.png"/>
+                                <div class="name"><a href="/brief_bit31">BIT3.1模组</a></div>
+                                <div class="desc">MT7688AN </br> 小巧好用，LCC封装 </br> 高性价比网关御用方案 </br> 运行OpenWrt </div>
+                </li>
+
+                <li>
+                                <img class="logo"  srcset="_media/mpi-r3.jpg"/>
+                                <div class="name"><a href="/mangopi_r">芒果派™ MPi-R3</a></div>
+                                <div class="desc">F1C200s </br> 极致迷你，5寸电容触摸屏 </br> 或许是最漂亮的F1C小板子 </br> 运行Linux </div>
+                </li>
+
+                <li>
+                    <img class="logo"  srcset="_media/1555303736803-neo-seer-200.png"/>
+                    <div class="name"><a href="/brief_neo">NEO-SEER(100%开源)</a></div>
+                    <div class="desc">MT7688AN </br> 一体化7688原型平台 </br> 板载TTL和音频 </br> 单板即可完成7688评估 </div>
+                </li>
+
+        <li>
+            <img class="logo"  srcset="_media/eyjau7_vcaeqbt3-removebg-preview.png"/>
+            <div class="name"><a href="/bitk210r2">BITK210模组 r2</a></div>
+            <div class="desc">kendryte K210</br> 只有20*18mm的M.2金手指</br> 极高性价比 </div> 
+    </li>
+
+                <li>
+                   <img class="logo"  srcset="_media/airvr3_-_副本.png"/>
+                    <div class="name"><a href="/airv3">AIRV r3(PCB开源)</a></div>
+                    <div class="desc">基于BITK210模组</br> 板载屏幕酷似小电视 </br> 新增音频和WiFi </br> 超强扩展，释放性能 </br>
+                </li>
+
+
+        <li>
+            <img class="logo"  srcset="_media/ting.png"/>
+            <div class="name"><a href="/lora_dev">"听"TING-01(M)模组</a></div>
+            <div class="desc">SX1278</br> 支持透传/AT命令双模式</br> 可二次开发，简单易用 </br> 低功耗和超远距离共存 </br> </div>
+        </li>
+
+        <li>
+            <img class="logo"  srcset="_media/githublogo.png"/>
+            <div class="name"><a href="http://gitd.cc">GitD服务</a></div>
+            <div class="desc"> 成功加速超150K次 </br> GitHub下载加速 </br> 永久免费 </br> 用爱发电 </div>
+        </li>
+
+        </ul>
+        
+    </section>
+    
+    </div>
+</html>
+
+
+
+===Widora,Compute Platform for AIoT===
+===人工智能物联网计算平台提供商===
+
+
+

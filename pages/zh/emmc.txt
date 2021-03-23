@@ -1,0 +1,3 @@
+{{ :zh:emmc.pdf |}}
+
+{{ :zh:emmc.jpg |}}

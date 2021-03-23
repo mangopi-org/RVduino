@@ -1,0 +1,100 @@
+~~NOTOC~~
+====工具====
+  * macOS && Linux ：系统自带
+  * Win ：{{ :putty.zip |}}
+  * 网络方式登录控制台前，要保证电脑直接连NEO的网口或WI-FI。
+  * 连接前需要确认板子的IP地址，在串口终端使用ifconfig br-lan可以看到。
+====macOS && Linux下Telnet登录====
+打开系统终端，输入以下命令：
+  mangodeMacBook-Pro:~ mango$ telnet 192.168.1.1 
+登录后是这个样子的。
+
+<code bash>
+mangodeMacBook-Pro:~ mango$ telnet 192.168.1.1
+Trying 192.168.1.1...
+Connected to bogon.
+Escape character is '^]'.
+
+
+BusyBox v1.23.2 (2017-04-19 23:18:55 CST) built-in shell (ash)
+
+ _       ___     __
+| |     / (_)___/ /___  _________ _
+| | /| / / / __  / __ \/ ___/ __ `/
+| |/ |/ / / /_/ / /_/ / /  / /_/ /
+|__/|__/_/\__,_/\____/_/   \__,_/
+ -----------------------------------------------------
+ CHAOS CALMER (Chaos Calmer, r49378) Version:0.1.7 by mango
+ -----------------------------------------------------
+  * 1 1/2 oz Gin            Shake with a glassful
+  * 1/4 oz Triple Sec       of broken ice and pour
+  * 3/4 oz Lime Juice       unstrained into a goblet.
+  * 1 1/2 oz Orange Juice
+  * 1 tsp. Grenadine Syrup
+ -----------------------------------------------------
+root@Widora:/#
+</code>
+
+若是要退出telnet，在控制台中输入exit命令回车即可。
+
+====macOS && Linux下SSH登录====
+打开系统终端，输入以下命令：
+  mangodeMacBook-Pro:~ mango$ ssh root@192.168.1.1 
+第一次登录可能会有如下提示，键入"yes"
+
+<code bash>
+mangodeMacBook-Pro:~ mango$ ssh root@192.168.1.1
+The authenticity of host '192.168.1.1 (192.168.1.1)' can't be established.
+RSA key fingerprint is SHA256:j0FUuPK6qLHpVQUqrDL5FwuJ8X0L1wHXamn2vSVyXuA.
+Are you sure you want to continue connecting (yes/no)?
+</code>
+接下来会询问密码:
+<code bash>
+Warning: Permanently added '192.168.1.1' (RSA) to the list of known hosts.
+root@192.168.1.1's password:
+</code>
+此时输入密码“12345678”即可，macOS和Linux的逻辑是输入密码并没有回显，输入完回车即可。 看登录后的样子：
+<code bash>
+root@192.168.1.1's password: 
+
+BusyBox v1.23.2 (2017-04-19 23:18:55 CST) built-in shell (ash)
+
+ _       ___     __
+| |     / (_)___/ /___  _________ _
+| | /| / / / __  / __ \/ ___/ __ `/
+| |/ |/ / / /_/ / /_/ / /  / /_/ /
+|__/|__/_/\__,_/\____/_/   \__,_/
+ -----------------------------------------------------
+ CHAOS CALMER (Chaos Calmer, r49378) Version:0.1.7 by mango
+ -----------------------------------------------------
+  * 1 1/2 oz Gin            Shake with a glassful
+  * 1/4 oz Triple Sec       of broken ice and pour
+  * 3/4 oz Lime Juice       unstrained into a goblet.
+  * 1 1/2 oz Orange Juice
+  * 1 tsp. Grenadine Syrup
+ -----------------------------------------------------
+root@Widora:~#
+</code>
+
+同理，若是要退出ssh，在控制台中输入exit命令回车即可。
+
+====WIN下Telnet登录====
+打开PUTTY后选择Telnet，填入IP
+{{ ::winputty.png |}}
+点击Open，即登录完成
+{{ ::telnet2.png |}}
+
+====WIN下SSH登录====
+打开PUTTY后选择SSH，填入IP
+{{ ::ssh.png |}}
+点击Open，随机可能弹出确认框，点击YES
+{{ ::alert.png |}}
+接下来就跳转到输入用户名密码界面了，用户名为root ,密码是12345678 ，输入完回车。
+{{ ::ok.png |}}
+
+
+在SSH登陆前需要注意的事项有
+  - root用户已经设置了密码。 
+  - /etc/config/dropbear 配置。
+  - /etc/init.d/dropbear 服务已经启动 
+  - /etc/config/firewall 防火墙配置允许当前网络SSH接入。

@@ -1,0 +1,11 @@
+UCI是(Unified Configuration Interface)的缩写， 即统一配置接口。UCI是Openwrt提供的一套软件包参数配置管理系统，其目的是让系统和软件包的配置更加简单，并且易于集中管理。UCI的配置文件全部放置在/etc/config目录下，其中最基本和常用的一些配置文件包括:
+   /etc/config/wireless        无线配置 
+   /etc/config/network         网络配置
+   /etc/config/firewall        防火墙配置
+   /etc/config/dropbear        SSH配置
+   /etc/config/system          网络时间同步配置等
+   /etc/config/fstab           (块设备)文件系统和交换分区的挂载配置
+   /etc/config/dhcp            DHCP和DNS配置
+   /etc/config/uhttpd          Web服务器配置
+   /etc/config/mountd          USB存储设备自动挂载配置
+配置方法可以是直接修改文件或用uci命令进行修改，具体语法可以参考wiki.openwrt.org。

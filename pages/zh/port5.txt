@@ -1,0 +1,100 @@
+====简介====
+<WRAP center round tip 60%>
+最新代码已经将5口模式合并，通过ethmode设置，无需以下步骤
+</WRAP>
+
+====提前了解：5口模式的部分资源冲突====
+[[iot_router]]
+
+====新方法====
+
+查看网络模式命令ethmode,（不受恢复出厂设置影响）：
+^ ethmode命令 ^ 网口状态 ^
+| ethmode l | 单网口0，LAN |
+| ethmode w | 单网口0，WAN |
+| ethmode wllll | 五网口，Port0为WAN，其余为LAN |
+| ethmode lllll | 五网口，均为LAN |
+
+
+====旧方法====
+
+有时，单个网口总会带来不便，比如既想用来pppoe上网，又想多出几个来连接家里的设备。此时，就需要MT7688AN的5网口模式了。 \\
+源码中，总体来说要改这几个位置：
+  * AGPIO_CFG寄存器，这里的BIT20-BIT17配置了除了PORT0之外四个网口的复用模式。
+  * ephy的LED指示。
+  * 源码中的network。
+
+{{ ::pasted_graphic.jpg |}}
+{{ ::qq20170328-215021.png |}}
+
+在源码/package/base-files/files/etc/init.d/目录下添加一个文件“setwllll” 文件如下：
+<code bash>
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+
+START=99
+
+start() {
+     reg w 10000064 0x0
+     reg w 1000003c 0xe001ff
+}
+</code>
+添加后别忘了添加执行权限：chmod +x setwllll 这个文件会随着系统启动，将PORT1-PORT4及对应的LED灯设置为网口模式。
+
+===VLAN的源码改法===
+修改源码:/target/linux/ramips/base-files/etc/board.d/02_network
+
+将widora及widora32m从50,51行移动到178行。
+
+===VLAN的系统内改法===
+修改系统文件:/etc/config/network如下：
+
+<code bash>
+  config interface 'loopback'
+        option ifname 'lo'
+        option proto 'static'
+        option ipaddr '127.0.0.1'
+        option netmask '255.0.0.0'
+
+  config globals 'globals'
+        option ula_prefix 'fd3d:94e9:a731::/48'
+
+  config interface 'lan'
+        option ifname 'eth0.1'
+        option force_link '1'
+        option macaddr '0c:ef:af:d1:17:8d'
+        option type 'bridge'
+        option proto 'static'
+        option ipaddr '192.168.1.1'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+
+  config interface 'wan'
+        option ifname 'eth0.2'
+        option force_link '1'
+        option macaddr '0c:ef:af:d1:17:8c'
+        option proto 'dhcp'
+
+  config interface 'wan6'
+        option ifname 'eth0.2'
+        option proto 'dhcpv6'
+
+  config switch
+        option name 'switch0'
+        option reset '1'
+        option enable_vlan '1'
+
+  config switch_vlan
+        option device 'switch0'
+        option vlan '1'
+        option ports '1 2 3 4 6t'
+
+  config switch_vlan
+        option device 'switch0'
+        option vlan '2'
+        option ports '0 6t'
+</code>
+
+修改完后重启网络： /etc/init.d/network restart
+
+修改后，系统会将PORT0识别为WAN，其余四个为LAN，因处于同一个switch中，所以在network中划分了vlan。 至此，修改完毕。

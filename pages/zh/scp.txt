@@ -1,0 +1,58 @@
+~~NOTOC~~
+有时候，我们需要将电脑上的文件传给NEO，又或者把NEO的文件传给电脑，总之：我们可能经常用网络传输文件。
+
+这个事情对于NEO来说是很方便的。先看用到的工具。
+  * macOS && Linux : 系统自带scp工具
+  * WIN： {{ ::winscp432.zip |}}
+
+====macOS && Linux下SCP====
+前提1：SCP是基于SSH的命令，我们这里默认NEO的用户名，密码，以及IP均为初始值。（root, 12345678, 192.168.1.1） 
+
+前提2: 命令的执行都在电脑上进行
+
+从NEO拷贝到电脑命令格式: scp root@192.168.1.1:开发板的文件路径 本地目录
+
+举个栗子，我们把NEO的/etc/config/wireless拷贝到电脑的当前目录
+
+<code bash>
+mangodeMacBook-Pro:~ mango$ scp root@192.168.1.1:/etc/config/wireless .
+root@192.168.1.1's password: 
+wireless                                      100%  543   362.5KB/s   00:00    
+mangodeMacBook-Pro:~ mango$
+</code>
+拷贝完后再看本地目录：
+<code bash>
+mangodeMacBook-Pro:~ mango$ ls -l wireless 
+-rw-r--r--  1 mango  staff  543  6 20 11:10 wireless
+mangodeMacBook-Pro:~ mango$
+</code>
+如果是从电脑拷贝到NEO呢？相信聪明的你已经想到了，那就是scp 本地文件 root@192.168.1.1:开发板的路径 
+
+举个栗子，我们把电脑用户目录下的test.txt拷贝到NEO的tmp目录下
+<code bash>
+mangodeMacBook-Pro:~ mango$ scp test.txt root@192.168.1.1:/tmp/
+root@192.168.1.1's password: 
+test.txt                                      100%   11     7.8KB/s   00:00    
+mangodeMacBook-Pro:~ mango$
+</code>
+再根据上一节的Telnet登录到NEO，看看/tmp下是不是有了这个文件。
+<code bash>
+root@Widora:/tmp# ls                                                            
+TZ                extroot           mounts            run                       
+dhcp.leases       hosts             mt7628.dat        shm                       
+dnsmasq.d         lib               resolv.conf       state                     
+dropbear          lock              resolv.conf.auto  sysinfo                   
+etc               log               root              test.txt                  
+root@Widora:/tmp# cat test.txt                                                  
+1234567890                                                                      
+root@Widora:/tmp#
+
+</code>
+
+提示: 如果执行scp命令时出现连接失败错误，请检查防火墙配置/etc/config/firewall是否正确。
+====Win下SCP====
+打开Winscp.exe，协议选择SCP，填入主机名，用户名，密码12345678，点击登录。
+{{ ::winscp1.png |}}
+会弹出警告，点击“是”，还会弹出用户组出错，这个没关系，点击“确定” 
+{{ ::winscp2.png?600 |}}
+这个比较简单了，左侧是本机目录，右侧是NEO的目录，想要复制文件拖过去即可。

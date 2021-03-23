@@ -1,0 +1,42 @@
+====ngrok是什么?====
+
+  * 外网访问内网服务器不再是距离
+  * 在您电脑的web服务直接开放给外网，再也不担心没有路由器权限和80端口被营运商封闭了
+  * 不仅实现了http服务的端口转发同时支持tcp的端口，在外网可以通过ssh等方式连接服务器
+
+===需要用到的软件====
+  * 原官网链接：http://hls.ctopus.com/sunny/for%20mt7628%20op.zip 
+  * 拷贝到Widora中。比如放入widora的sbin目录下：scp /path/to/ngrokc root@192.168.1.1:/sbin/
+  * 提示输入密码为12345678
+  * 对SCP不熟的可以使用U盘。 
+
+====注册====
+1、在ngrok.cc注册成为会员 \\
+2、记录tocken
+{{ ::qq20170414-151118.png?400 |}}
+
+====Widora中运行ngrok====
+命令: ngrokc -SER[Shost:server.ngrok.cc,Sport:4443,Atoken:9216cc1f76f43750dadea0xxxxxxxx] -AddTun[Type:http,Lhost:127.0.0.1,Lport:80,Sdname:widoratest] \\
+
+===字段解释: ===
+  * SER:服务器 
+Shost:因为我们在ngrok.cc上注册的，所以服务器为server.ngrok.cc \\
+Sport:端口固定为4443，token就是上一步骤记录下来的值。 \\
+  * Tun:隧道
+Type:是代理类型，可以使http网页，也可以使tcp。  \\
+Lhost:如果是Widora本机填写127.0.0.1或者0.0.0.0，如果是局域网内的其他设备就填写对应的IP \\
+Lport:代理的端口，普通网页是80 \\
+Sdname:申请二级域名的前缀，比如我填写widoratest，那么页面访问时就输入：widoratest.ngrok.cc就可以了 \\
+运行log如下： \\
+
+{{ ::qq20170414-152057.png?700 |}}
+
+到这里，隧道打通，打开widoratest.ngrok.cc后，会看到如下界面。 \\
+
+{{ ::qq20170414-152427.png?400 |}}
+
+我的局域网有一台NAS，IP为192.168.3.12，把命令修改一下:  \\
+ngrokc -SER[Shost:server.ngrok.cc,Sport:4443,Atoken:9216cc1f76f43750dadea0f43xxxxxxxx] -AddTun[Type:http,Lhost:192.168.3.12,Lport:5000,Sdname:nas]  \\
+运行后，访问nas.ngrok.cc，界面如下:  \\
+
+{{ ::800px-nas.png?400 |}}

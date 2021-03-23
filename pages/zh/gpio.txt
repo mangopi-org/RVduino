@@ -1,0 +1,59 @@
+====简介====
+一提起IO，就想到了玩51的那个年代，其实那会儿不管是什么单片机，总是从IO控制开始的。LED闪灯会兴奋半天。 \\
+widora默认支持9个GPIO，分别是GPIO0(实为GPIO11)，14，15，16，17，39，40，41，42。如需再多的GPIO需要改动引脚复用关系。
+===控制台操作IO====
+终端进入/sys/class/gpio/目录，导出想要控制的GPIO，比如导出GPIO14，则输入以下命令：
+
+<code bash>
+# cd /sys/class/gpio/
+# echo 14 > export
+# ls
+</code>
+此时是不是发现多了一个gpio14的文件夹？如果没有的话，检查一下上述步骤是不是漏掉了什么。
+
+====设置相应IO方向====
+进入相应文件夹，可能是以下样子的：
+<code bash>
+root@Widora:/sys/devices/10000000.palmbus/10000600.gpio/gpio/gpio14# ls
+active_low  device      direction   edge        subsystem   uevent      value
+</code>
+设置GPIO方向，支持in和out，比如将gpio14设置为输出： <br />
+<code bash>
+# echo out > direction
+</code>
+====输出高低电平====
+设置为高电平
+<code bash>
+# echo 1 > value
+</code>
+
+{{ ::img_0016.jpg?200 |}}
+
+设置为低电平
+<code bash>
+# echo 0 > value
+</code>
+
+{{ ::img_0018.jpg?200 |}}
+
+====输入测试====
+设置为输入：
+<code bash>
+root@Widora:/sys/devices/10000000.palmbus/10000600.gpio/gpio/gpio14# echo in > direction
+</code>
+接下来使用杜邦线段路GPIO14和GND后，读取电平：
+<code bash>
+root@Widora:/sys/devices/10000000.palmbus/10000600.gpio/gpio/gpio14# cat value  
+0 
+</code>
+
+接下来使用杜邦线段路GPIO14和3V3后，读取电平：
+<code bash>
+root@Widora:/sys/devices/10000000.palmbus/10000600.gpio/gpio/gpio14# cat value  
+1 
+</code>
+
+====额外注意====
+目前手中的7688手册是1.4版本，该版本对于GPIO的描述有误导，<wrap hi>这些地方的GPO，实测都是GPIO。</wrap>：
+{{ ::p25.png?500 |}}
+{{ ::p26.png?500 |}}

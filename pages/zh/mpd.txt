@@ -1,0 +1,93 @@
+MPD(Music Player Daemon)是一个款客户端/服务端结构的音乐播放器，MPD作为服务端以守护进程形式运行于后台，前台客户端用mpc命令进行播放的控制。用它可以来播放mp3和mms文件，以Widora-NEO为例：
+
+====1. 分别安装mpd和mpc====
+   opkg update
+   opkg install mpd-full
+   opkg install mpc
+
+如果你需要播放mms节目，那么需要安装libffmpeg-full。
+
+MT7688没有fpu单元，用mpc播放mms节目会有点卡，特别是播放高码率的节目。
+====2. 修改/etc/mpd.conf 文件====
+将原来的/etc/mpd.conf修改成如下：
+   music_directory         "/usb/music"
+   playlist_directory      "/home/playlists"
+   db_file                 "/home/.mpd/mpd.db"
+   log_file                "/home/.mpd/mpdlog"
+   pid_file                "/home/.mpd/pid"
+   state_file              "/home/.mpd/state"
+   user                    "root"
+   group                   "users"
+   bind_to_address         "0.0.0.0"
+   port                    "6600"
+   audio_output {
+        type             "alsa"
+        name             "my alsa device"
+        mixer_type       "hardware"
+        mixer_control    "Playback"
+   }
+   filesystem_charset     "UTF-8"
+
+其中music_directory是你存放原始mp3文件的目录,请按照自己的情况设定各目录。.mpd文件夹如果无法自动生成的话请用手工创建。
+注意文件夹的权限设置。
+
+
+====3. 添加歌曲到播放列表 ====
+首先运行mpd服务端:
+   /etc/init.d/mpd start
+默认情况下mpd会开机自启动。
+查看mpc帮助:
+   mpc help
+每次先更新一下mpd的数据库
+   mpc update
+列出music_directory中的所有歌曲：
+   mpc listall
+添加music_directory中的指定歌曲到播放列表：
+   mpc add xxx.mp3
+添加music_directory中的所有歌曲到播放列表：
+   mpc listall | mpc add
+打印当前播放列表:
+   mpc playlist
+删除播放列表中的第3首歌曲：
+   mpc del 3
+清空播放列表
+   mpc clear
+添加mms播放地址：
+   mpc add mms://111.75.206.136/yinyue  (例子）
+====4. 播放歌曲 ====
+按照播放列表进行播放:
+   mpc play
+暂停:
+   mpc pause
+停止:
+   mpc stop
+播放下一首:
+   mpc next
+播放前一首:
+   mpc prev
+快进到歌曲的60%处：
+   mpc seek 60%
+单曲模式:
+   mpc single on  (repeat off时播放完后停止，repeat on时循环播放)
+启用重复播放:
+   mpc repeat on
+启用随机播放:
+   mpc random on
+播放列表中第5首歌曲:
+   mpc play 5
+显示当前播放状态:
+   mpc  或  mpc status
+播放mms的时候加载时间会稍长，这和网络通畅程度有关。
+====5. 控制音量 ====
+请预先用alsamxier命令对Headphone和Speaker输出的最大音量进行设定。
+将音量调节到90%:
+   mpc volume 90
+
+====6. 其他 ====
+6.1 mpd会自动记住当前播放状态，因此重新启动系统后它会继续播放。
+
+6.2 从Ubuntu scp传mp3文件到Widora-NEO可以防止歌曲名出现乱码。
+
+6.3 mpc也可以播放mp4等视频文件里的音频。
+
+关于MPD的更详细信息请查看官网 https://www.musicpd.org/

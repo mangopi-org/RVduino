@@ -1,0 +1,123 @@
+=====搭建编译环境（主线）=====
+编译OpenWrt需要Linux环境或mac环境，或win10下的WSL，或者安装虚拟机。
+
+
+=== Linux,WSL===
+<wrap hi>注意: 如果提示找不到openjdk-8-jdk，可以试试openjdk-7-jdk</wrap>  \\
+编译前要安装以下依赖：
+<code bash>
+  $ sudo apt-get update 
+  $ sudo apt-get install git g++ make libncurses5-dev subversion libssl-dev gawk libxml-parser-perl unzip wget python xz-utils vim zlibc zlib1g zlib1g-dev openjdk-8-jdk build-essential ccache gettext xsltproc
+</code>
+如果是64位，需要多操作如下步骤：
+<code bash>
+  $ sudo dpkg --add-architecture i386
+  $ sudo apt-get update
+  $ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+</code>
+
+===macOS(未测试M1新平台)===
+首先从APP Store中安装Xcode command line tools，再安装[brew]工具，接下来使用brew安装依赖：
+<code bash>
+  $ brew install coreutils findutils gawk gnu-getopt gnu-tar grep wget quilt xz
+</code>
+编译中极有可能碰到getopt和xgettext问题，碰到后做以下两步：
+<code bash>
+  $ brew ln gnu-getopt --force
+  $ ln -s /usr/local/Cellar/gettext/0.18.1.1/bin/xgettext xgettext
+</code>
+如果编译过程中有"date illegal option"错误，因为macos里默认的date不是GNU的date，参数有些差异，可以这样:
+<code bash>
+  $ cd /usr/local/bin/
+  $ ln -s gdate date
+</code>
+重新打开终端后生效，此时
+<code bash>
+localhost:~ mango$ date --v
+date (GNU coreutils) 8.29
+Copyright (C) 2017 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by David MacKenzie.
+</code>
+=====下载源码=====
+下载代码，openwrt-19.07分支，下载完默认就是
+<code bash>
+  $ git clone https://github.com/widora/openwrt.git
+如果太慢就用镜像地址
+  $ git clone https://github.com.cnpmjs.org/widora/openwrt.git
+
+</code>
+
+=====更新源码=====
+<code bash>
+  $ git pull
+</code>
+更新完后，由于本地编译环境有上次的残留，会造成异常，最好做如下清理工作（在openwrt文件夹目录内）：
+  - make clean
+  - /scripts/feeds update -a
+  - /scripts/feeds install -a
+  - rm -r tmp/
+  - rm .config
+重启ubuntu系统后
+  - make menuconfig
+=====编译=====
+下载依赖
+  $make download V=s
+ 
+
+因为众所周知的原因，在国内编译OpenWrt很困难，有很多包被墙无法下载。我们提供了一个dl镜像的链接：https://pan.baidu.com/s/1j9qZ2G7zyF7h5YF3nQJ4SA 
+
+更新并安装软件包
+<code bash>
+  $ ./scripts/feeds update -a 
+  $ ./scripts/feeds install -a
+</code>
+配置OpenWrt
+  $ rm .config
+  $ make menuconfig
+选择项
+16MB+128MB配置(BIT3 BIT4,16MB FLASH)： 
+  Target System: MediaTek Ralink MIPS 
+    Subtarget: MT76x8 based boards 
+       Target Profile: Widora-NEO(16M) 
+
+32MB+128MB配置(BIT3 BIT4,32MB FLASH)： 
+  Target System: MediaTek Ralink MIPS 
+    Subtarget: MT76x8 based boards 
+       Target Profile: Widora-NEO(32M) 
+
+保存退出
+
+快速编译命令是$ make -j4 \\
+可能会由于环境或网络问题出错，想查看错误信息需要用 $ make V=s 命令 \\
+整个编译在dl文件夹完整的情况下持续1个小时左右，编译完会在bin/targets/ramips/mt76x8目录生成固件，大概3.6MB，名字类似如下：  \\
+  openwrt-ramips-mt76x8-widora_neo-32m-squashfs-sysupgrade.bin
+  
+
+
+=====U-Boot编译（环境仅支持LINUX）=====
+
+<html>
+<iframe src="//player.bilibili.com/player.html?aid=36011142&cid=63217359&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" style="width: 640px; height: 430px; max-width: 100%" allowfullscreen="true"> </iframe>
+</html>
+使用git工具下载u-boot-mt7688源码
+  $git clone https://github.com/widora/u-boot-mt7688.git
+解压编译工具链到/opt/目录下
+<code bash>
+$cd u-boot-mt7688
+$sudo tar xvfj buildroot-gcc342.tar.bz2 -C /opt/
+</code>
+安装openjdk,并保证系统语言为英文
+<code bash>
+$sudo apt-get install openjdk-8-jdk
+</code>
+进入u-boot-mt7688源码，编译
+<code bash>
+$cd u-boot-mt7688
+$make clean;make
+</code>
+编译完，生成到本目录下uboot.bin	
+  $ls uboot.bin

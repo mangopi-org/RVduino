@@ -1,0 +1,32 @@
+~~NOTOC~~
+====注意====
+<wrap hi>搞嵌入式，尽量避免使用PL2303、CH330、CH340这类极不稳定又兼容性不好的USB转串口芯片，推荐使用CP210X和FT232这些，一分钱一分货。</wrap>
+====驱动====
+  * macOS：http://www.silabs.com/documents/public/software/Mac_OSX_VCP_Driver.zip
+  * Linux：自带，无需安装
+  * Windows：http://www.silabs.com/documents/public/software/CP210x_Windows_Drivers.zip
+====终端软件====
+  * macOS: brew install minicom
+  * Ubuntu: apt-get install minicom
+  * Windows: {{ ::putty.zip |}}
+
+====软件设置====
+  * macOS: 串口设备一般是/dev/tty.SLAB_USBtoUART
+  * Linux: 串口设备一般是/dev/ttyUSB0
+  * 设置minicom，”$ sudo minicom -s”,选择Serial port setup后，将A设置为对应的串口设备，E设置为115200 8N1，F设置为No
+
+{{ ::minicomset.png |}}
+  * 设置完，选择Save setup as dfl后，再选择Exit，此时会进入控制台，NEO启动时会噼里啪啦的打印启动LOG，大约20秒打印完毕，敲几次回车，进入输入命令状态，如下图：
+
+{{ ::minicomenter.png |}}
+
+==Windows==
+  * Windows: 串口号从设备管理器中查看，一般是COM1或者其他号。
+  * Putty设置: putty中设置串口速度115200，串口标签页中将流量控制设置为“无”即可。
+
+{{ ::04.jpg |}}
+{{ ::05.jpg |}}
+
+ 启动时万一遇到控制台打印卡住，敲入回车也无反应。这时可以关闭这个控制台，然后重新启动一个控制台，按下回车就会有正常回显了。
+ 进入控制台后，敲两次tab键，可以看到NEO固件支持的命令 
+{{ ::tab.png |}}

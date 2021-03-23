@@ -1,0 +1,49 @@
+====摄像头====
+  * 注意1:此操作说明使用的是30W像素USB免驱摄像头，理论兼容所有USB免驱摄像头。
+  * 注意2:摄像头尽可能选用支持MJPG格式的，如果仅仅支持YUV会很浪费CPU。
+====连接摄像头====
+连接uvc摄像头，查看widora是否认出摄像头。 
+<code bash>
+  #ls  /dev/video*
+  /dev/video0
+</code>
+
+====设置mjpg-streamer====
+进入/etc/config/ 目录
+<code bash>
+  # cd /etc/config/
+  # vi mjpg-streamer
+</code>
+该文件内容如下：
+<code bash>
+  config mjpg-streamer 'core'
+        option enabled '0'
+        option input 'uvc'
+        option output 'http'
+        option device '/dev/video0'
+        option resolution '640x480'
+        option yuv '0'
+        option quality '80'
+        option fps '25'
+        option led 'auto'
+        option www '/www/webcam'
+        option port '8080'
+        option username 'openwrt'
+        option password 'openwrt'
+</code>
+将enabled改为‘1’，分辨率改为摄像头支持的分辨率，比如‘640x480’帧数改为‘25’改完后按‘Esc键’后输入‘:wq’保存退出。
+
+====重启mjpg服务====
+
+<code bash>
+#/etc/init.d/mjpg-streamer restart
+</code>
+
+== 网络查看 ==
+电脑网络连接widora，可以有线也可以无线。访问widora地址：192.168.1.1:8080 (如果不知道Widora地址，请使用ifconfig br-lan命令查看一下) 
+
+如果要求输入用户名密码就按照设置文件中的输入即可。 
+  * 获取视频： http://192.168.1.1:8080/?action=stream  
+  * 获取单桢：http://192.168.1.1:8080/?action=snapshot
+
+如果不显示，可能你买到的是不支持mjpg的摄像头，那就把配置文件中的yuv一项值从0改为1，再重启mjpg推流服务即可

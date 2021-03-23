@@ -1,0 +1,40 @@
+====简介====
+有时在Linux开发过程中需要修改寄存器，这里固件中提供了一个reg工具，可以查看、修改寄存器的值。
+
+使用方法：
+<code bash>
+root@Widora:/# reg
+Usage : reg r addr 
+Usage : reg w addr value
+</code>
+
+====查看某个寄存器的值====
+例如读取0x10000000的值，根据MT7688的datasheet得知默认应该是：0x3637544D
+<code bash>
+root@Widora:/# reg r 0x10000000
+add:0x10000000 = 0x3637544d
+</code>
+
+例如读取0x1000000C的值，根据MT7688的datasheet得知默认应该是：0x00010102
+<code bash>
+root@Widora:/# reg r 0x1000000C
+add:0x1000000c = 0x10102
+</code>
+
+====写入某个寄存器的值====
+这里假定控制WLED，但WLED默认连接到了内部WI-FI组件用于指示WI-FI状态，默认的固件系统起来后WLED是长亮的。如果我修改了GPIO2_MODE寄存器的低两位修改WLED的通路，可以达到改变此LED灯的效果。 \\
+WLED_AN_MODE :  \\
+0-0 WLED \\
+0-1 GPIO \\
+1-0 保留 \\
+1-1 保留 \\
+<code bash>
+root@Widora:/# reg r 0x10000064
+add:0x10000064 = 0x550
+root@Widora:/# reg w 0x10000064 0x552
+</code>
+此时，是不是看到WLED灭了，如要恢复，那就还将原始值：0x550写入该地址
+<code bash>
+root@Widora:/# reg w 0x10000064 0x550
+</code>
+此时，WLED又亮起来了。

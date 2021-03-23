@@ -1,0 +1,9 @@
+====开发环境介绍====
+
+MT7688基本上有如下几个开发环境： \\
+  - 联发科官方Linux-SDK环境，通常名字为MediaTek_ApSoC_SDK_4320_xxxxxxxx.tar.bz2,可用来编译出标准路由器固件，非OpenWrt环境。
+  - 联发科官方OpenWrt-SDK环境，名字类似于mtksdk-openwrt-3.10.14-20150311-xxxxxxxx.tar.bz2，是官方在SDK基础上强行引入了OpenWrt的Buildroot，可对标OpenWrt的BB版本。
+  - 开源OpenWrt-CC环境，联发科在OpenWrt CC版本Release时候退出了Linkit Smart 7688开源硬件，所用的就是该版本Openwrt环境，CC版本也是正式开始支持MT7688的一个版本，所以国内外很多MT7688厂商选用此版本软体进行开发。
+  - 开源OpenWrt-LEDE环境，自从OpenWrt中一部分激进开发者分离出LEDE后，开发十分活跃，LEDE比CC版本晚，自然也支持7688，只不过原生的LEDE调用的“MT76”开源WI-FI驱动，此驱动截止到目前稳定性、性能都还欠佳。
+
+目前Widora发布的固件，源码也是基于开源OpenWrt-CC环境。

@@ -1,0 +1,36 @@
+
+===== 例如0口（其他口改命令即可）=====
+ 
+
+===有网线插入===
+<code bash>
+root@Widora:/etc/hotplug.d/firmware# swconfig dev switch0 port 0 show
+Port 0:
+        disable: 0
+        doubletag: 1
+        untag: 1
+        led: 5
+        lan: 1
+        recv_bad: 0
+        recv_good: 180
+        tr_bad: 0
+        tr_good: 63
+        pvid: 0
+        link: port:0 link:up speed:100baseT full-duplex 
+</code>
+===拔掉===
+<code bash>
+root@Widora:/etc/hotplug.d/firmware# swconfig dev switch0 port 0 show 
+Port 0:
+        disable: 0
+        doubletag: 1
+        untag: 1
+        led: 5
+        lan: 1
+        recv_bad: 0
+        recv_good: 276
+        tr_bad: 0
+        tr_good: 67
+        pvid: 0
+        link: port:0 link:down
+</code>

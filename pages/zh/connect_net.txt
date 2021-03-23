@@ -1,0 +1,19 @@
+<html><iframe src="//player.bilibili.com/player.html?aid=41749809&cid=73303919&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" style="width: 640px; height: 430px; max-width: 100%" allowfullscreen="true"> </iframe></html>
+
+====Widora联网====
+网络是物联网设备的基础，NEO联入互联网非常简单，首先你需要有一台能正常上网的路由器
+
+===通过网线上网===
+  * 用网线将NEO的网口与你的路由器LAN口相连，会看到NEO上LAN灯（蓝色）亮起
+  * 控制台里运行命令：ethmode w 命令，稍等10秒 
+  * 控制台中使用ifconfig eth0看NEO是否获取到IP了
+  * 如果此时eth0和br-lan网段重复，需要修改/etc/config/network中LAN部分的IP为其他网段，改完后nr重启网络一下即可。
+
+===通过Wi-Fi模拟的网卡上网===
+  * 控制台中运行命令：wifimode apsta ssid key，如果没有密码，那么命令里省略key字段即可，ssid部分是你的WI-FI信号，key部分是密码。
+大约10秒中，终端打印如下：
+{{ ::linkup.png |}}
+  * 控制台中使用ifconfig apcli0看NEO是否获取到IP了。如果此时apcli0和br-lan网段重复，需要修改/etc/config/network中LAN部分的IP为其他网段，改完后nr重启网络一下即可。
+测试链接，PING一下外网试试。
+{{ ::ping.png |}}
+此时用电脑手机IPAD可以链接NEO的WI-FI，是不是发现已经可以上网了？此时NEO作用类似于WI-FI信号放大器了

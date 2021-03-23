@@ -1,0 +1,39 @@
+=====准备环境=====
+
+===1.技巧===
+这里给出一种目录组织方式供大家参考。
+
+  - 假定主系统是Win，虚拟机本身尽可能放在SSD盘，可极快的加快编译速度。但不要使用WSL，这玩意问题太多，IO性能拉跨。
+  - 在D盘新建一个share目录，用于主机与虚拟机的文件交互。
+  - 虚拟机内请提前安装好虚拟机增强工具（也有叫增强功能），且尽量用非root用户做开发。
+  - 虚拟机内请把源改为国内源，可参考 https://cn.bing.com/search?q=ubuntu+%E5%9B%BD%E5%86%85%E6%BA%90
+  - 将共享文件夹D:\share 固定挂载至虚拟机，VirtualBox内会固定挂载到如下目录： /media/sf_share
+  - 如果遇到挂载目录权限问题，可使用 sudo usermod -aG vboxsf $(whoami) 解决，重启生效。
+  - 代码一定要用git下载，尽量下载到用户目录内，例如：/home/widora 
+
+===2.安装依赖===
+  sudo apt install wget unzip build-essential git bc swig libncurses5-dev libpython3-dev libssl-dev pkg-config zlib1g-dev libusb-dev libusb-1.0-0-dev python3-pip gawk
+  
+下载主线代码至用户文件夹（不建议下载zip方式，因为以后还需要用git pull拉代码更新。建议点star和watch，代码有更新可随时收到邮件提醒。）：
+  cd ~/
+  git clone https://github.com/aodzip/buildroot-tiny200
+  如果太慢就试用如下镜像地址
+  git clone https://github.mangopi.org/aodzip/buildroot-tiny200
+  
+
+===3.加速编译，下载dl文件夹===
+链接： https://pan.baidu.com/s/16gUSVLKmv4EHBMEN9VA4iQ      提取码：uzly 
+
+下载后可以挪到D:\share内再解压，组织成如下目录：
+
+{{ ::br20210209074236.png |}}
+
+===4.创建链接===
+回到下载好的代码目录，我这里是/home/widora/mpi-r
+  ln -s /media/sf_share/buildroot-dl dl
+  
+{{ ::dir20210209081516.png |}}
+
+
+===5.问题===
+一般这个步骤不会碰到什么问题，请到临时论坛 sns.widora.io 发帖交流

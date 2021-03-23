@@ -1,0 +1,84 @@
+
+
+
+====SCH/PCB====
+开源工程： https://github.com/widora/MangoPi-R
+
+开源工程： https://oshwhub.com/mangogeek/mangopi-r3
+===R1===
+  * {{ :zh:tiny200-sch.pdf |原理图}}
+  * {{ :zh:tiny200-pcb.pdf |PCB图pdf版}}
+  * {{ :zh:tiny200v3-silk-t.pdf |正面彩色丝印图}}
+  * {{ :zh:tiny200v3-silk-b.pdf |背面彩色丝印图}}
+
+===R2===
+  * {{ ::f1c200s_sch.pdf |原理图200s部分}} {{ ::periph.pdf |原理图外设部分}}
+  * {{ ::tiny200v2pcb.pdf |PCB图pdf版}}
+  * {{ ::tiny200r2-silk-b.pdf }}{{ ::tiny200r2-silk-t.pdf }}
+
+  相比R1版改进
+  * USB座增加了2个提高强度焊盘。
+  * LED升压输出增加了保护，理论上出现短路也不会烧。
+  * 修正所有0402封装。
+  * 增加FPC 24Pin DVP连接器，ov2640（1.2V），ov5640（1.5V），gc0328（NULL）等。（默认1.2V，可选焊1.5V）
+  * 增加音频部分PAM8403功放，可直接接扬声器，1.5瓦功率。
+  * USB-TTL可通过选焊从PE0/PE1调整到PA2/PA3, 默认TTL走UART1
+  * 电容触摸和电阻触摸的中断线默认合成到PA0 (但PA0不是中断, 需普通GPIO轮询)，（也就是第一版中的焊二极管问题）
+  * RGB由666变更为565, 这样可将复用功能IIC留出
+  * 液晶背光由以前的PE6（PWM1）调整到默认常亮，但可以选焊到PE12控制（PWM0）.这样设计的目的是运行以前的程序即使背光没控制屏幕也能亮。
+
+  R2存在的问题
+  * 电容触摸6P接口在接GT911这种需要初始化时序的触摸时,可能无法正常初始化
+  * 背面焊接NAND版本的暂无软件支持
+
+===R3===
+  * {{ ::f200s-r3.pdf |}}
+  * {{ ::periph-r3.pdf |}}
+  * {{ ::tiny200r3-silk-t.pdf |正面丝印}}
+  * {{ ::tiny200r3-silk-b.pdf |背面丝印}}
+
+  相比R2的改进
+  * 电容触摸和电阻触摸的中断线默认合成到PE12，修复电容触摸6P接口的问题
+  * 修复NAND版本无软件支持的问题
+
+
+====外围接口====
+
+^ 资源         ^ R1 ^ R2 ^ R3 ^
+| RGB显示      | PD0-PD21(RGB666格式) | PD1-PD11,PD13-PD21 (RGB565格式) ||
+| 背光控制      | PE6 | 常亮 或 PE12 | 常亮 或 PE6 |
+| I2C0         | PE11 PE12 | PD0 PD12 ||
+| 串口控制台    | PE0 PE1(UART0) | 默认焊接PA2 PA3(UART1)  \\ 可自行选焊到PE0 PE1(UART0) ||
+| USB_ID线 | PE2 | 无 ||
+| CTP触摸屏中断 | PE3 | PA0(无中断,需轮询) | PE12 |
+| RTP触摸屏中断 | 漏焊R23, [[https://whycan.cn/t_3175.html|改装方法]] | 合并到CTP | PE12 |
+| CTP触摸屏复位 | PE4 | 和系统复位并联, GT911初始化可能有问题 | PA0 |
+| DVP          | 无 | PE0-PE11,默认支持OV2640 5640 ||
+| DVP复位控制 | 无 | 默认和系统复位并联, 可选焊到PA1 ||
+| DVP的SCCB     | 无 | I2C0 ||
+| DVP的数字电压 | 无 | 默认1.2V, 可选贴U9(xc6206)并且去掉R24 以适配更多种电压 ||
+| USB(TTL) | USB转TTL到默认串口控制台(CP2104)  | USB转TTL到默认串口控制台(CP2104) ||
+| USB(OTG) | 默认OTG | 默认OTG ||
+| USB(OTG-ID线) | PE2 | 无 ||
+
+
+注意: 板子左侧两个MicroUSB座均可供电，左上角的USB兼具USB转串口功能（板载了CP2104），而左下脚的则是主芯片的原生USB口，可用于fel（全志USB刷机方式）状态下刷机，也可用于在系统启动后的USB OTG功能。
+
+
+
+====启动顺序====
+全志F1C200s的启动顺序依次是SDIO（TF卡）- SPI NAND  - SPI NOR - USB。
+
+===SD卡启动，优先级最高===
+在提前插入TF卡，且TF卡有可启动镜像的前提下，则TINY200会从TF卡启动系统。否则会按照启动顺序来尝试NAND、NOR和USB。
+
+===SPI NAND和NOR启动，优先级居中===
+TINY200的背面有SOP8焊盘，能装NAND或NOR，默认焊接了16M NOR。
+
+===USB启动，优先级最低===
+sunxi-fel刷机方式，进入该方式的操作是按住BOOT按钮不放、按一次REST键后再松开BOOT。电脑可发现一个设备VID/PID=1f3a:efe8
+
+
+====使用注意事项====
+  * 禁止在上电状态下插拔RGB 40Pin接口
+

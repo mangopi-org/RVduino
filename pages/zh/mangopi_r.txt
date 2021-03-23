@@ -1,0 +1,115 @@
+=====MPi-R1/2/3=====
+MPi-Rx（原TINY200）是针对全志超低价F1C200s设计的小型ARM-Linux原型板，一体化设计，迷你, 资源： 
+  - USB-TTL CP2104串口控制台（开发必备）
+  - microUSB OTG口（fel方式刷机、接U盘、键盘、摄像头、usb网卡等）
+  - 16M nor FLASH 或者 128M nand flash
+  - TF卡槽，可接TF卡或TF-WiFi
+  - 40P通用RGB FPC排座<wrap hi>下接触</wrap>
+  - 板载电阻触摸芯片NS2009
+  - 6P通用电容触摸FPC排座
+  - 板载MIC*1
+  - BOOT按键、复位按键
+  - 5x2.2cm纤瘦尺寸，2.54排针引出所有资源，双排针间隔20.32mm适合面包板
+  - 24Pin DVP接口(only R2 R3)
+  - D类音频功放（only R2 R3）
+
+{{::mpi-r3-1.png?400|}}   {{::mpi-r3-2.png?400|}}
+
+  R1（首次发布，可搭配电阻触摸屏） 
+  R2（在R1基础上增加DVP接口和音频功放） 
+  R3（修复R2的触摸中断，新增电容触摸屏及Buildroot支持，主要发售SPI NAND版本）
+
+<WRAP group>
+=====Buildroot on Tiny200支持情况=====
+<WRAP half column>
+====正常&测试====
+=== 启动项: ===
+  * SPI NOR Flash (W25Qxx..)
+  * SPI NAND Flash (GD5F1GQ4UAxxG..)
+  * MMC 0 (4-bit TF卡或芯片)
+  * MMC 1 (1-bit TF芯片，雷龙)
+=== U-Boot: ===
+  * Basic LCD/GPIO背光
+  * SF Devices
+  * MTD Devices
+  * USB Peripheral
+  * USB Mass Storage Drive Enulator
+  * DFU下载方式
+  * TF卡刷方式
+=== Linux:===
+  * Simple Peripheral: GPIO, SPI, UART, IIC, SDIO, PWM
+  * DMA Controller
+  * Audio Codec: Playback, Mic-IN
+  * USB: OTG Mode, Peripheral Mode, Host Mode
+  * DVP Camera: OV2640, OV5640
+  * Display Engine: Frontend, Backend, TCON
+  * Keypad ADC
+  * AW9523B GPIO扩展
+  * AXP199
+</WRAP>
+<WRAP half column>
+==== 正常&未测试====
+U-Boot 驱动:
+  * PWM Backlight
+Linux 驱动:
+  * Audio Codec: FM-IN, Line-IN
+  * IR Receiver
+  * Cedar Video Engine
+==== 正在开发====
+Linux 驱动:
+  * TV(CVBS) En/De
+</WRAP>
+</WRAP>
+
+
+
+----
+<WRAP group>
+<WRAP half column>
+=====硬件=====
+  * [[f1c200_chip|F1C100s/F1C200s芯片资料]]
+  * [[TINY200|硬件资料]]
+
+  * [[1bittf|SPI位置使用1Bit-TF芯片]]
+</WRAP>
+
+<WRAP half column>
+=====固件=====
+  * [[mpi-firmware|固件]]
+</WRAP>
+</WRAP>
+
+
+
+
+<WRAP group>
+<WRAP half column>
+=====环境=====
+  * [[f1c_br|Buildroot环境搭建]]
+  * [[f1c_mainline|编译]]
+</WRAP>
+
+<WRAP half column>
+=====刷机=====
+  * [[f1c_flashrom|刷机准备]]
+  * [[tinyflash|NOR Flash刷机]]
+  * [[f1c_nand|NandFlash刷机]]
+  * [[f1c_log|启动LOG]]
+</WRAP>
+</WRAP>
+
+=====进阶/玩法=====
+
+<WRAP group>
+<WRAP half column>
+  * [[f1c_source|源码目录]]
+  * [[f1c_play|F1C玩法介绍]]
+</WRAP>
+
+<WRAP half column>
+  * [[f1c_noos|裸机]]
+</WRAP>
+</WRAP>
+
+
+

@@ -1,0 +1,13 @@
+=====Datasheet=====
+存储类型：SLC
+
+{{ ::csnp1gcr01-amw二代.pdf |}}
+
+{{ ::csnpxgxr01_rohs_2.0_报告.pdf |}}
+
+{{::img_3202_2.jpg?400|}}
+
+
+{{https://sns.widora.io/assets/uploads/files/1568535921759-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2019-09-15-%E4%B8%8B%E5%8D%884.25.09.png?500}}
+
+测试数据：https://sns.widora.io/topic/543

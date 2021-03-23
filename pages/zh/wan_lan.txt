@@ -1,0 +1,12 @@
+====名词解释====
+  * WAN：连接互联网接口
+  * LAN：连接局域网接口
+  * br-lan：虚拟设备，LAN口桥接
+  * eth0：真实设备，CPU内部连接交换机芯片的接口，在芯片内
+  * eth0.1：虚拟设备，由VLAN划分的有线的LAN口，VLAN编号1
+  * eth0.2：虚拟设备，由VLAN划分的有线的WAN口，VLAN编号2
+  * lo：虚拟设备，回环设备
+  * ra0：真实设备，启动WI-FI后的AP
+  * ap-client：真实设备，启动WI-FI后的Client
+  * pppoe：虚拟设备，是PPPOE拨号上网成功后产生的
+

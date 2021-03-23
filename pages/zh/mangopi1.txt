@@ -1,0 +1,30 @@
+====MangoPi 1====
+MangoPi 1数字系列是完整的单板AIoT计算机原型平台, 精美的设计, 强悍的性能, 以及极致的性价比 8-)
+
+当前MangoPi 1提供了足以媲美树莓派4的性能，同时还提供千兆有线网，USB3.0 HOST，TypeC，双频WiFi，蓝牙，HDMI，CSI，DSI，物理按键，TF卡槽。 
+
+最最重要的是，我们还提供了<wrap hi>板载的超快速EMMC存储颗粒</wrap>，以及令人兴奋的<wrap hi>大于3Tops性能的NPU</wrap>。
+
+以上所有的一切，被设计到一块只有6*4CM面积的小板子上，简直不可思议。
+
+
+====特点====
+  * 带NPU（AIoT单板机的刚需，1Tops起步是基本操作）
+  * 12nm 低功耗制程
+  * 强大的性能（可比肩甚至超越树莓派最新版）
+  * 艺术品一样的美观（传统艺能）
+  * 极致性价比（废话真多）
+
+====图片====
+即将放出
+
+
+====OS====
+  * Ubuntu
+  * Android 10
+
+
+====NPU====
+成熟的模型编译器，当前支持的模型： Caffe/Tensorflow/Tflite/Darknet/Onnx/Pytroch/keras
+
+

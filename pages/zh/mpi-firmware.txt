@@ -1,0 +1,12 @@
+=====R3=====
+
+
+20210209，用户名：root，密码：无
+==NAND版本==
+{{ ::sysimage-nand.zip |}}  下载后解压， MD5：446a685995e40e0109b18e2c17ec3beb
+ 
+
+
+==NOR版本==
+{{ ::sysimage-nor.zip |}}  下载后解压， MD5：ac8289beb6c32413dcb128d902286e53
+

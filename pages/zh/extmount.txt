@@ -1,0 +1,30 @@
+====Overlay是什么？====
+Overlay是一种新型的联合文件系统，类似于透过一片玻璃来画画，而Flash原始的文件系统则是玻璃下面的背景。从外表看在玻璃上画画就和画到背景上没什么不同。如果想要恢复出厂设置，那就把玻璃擦干净即可。 \\
+
+====为何要扩容Overlay? ====
+OpenWrt装软件提示空间不足，这时要把rootfs扩展到U盘，可以把软件安装到U盘上去。
+
+====扩充前的准备====
+
+U盘或者TF卡，格式化成EXT4文件系统。可以使用Widora操作。  \\
+  -  将U盘或TF卡插入Widora板，为了避免之前文件系统自动挂载形成干扰，先执行卸载命令: "umount /tmp/mounts/USB-A1/" 或"umount /tmp/mounts/SD-P1" 。实际命令要和挂载的文件夹一致
+  -  格式化，U盘使用“mkfs.ext4 /dev/sda”，TF卡使用"mkfs.ext4 /dev/mmcblk0"
+
+====生成fstab====
+  -  block detect  > /etc/config/fstab
+  -  vi /etc/config/fstab 
+  -  修改option 'target' '/overlay'，修改option 'enabled' '1'
+  -  重启
+
+== 查看挂载后的情况 ==
+<code bash>
+    root@Widora:/# df -h
+    Filesystem                Size      Used Available Use% Mounted on
+    rootfs                    3.6G      7.6M      3.4G   0% /
+    /dev/root                 4.8M      4.8M         0 100% /rom
+    tmpfs                    61.7M     76.0K     61.7M   0% /tmp
+    /dev/mmcblk0              3.6G      7.6M      3.4G   0% /overlay
+    overlayfs:/overlay        3.6G      7.6M      3.4G   0% /
+    tmpfs                   512.0K         0    512.0K   0% /dev
+</code>
+接下来，就可以安装很多软件了。

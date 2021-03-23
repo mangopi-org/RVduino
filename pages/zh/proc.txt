@@ -1,0 +1,29 @@
+procd是非常重要的系统守护进程,它几乎贯穿了openwrt系统的整个运行生命周期, 系统正常运行时它的pid是1。
+procd被设计用来初始化系统、管理进程、处理热插拔事件和watchdog、参与debug信息管理、处理内核与用户的部分交互等。procd通过ubus与其他进程的交互来触发、验证和管理上述各项事务。
+
+procd的主要功能：
+==== 1. 初始化系统 ====
+ procd在系统初始化时会调用系统/lib/preinit脚本, 读取/etc/inittab文件, 按照顺序执行/etc/rc.d 目录下的脚本。
+====  2. 对进程和配置文件的监控/管理  ====
+在/etc/init.d/文件夹内带有USE_PROCD=1标志的脚本就是应用了procd管理。procd可以监控指定进程的运行状态,比如：
+   设置 procd_set_param respawn ： 进程意外退出，procd会重新启动该进程。
+   设置 procd_add_reload_trigger  “cui_conf" ：  配置文件如果改变，procd可以重新读取配置,并重启进程。
+====  3. 处理热插拔事件  ====
+procd收到内核的uevent后会根据/etc/hotplug.json文件的描述来处理热插拔事件，它会根据设定的监控变量名来触发hotplug.d目录了下的相应脚本。
+可以使用 export DBGLVL=10; procd -h /etc/hotplug.json命令让procd输出热插拔事件的具体debug信息，然后用dmesg可以查看。
+
+===例子：连接网络后执行特定程序===
+在/etc/hotplug.d/iface 目录下编辑文件50-play,内容如下：
+<code bash>
+#!/bin/sh
+
+if [ "$ACTION" = ifup ] && [ "$INTERFACE" = lan ];then
+espeak --stdout 'network is up' | aplay -M
+
+elif [ "$ACTION" = ifdown ];then
+espeak --stdout 'network is down' | aplay -M
+
+fi
+</code>
+上面要注意符号'['、']'和'='两侧均有空格。"$INTERFACE" = lan 或 wan 根据你实际的网络接口设定。
+当系统连接上和断开网络的时候就会播放语音。(eSpeak安装和使用参见 [[espeak]]）

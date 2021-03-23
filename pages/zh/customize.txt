@@ -1,0 +1,72 @@
+====修改说明====
+  * 临时修改：表示在板子上直接修改，一般重启后生效，但板子恢复出厂设置后会失效。
+  * 永久修改：表示用于定制固件，修改源代码完编译后生效，恢复出厂设置后也不会失效。
+====修改banner====
+<code bash>
+ _       ___     __
+| |     / (_)___/ /___  _________ _
+| | /| / / / __  / __ \/ ___/ __ `/
+| |/ |/ / / /_/ / /_/ / /  / /_/ /
+|__/|__/_/\__,_/\____/_/   \__,_/
+ -----------------------------------------------------
+ CHAOS CALMER (Chaos Calmer, r49378) Version:0.1.7 by mango
+ -----------------------------------------------------
+  * 1 1/2 oz Gin            Shake with a glassful
+  * 1/4 oz Triple Sec       of broken ice and pour
+  * 3/4 oz Lime Juice       unstrained into a goblet.
+  * 1 1/2 oz Orange Juice
+  * 1 tsp. Grenadine Syrup
+ -----------------------------------------------------
+</code>
+==临时修改==
+/etc/banner
+==永久修改==
+openwrt_widora/package/base-files/files/etc/banner
+
+
+====修改机器名字====
+默认是Widora，提现在交互终端上：
+<code bash>
+root@Widora:/etc/config#
+</code>
+
+==临时修改==
+/etc/config/system 文件中的hostname
+<code bash>
+config system
+        option hostname Widora
+        option timezone CST-8
+</code>
+==永久修改==
+openwrt_widora/package/base-files/files/etc/config/system 文件中的hostname
+
+====修改WI-FI名字====
+{{::wifiname.png|}}
+
+==临时修改==
+/etc/config/wireless
+<code bash>
+config wifi-iface ap
+        option device   radio0
+        option mode     ap
+        option network  lan
+        option ifname   ra0
+        option ssid     Widora-0648
+        option encryption none
+        option hidden    0
+</code>
+修改ssid后的字符串即可。
+
+==永久修改==
+openwrt_widora/package/mtk-wifi/files/lib/wifi/ralink.sh
+<code bash>
+config wifi-iface ap
+        option device   radio0
+        option mode     ap
+        option network  lan
+        option ifname   $dev
+        option ssid     Widora-$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6}'| tr a-z A-Z)
+        option encryption none 
+        option hidden    0
+</code>
+修改ssid后的字符串，这里用到了mac地址，建议仅修改Widora字眼即可。

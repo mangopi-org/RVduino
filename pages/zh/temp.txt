@@ -1,0 +1,33 @@
+====76x8芯片温度====
+
+挺有意思的是，wifi驱动部分提供了这个接口，直接拿 iwpriv ra0 stat 命令就可以获取到：
+<code bash>
+root@Widora:~# iwpriv ra0 stat
+ra0       stat:
+CurrentTemperature              = 51
+Tx success                      = 0
+Tx fail count                   = 0, PER=0.0%
+Rx success                      = 1118
+Rx ICV Error                    = 0
+Rx with CRC                     = 807, PER=41.9%
+Rx with PhyErr                  = 0
+Rx with PlcpErr                 = 0
+Rx drop due to out of resource  = 0
+Rx duplicate frame              = 0
+False CCA                       = 0
+RSSI                            = 17 17 0
+TX AGG Range 1 (1)              = 0
+TX AGG Range 2 (2~5)            = 0
+TX AGG Range 3 (6~15)           = 0
+TX AGG Range 4 (>15)            = 0
+AMPDU Tx success                = 0
+AMPDU Tx fail count             = 0, PER=0.0%
+WPS Information:
+Enrollee PinCode(ra0)           37448820
+Enrollee PinCode(ra1)           37448820
+Enrollee PinCode(ra2)           47934580
+Enrollee PinCode(ra3)           58420348
+
+Enrollee PinCode(ApCli0)        01133943
+Ap Client WPS Profile Count     = 0
+</code>
