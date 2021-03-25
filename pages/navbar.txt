@@ -1,7 +1,10 @@
 ~~NOCACHE~~
+  * MPi
+    * [[mangopi1|MangoPi 1]]
+    * [[mangopi_r|MangoPi R]]
+    * [[accessories]]
  
+
+  * [[http://forum.mangopi.org|Forum]]
   * [[https://widora.taobao.com|Shop]]
-  * [[https://github.com/mangopi-sbc/mangopi-org/discussions|Forum]]
-
-
-  * [[https://github.com/mangopi-sbc/mangopi-org|EDIT on GitHub]]
+  * [[https://github.com/mangopi-sbc/mangopi-org|Co-Edited]]

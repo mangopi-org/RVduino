@@ -16,9 +16,9 @@
   
 下载主线代码至用户文件夹（不建议下载zip方式，因为以后还需要用git pull拉代码更新。建议点star和watch，代码有更新可随时收到邮件提醒。）：
   cd ~/
-  git clone https://github.com/aodzip/buildroot-tiny200
+  git clone https://github.com/mangopi-sbc/buildroot-mangopi-r
   如果太慢就试用如下镜像地址
-  git clone https://github.mangopi.org/aodzip/buildroot-tiny200
+  git clone https://github.mangopi.org/mangopi-sbc/buildroot-mangopi-r
   
 
 ===3.加速编译，下载dl文件夹===
