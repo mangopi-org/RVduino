@@ -5,6 +5,6 @@
     * [[accessories]]
  
 
-  * [[http://forum.mangopi.org|Forum]]
+  * [[https://mangopi.club|Forum]]
   * [[https://widora.taobao.com|Shop]]
   * [[https://github.com/mangopi-sbc/mangopi-org|Co-Edited]]
