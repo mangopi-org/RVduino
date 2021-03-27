@@ -1,0 +1,41 @@
+<WRAP group>
+<WRAP half column>
+
+</WRAP>
+
+<WRAP half column>
+//支持//
+
+[[about|关于我们]]
+
+[[https://github.com/widora|GitHub]]
+
+[[https://twitter.com/mangopi_widora|推特]]
+
+[[https://www.zhihu.com/people/widora|知乎芒果派]]
+
+[[https://t.me/widora|TG Group]]
+</WRAP>
+
+</WRAP>
+
+
+
+
+<WRAP>
+<WRAP right column>
+
+由[[https://widora.io|歪朵拉]]运营
+
+</WRAP>
+</WRAP>
+
+
+
+
+
+
+
+
+
+
