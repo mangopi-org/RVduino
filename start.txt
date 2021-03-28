@@ -1,4 +1,4 @@
-<wrap hi>Wait to translate</wrap>
+
 <html>
 <style type="text/css">
         .company {

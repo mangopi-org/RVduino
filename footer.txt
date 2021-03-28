@@ -1,6 +1,14 @@
 <WRAP group>
 <WRAP half column>
+//交流社群//
 
+[[https://qm.qq.com/cgi-bin/qm/qr?k=0LAGnKz_n318RVZaHKcb2d2TVm4XW-gX&jump_from=webapi|芒果派主群: 662381849]]
+
+[[https://qm.qq.com/cgi-bin/qm/qr?k=67ZnfwApm7fAsusBHyGL2jkv-8hPQJEK&jump_from=webapi|歪朵拉主群: 299381903]]
+
+[[https://qm.qq.com/cgi-bin/qm/qr?k=5nDahYuY6nCJnYeP5d5QXX99__z3bafT&jump_from=webapi|AI:242127577]]
+
+[[https://qm.qq.com/cgi-bin/qm/qr?k=UIKSgwo-cNnVldEZUrVfX40vye7ZTvgi&jump_from=webapi|DL:663926178]]
 </WRAP>
 
 <WRAP half column>
