@@ -1,0 +1,38 @@
+====乐鑫资源====
+
+  * 乐鑫官方ESP32论坛（英文为主）：esp32.com
+  * 官方twitter：@ESP32net
+  * Hackaday上的ESP32项目：[[https://hackaday.io/projects?tag=ESP32|ESP32 tag on Hackaday.io]] 
+  * ESP32资源汇总站（非官方）：esp32.net
+
+
+====优秀的软件平台架构====
+  * [[https://github.com/espressif/esp-idf]]
+FreeRTOS及诸多组件，也是我们主要讲的开发平台。
+  * [[https://github.com/espressif/arduino-esp32]]
+Arduino针对ESP32的适配，紧随IDF更新，简化开发的不二之选。
+  * [[https://mongoose-os.com]]
+十分有特色的操作系统，支持ESP32，ESP8266，STM32等，并且继承了亚马逊的AWS和Google的IOT，可以使用JavaScript或C开发。
+  * [[https://www.zephyrproject.org]]
+这个有点像微型Linux，是基于Apache 2.0许可并与Linux基金会合作发布的，旨在构建一款面向最小尺寸物联网设备的实时操作系统 (RTOS)，它是一个将权力赋予社区发展的真正开源解决方案。
+  * [[https://github.com/micropython/micropython-esp32/tree/esp32/]]
+MicroPython实现了整个Python3.4的语法，可以以文本的来源形式或预编译的字节码执行脚本，无论是从设备上的文件系统还是从MicroPython可执行文件，大大降低了开发难度。
+  * [[https://ruff.io Ruff]]
+这是支持JavaScript开发应用的物联网操作系统，以众多开发者的唯一全栈语言作为编程语言，对硬件进行抽象，降低开发入门门槛。
+  * [[https://github.com/nodemcu/nodemcu-firmware/tree/dev-esp32]]
+这是基于eLua的固件，Lua非常小巧轻量，由于其编程简单，无需编译等特点，非常适合快速开发验证、教育等场合。
+  * [[https://github.com/espruino/Espruino/tree/ESP32]]
+Espruino是用于微控制器的JavaScript解释器。 它专为具有128kB闪存和8kB RAM的器件而设计。
+  * [[http://platformio.org/]]
+PlatformIO是物联网开发的开源生态系统，包含跨平台IDE，统一调试器，远程单元测试和固件更新
+
+====国外优秀项目====
+===ESP32网络音频播放器===
+{{ ::attach_14dc9221dc66d03c.jpg |}}
+这是一个简单的网络收音机流媒体。 它通过wifi连接到网络广播电台，解码流，并通过I2S编解码器或直接连接到DAC引脚的扬声器播放声音。<br />
+
+特征：
+  * 解码MP3和AAC（Beta）
+  * 蓝牙音箱模式
+  * 项目源码：[[https://github.com/MrBuddyCasino/ESP32_MP3_Decoder]]
+  * 项目讨论：[[https://esp32.com/viewtopic.php?f=17&t=1026]]

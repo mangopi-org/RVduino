@@ -1,0 +1,132 @@
+====小贴士====
+
+1. ESP32内部有一部分ROM，存放着第一级引导程序。这个做法和很多处理器一致。
+
+====启动流程====
+1. ROM中的第一级引导加载程序将闪存偏移0x1000的第二级引导加载程序（4K偏移，bootloader.bin）加载到RAM（IRAM和DRAM）。
+
+2. 第二级引导程序从闪存加载分区表和主应用程序映像（64K偏移，hello-world.bin）。 主应用程序包含RAM段和通过闪存缓存映射的只读段。
+
+3. 主应用程序图像执行。 此时可以启动第二个CPU和RTOS调度程序。
+
+==第一阶段（芯片内部ROM自动完成）==
+ESP32内有两个对称的CPU，分别叫PRO CPU和APP CPU，芯片上电复位后，PRO CPU将立即开始运行，执行复位向量代码，而APP CPU保持复位。启动过程中，PRO CPU执行所有初始化。复位向量始终位于ESP32芯片掩码ROM中的地址0x40000400，不能修改。
+
+复位向量代码通过检查GPIO_STRAP_REG寄存器（与Bootstrap引脚有关）来确定引导模式。
+
+GPIO_STRAP_REG[5:0]的BIT5到BIT0分别对应MTDI，GPIO0，GPIO2，GPIO4，MTDO，GPIO5。
+
+还记得之前教程里的BOOTSTRAP图么，就是这么回事。
+{{ :attach_14dafc6e4af26cf7.png |}}
+
+如果是正常启动模式，则加载0x1000(4K)偏移的bootloader，而如果是下载模式，那么就进入串口下载状态。
+
+==第二阶段（SPI FLASH中4K偏移存放的Bootloader）==
+
+在ESP-IDF中，闪存中位于0x1000位置的二进制映像是bootloader，源码在esp-idf/components/bootloader目录中。 ESP-IDF中使用两级boot的方法主要是用来增加灵活性，方便扩展闪存加密，安全引导和空中更新（OTA）相关的各种功能。
+
+Bootloader会读取偏移0x8000处的分区表找到Factory数据和OTA分区，并根据在OTA信息分区中找到的数据来决定哪一个进行引导。
+
+简单看一下bootloader中的关键代码
+<code c>
+void bootloader_main()
+{
+	/* 必要的外设配置 */
+	clock_configure();
+    uart_console_configure();
+    wdt_reset_check();
+    ESP_LOGI(TAG, "ESP-IDF %s 2nd stage bootloader", IDF_VER);
+    /* 关闭看门狗 */
+    REG_CLR_BIT( RTC_CNTL_WDTCONFIG0_REG, RTC_CNTL_WDT_FLASHBOOT_MOD_EN );
+    REG_CLR_BIT( TIMG_WDTCONFIG0_REG(0), TIMG_WDT_FLASHBOOT_MOD_EN );
+	/* 打印FLASH信息 */
+    print_flash_info(&fhdr);
+	/* 读取分区表 */
+    if (!load_partition_table(&bs)) {
+        ESP_LOGE(TAG, "load partition table error!");
+        return;
+    }
+	/* 加载分区表中的APP数据 */
+	esp_image_metadata_t image_data;
+    if (!load_boot_image(&bs, boot_index, &image_data)) {
+        return;
+    }
+    /* 将加载的段复制到RAM，为映射段设置高速缓存，并启动应用程序 */
+    unpack_load_app(&image_data);
+}
+</code>
+
+==应用程序阶段（运行64K偏移地址存放的hello-world.bin）==
+
+在这之前ESP32还通过PRO CPU运行，而APP CPU处于复位状态。PRO CPU运行到了components/esp32/cpu_start.c代码中的call_start_cpu0函数，启用堆分配器后释放APP CPU的复位状态，APP CPU会直接运行到start_cpu1函数等待调度。
+
+当PRO CPU在start_cpu0功能中进行初始化时，APP CPU在start_cpu1功能中旋转，等待在PRO CPU上启动调度程序。一旦在PRO CPU上启动了调度程序，APP CPU上的代码也启动了调度程序。
+
+到这里基本上清楚了，从一上电到FreeRTOS调度，都是PRO CPU在运行，最后把APP CPU的环境准备好后，让APP CPU也参与调度，这就是双核的好处。比如20个任务，如果仅有1个CPU，那么它要处理20个任务。如果两个CPU，那每个CPU仅处理10个任务即可。
+
+
+==完整的启动LOG（可以从源码中对照打印内容来分析这份log）==
+
+<code bash>
+ets Jun  8 2016 00:22:57
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+ets Jun  8 2016 00:22:57
+rst:0x10 (RTCWDT_RTC_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0010,len:4
+load:0x3fff0014,len:5404
+load:0x40078000,len:0
+load:0x40078000,len:12028
+entry 0x40078f24
+I (45) boot: ESP-IDF v3.0-dev-265-g969f1bb9 2nd stage bootloader
+I (45) boot: compile time 16:21:50
+I (78) boot: Enabling RNG early entropy source...
+I (78) boot: SPI Speed      : 40MHz
+I (78) boot: SPI Mode       : DIO
+I (88) boot: SPI Flash Size : 16MB
+I (101) boot: Partition Table:
+I (112) boot: ## Label            Usage          Type ST Offset   Length
+I (135) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (158) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (182) boot:  2 factory          factory app      00 00 00010000 00100000
+I (205) boot: End of partition table
+I (218) esp_image: segment 0: paddr=0x00010020 vaddr=0x3f400020 size=0x077b0 ( 30640) map
+I (279) esp_image: segment 1: paddr=0x000177d8 vaddr=0x3ffb0000 size=0x02d84 ( 11652) load
+I (293) esp_image: segment 2: paddr=0x0001a564 vaddr=0x40080000 size=0x00400 (  1024) load
+0x40080000: _iram_start at ??:?
+
+I (302) esp_image: segment 3: paddr=0x0001a96c vaddr=0x40080400 size=0x056a4 ( 22180) load
+I (356) esp_image: segment 4: paddr=0x00020018 vaddr=0x400d0018 size=0x263a8 (156584) map
+0x400d0018: _flash_cache_start at ??:?
+
+I (524) esp_image: segment 5: paddr=0x000463c8 vaddr=0x40085aa4 size=0x0d234 ( 53812) load
+0x40085aa4: prvProcessTimerOrBlockTask at /Users/mango/ESP/esp-idf/components/freertos/./timers.c:466
+
+I (593) esp_image: segment 6: paddr=0x00053604 vaddr=0x400c0000 size=0x00000 (     0) load
+I (627) boot: Loaded app from partition at offset 0x10000
+I (628) boot: Disabling RNG early entropy source...
+I (629) cpu_start: Pro cpu up.
+I (640) cpu_start: Starting app cpu, entry point is 0x40080dec
+0x40080dec: call_start_cpu1 at /Users/mango/ESP/esp-idf/components/esp32/./cpu_start.c:192
+
+I (0) cpu_start: App cpu up.
+I (673) heap_init: Initializing. RAM available for dynamic allocation:
+I (693) heap_init: At 3FFAE2A0 len 00001D60 (7 KiB): DRAM
+I (712) heap_init: At 3FFB66C0 len 00029940 (166 KiB): DRAM
+I (731) heap_init: At 3FFE0440 len 00003BC0 (14 KiB): D/IRAM
+I (751) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (770) heap_init: At 40092CD8 len 0000D328 (52 KiB): IRAM
+I (790) cpu_start: Pro cpu start user code
+I (848) cpu_start: Starting scheduler on PRO CPU.
+I (191) cpu_start: Starting scheduler on APP CPU.
+Hello world!
+This is ESP32 chip with 2 CPU cores, WiFi/BT/BLE, silicon revision 0, 16MB external flash
+Restarting in 10 seconds...
+</code>
+
+
+==扩展参考==
+
+http://esp-idf.readthedocs.io/en/latest/api-guides/general-notes.html

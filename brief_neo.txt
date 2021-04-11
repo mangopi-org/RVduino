@@ -1,0 +1,65 @@
+~~NOTOC~~
+{{:zh:img_3075-removebg.png?350|}} {{:zh:img_3082-removebg.png?350|}}
+
+====简介====
+  * NEO是一款电子原型平台，硬件基于MT7688AN Wi-Fi SOC，软件基于OpenWrt / LEDE 等Linux发行版，提供了丰富的外设和存储空间。允许使用 C , SHELL , Node.js , Python等语言进行开发。硬件资源如下：
+  * MT7688AN MIPS CPU 580MHz
+  * 32MByte FLASH（当前批次32M 4B模式，老批次16MB和32MB 3B模式）
+  * EEPROM芯片24LC02（当前Seer批次）
+  * 128MByte DDR2 RAM
+  * 150Mbps Wi-Fi 1T1R 802.11bgn
+  * 100Mbps ETH
+  * 若干GPIOS
+  * SPI CS0(FLASH占用)，CS1预留
+  * UART0(默认控制台)，UART1，UART2
+  * PWM0-3
+  * I2S 全双工
+  * USB2.0 HOST
+  * SDIO
+  * 供电5V，电流110mA左右
+  * 运行温度：0 - 55 度
+
+
+====硬件资料====
+NEO-Seer（2019 W8最终版） / FLASH启动默认4B模式
+  * {{ :zh:widora-neo-seer.pdf |}}
+  * {{ :zh:widora-neo-seer-silk-b.pdf |}}
+  * {{ :zh:widora-neo-seer-silk-t.pdf |}}
+  * [[https://sns.widora.io/assets/uploads/files/1552382993025-neo-shang02.stl|SEER外壳-上壳]]
+  * [[https://sns.widora.io/assets/uploads/files/1552382993022-neo-xia02.stl|SEER外壳-底盖]]
+  * PCB原始工程(无logo) https://github.com/widora/NEO
+
+
+2019之前的 NEO / FLASH启动默认3B模式
+  * {{ ::widora-neo.dxf.zip |}}
+  * {{ :widora-neo-16-128-sch.pdf |}}
+  * {{ :widora-neo-32-128-sch.pdf |}}
+  * {{ ::widora-neo-16-128-silk.pdf |}}
+  * {{ ::widora-neo-32-128-silk.pdf |}}
+
+====设计框图====
+{{ ::kuangtu.png |}}
+
+====外围接口介绍====
+{{ ::neo-jiekou.jpg |}}
+<code bash>
+  1. 板载WI-FI天线，默认发货时WI-FI信号走此天线
+  2. IPEX天线连接器，可以修改射频电阻来启用此接口，用于连接外置高增益天线
+  3. CPU硬复位按钮，随时按下即可复位
+  4. 用户按钮，IO信号对应GPIO38，在Uboot状态下按下可以进入web页刷机状态，进OpenWrt系统后长按超过3秒可以恢复出厂设置
+  5. 10/100Mbps网卡，对应Port0，默认是LAN口，在路由器模式下用作WAN口
+  6. FLASH芯片，存储Uboot和OpenWrt镜像
+  7. 复位IC，提供高可靠的上电复位和电压不稳复位（3.3V掉落至2.93V触发复位动作）
+  8. MT7688AN主芯片
+  9. DDR2颗粒，128MByte容量
+  10. 音频CODEC芯片，I2S接口，提供音频数字信号和模拟信号的双向转换
+  11. USB转串口TTL芯片CP2104，用户可省去外置的USB-TTL小板
+  12. 音频功放输出，一共4pin，正面看左侧2PIN是右声道输出，右侧2PIN是左声道输出，分别可接1个8欧扬声器
+  13. 耳机、MIC一体化音频接口，支持常见的手机带MIC耳机，例如小米、三星等耳机
+  14. NEO的USB供电口，兼备串口控制台功能
+  15. 三个LED，从上至下依次是电源指示（红色）、有线网口0连接指示（蓝色）、WI-FI指示灯（橙色）
+  16. NEO的USB-HOST口，可以外接U盘、USB摄像头等等，需要用一条OTG线
+  17. TF卡槽（背面），用于扩展系统存储或用来存储用户数据
+</code>
+====NEO针脚定义====
+{{ ::neopinout.png |}}

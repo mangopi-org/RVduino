@@ -1,0 +1,251 @@
+====小贴士====
+1. 项目目录统一为~/ESP/下，“~”代表用户文件夹。
+
+2. 如果无特殊说明，$代表当前用户下执行的命令。
+
+3. Windows下的串口号以映射到msys2中的为准。
+
+4. 默认工程esp-idf路径为用户目录／ESP／esp-idf。
+
+====准备工作====
+1.一台PC，系统可以是Windows，macOS，Linux。
+
+2. ESP32编译工具链。
+
+3. 下载ESP-IDF工程。
+
+4. 一个你喜欢的编辑器工具，例如ATOM，VSCODE，Eclipse。
+
+5. 连接AIR的USB线到电脑。
+
+====安装串口驱动====
+串口是下载调试ESP32的不二之选，按照自己的操作系统下载驱动程序：
+  * macOS：http://www.silabs.com/documents/public/software/Mac_OSX_VCP_Driver.zip
+  * Linux：系统自带
+  * Windows: http://www.silabs.com/documents/public/software/CP210x_Windows_Drivers.zip
+安装完后，检查是否正确识别串口： 
+
+macOS下：
+<code bash>
+$ ls /dev/cu.*
+/dev/cu.Bluetooth-Incoming-Port /dev/cu.SLAB_USBtoUART
+</code>
+
+Linux下：
+<code bash>
+$ ls /dev/ttyUSB*
+/dev/ttyUSB0
+</code>
+windows下： 在计算机管理->设备管理器中可以查看：
+{{ ::attach_14dc6d6367223777.png |}}
+
+====安装交叉编译工具链====
+交叉编译工具可以运行在三个系统平台上，但安装过程有些区别，下面我们区分系统来讲解。
+
+===macOS===
+终端中安装xcode command line tool
+<code bash>
+xcode-select --install
+</code>
+接下来按照引导步骤一步一步安装即可。
+
+安装homebrew homebrew是mac上很好用的一款软件包管理工具 homebrew官网：https://brew.sh 安装方法：打开终端，将如下命令拷贝到终端后回车执行：
+
+<code bash>
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</code>
+安装编译依赖包 终端执行命令：
+<code bash>
+$ brew install gnu-sed gawk binutils gperftools gettext wget help2man libtool autoconf automaake git
+</code>
+安装python的串口扩展：
+<code bash>
+$ pip install pyserial
+</code>
+如果没有pip工具，可以使用如下方法安装：
+<code bash>
+localhost:ESP mango$ wget https://bootstrap.pypa.io/get-pip.py
+localhost:ESP mango$ sudo python get-pip.py
+localhost:ESP mango$ sudo pip install pyserial
+</code>
+下载安装编译工具链 假设我们要把工具链放到本用户目录的ESP文件夹下，创建文件夹：
+<code bash>
+$ mkdir ~/ESP
+$ cd ESP
+$ pwd
+/Users/mango/ESP
+</code>
+用wget命令下载工具链到此并解压：
+<code bash>
+$ wget https://dl.espressif.com/dl/xtensa-esp32-elf-osx-1.22.0-61-gab8375a-5.2.0.tar.gz
+$ tar xzf xtensa-esp32-elf-osx-1.22.0-61-gab8375a-5.2.0.tar.gz
+$ ls
+xtensa-esp32-elf
+xtensa-esp32-elf-osx-1.22.0-61-gab8375a-5.2.0.tar.gz
+</code>
+添加环境变量，这一步就是告诉电脑在使用到esp的命令行时知道去~/ESP/xtensa-esp32-elf/bin中找。编辑~/.bash_profile，在末尾添加如下两行后保存：
+<code bash>
+export PATH=$PATH:$HOME/ESP/xtensa-esp32-elf/bin
+export IDF_PATH=$HOME/ESP/esp-idf
+</code>
+用source命令使生效：
+<code bash>
+$ source ~/.bash_profile
+</code>
+用gcc命令验证是否成功，提示如下算成功，否则会提示找不到此命令，这时你就要仔细看看是否哪里目录设置不对。
+<code bash>
+$ xtensa-esp32-elf-gcc -v
+Using built-in specs.
+......
+gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0-61-gab8375a)
+</code>
+
+===Linux===
+安装编译依赖包（不同的Linux发行版的包管理工具略有差异，这里拿ubuntu14.04 32bit举例）： Ubuntu or Debian:
+<code bash>
+sudo apt-get update
+sudo apt-get install git wget make libncurses-dev flex bison gperf python python-serial
+</code>
+下载安装编译工具链 假设我们要把工具链放到本用户目录的ESP文件夹下，创建文件夹：
+<code bash>
+$ mkdir ~/ESP
+$ cd ESP
+$ pwd
+/home/mango/ESP
+</code>
+用wget命令下载工具链到此并解压： 
+
+for 64-bit Linux:
+<code bash>
+$ wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz
+$ tar xzf xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz
+</code>
+for 32-bit Linux:
+<code bash>
+$ wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux32-1.22.0-61-gab8375a-5.2.0.tar.gz
+$ tar xzf xtensa-esp32-elf-linux32-1.22.0-61-gab8375a-5.2.0.tar.gz
+$ ls
+xtensa-esp32-elf
+xtensa-esp32-elf-osx-1.22.0-61-gab8375a-5.2.0.tar.gz
+</code>
+添加环境变量，这一步就是告诉电脑在使用到esp的命令行时知道去~/ESP/xtensa-esp32-elf/bin中找。编辑~/.profile，在末尾添加如下两行后保存：
+<code bash>
+export PATH=$PATH:$HOME/ESP/xtensa-esp32-elf/bin
+export IDF_PATH=$HOME/ESP/esp-idf
+</code>
+用source命令使生效：
+<code bash>
+$ source ~/.profile
+</code>
+用gcc命令验证是否成功，提示如下算成功，否则会提示找不到此命令，这时你就要仔细看看是否哪里目录设置不对。
+<code bash>
+$ xtensa-esp32-elf-gcc -v
+Using built-in specs.
+......
+gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0-61-gab8375a)
+</code>
+
+===Windows===
+1. 安装兼容的GNU环境
+
+Windows没有内置的“make”环境，所以你需要安装一个兼容GNU的环境，例如MSYS2。
+
+下载地址：https://dl.espressif.com/dl/esp32_win32_msys2_environment_and_toolchain-20170330.zip
+
+下载完解压到C盘根目录，会得到一个msys32的文件夹：C:\msys32\
+
+2. 进入命令行，运行C:\msys32\msys2.exe后，会看到命令行，输入看gcc是否工作正常
+
+<code bash>
+$ xtensa-esp32-elf-gcc -v
+Using built-in specs.
+......
+gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0-61-gab8375a)
+</code>
+
+3. 创建项目目录
+<code bash>
+$ mkdir ~/ESP
+</code>
+
+4. 添加环境变量
+
+打开C:\msys32\etc\profile.d\esp32_toolchain.sh编辑，多添加一行IDF_PATH后保存：
+<code bash>
+export IDF_PATH=$HOME/ESP/esp-idf
+</code>
+
+添加完如图：
+{{ ::attach_14dc76712223030f.png |}}
+
+再次打开msys2.exe命令行，使用echo $IDF_PATH命令查看是否生效。
+<code bash>
+$ echo $IDF_PATH
+/home/mango/ESP/esp-idf
+</code>
+5. 安装python和pyserial 在msys2中执行以下命令更新源，执行完需要重启msys2窗口：
+<code bash>
+$ pacman --noconfirm -Syu
+</code>
+安装python：
+<code bash>
+$ pacman --noconfirm -S python2 tar
+</code>
+这里有个要注意的地方，就是默认安装完名字为python2.7，而我们想要的效果是命令行中敲python即可执行，所以进入/usr/bin/下copy一份名为python.exe即可：
+<code bash>
+$ cd /usr/bin
+$ cp python2.exe python.exe
+</code>
+下载pyserial：
+<code bash>
+$ wget https://github.com/pyserial/pyserial/releases/download/v3.2.1/pyserial-3.2.1.tar.gz
+$ tar xvf pyserial-3.2.1.tar.gz
+$ cd pyserial-3.2.1/
+$ python setup.py install
+</code>
+查看映射到MSYS2下的串口：
+<code bash>
+$ ls /dev/ttyS*
+/dev/ttyS3
+</code>
+
+====下载ESP-IDF工程代码====
+1. 使用git下载代码，视网络环境此步骤通常会占用1-10分钟：
+<code bash>
+$ cd ~/ESP
+$ git clone --recursive  https://github.com/espressif/esp-idf.git
+</code>
+注意：如果忘了使用recursive参数，之前仅做过clone，需要进入esp-idf文件夹执行子模块更新：
+<code bash>
+$ cd ~/ESP/esp-idf
+$ git submodule update --init
+</code>
+工程代码保持与官方同步更新 因为官方开发非常活跃，几乎每天都有小幅度更新，习惯上保持最新代码的步骤是进入esp-idf文件夹依次执行如下命令：
+<code bash>
+$ cd ~/ESP/esp-idf
+$ git pull
+$ git submodule update
+</code>
+
+====配置工程及串口====
+ESP-IDF中带了大量的例程，目录为“esp-idf/examples/”，进入具体的例程目录才可以配置工程，拿hello_world例程为例：
+<code bash>
+$ cd ~/ESP/esp-idf/examples/get-started/hello_world
+$ make menuconfig
+</code>
+{{ ::attach_14dc76a1c0b90087.png |}}
+
+menuconfig中的操作非常人性化：
+  * 使用上下方向键移动所选行。
+  * 使用回车键进入子目录。
+  * 使用‘?’查看某一项的帮助信息。
+  * 使用空格键决定某一项的选择、取消选择。
+  * 使用‘/’查找信息。
+  * 使用左右方向键切换底部的光标。
+
+找到Serial flasher config > Default serial port，将串口设备路径填入，串口号填写：
+  * macOS：填写类似于：/dev/cu.SLAB_USBtoUART1
+  * Linux平台：填写类似于：/dev/ttyUSB0
+  * Windows平台填写的是映射进msys2的路径，例如/dev/ttyS3
+{{ ::attach_14dc7fc8319ebbb7.png |}}
+填好后，左右方向键切换到Exit，会询问是否保存，选择保存回车后即配置完毕。

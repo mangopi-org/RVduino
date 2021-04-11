@@ -1,5 +1,5 @@
 =====MPi-R1/2/3=====
-MPi-Rx（原TINY200）是针对全志超低价F1C200s设计的小型ARM-Linux原型板，一体化设计，迷你, 资源： 
+MPi-R（原TINY200）是针对全志超低价F1C200s设计的小型ARM-Linux原型板，一体化设计，迷你, 资源： 
   - USB-TTL CP2104串口控制台（开发必备）
   - microUSB OTG口（fel方式刷机、接U盘、键盘、摄像头、usb网卡等）
   - 16M nor FLASH 或者 128M nand flash

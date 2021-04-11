@@ -1,0 +1,18 @@
+=====R1,R2=====
+{{ ::kendryte_dvp2lcd-standalone.zip |}}
+
+
+=====R3=====
+2.4寸屏幕 {{ ::kendryte_dvp2lcd-standaloner3-2.4.zip |}}   
+
+1.14寸屏幕 {{ ::kendryte_dvp2lcd-standalone1.14.zip |}}
+
+
+
+=====R3双目=====
+
+双目2.4寸  {{ ::kendryte_dvp2lcd-gc0328x2.zip |}} 
+
+使用GC0328双目时，因线序和标准24Pin DVP有细微区别，需要按照如下图处理：
+
+{{ ::tim截图20200725095447.jpg?400 |}}

@@ -1,0 +1,14 @@
+{{ :ting.jpg|}}
+
+====TING系列模组====
+  * [[:breif_lora|LoRa入门和Ting模块]]
+  * [[:ting_hardware|硬件设计]]
+  * [[:ting_at|AT命令/针对Ting-01M]]
+  * [[:ting_soft|上位机]]
+  * [[:ting_source|开源固件]]
+  * [[:at_example|STM32示例]]
+  * [[:ting_ant|配套转接板及天线]]
+
+
+{{::x-pcb.png?60|}} {{ ::ting-01_m_转接板.zip |}}
+

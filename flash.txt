@@ -1,0 +1,18 @@
+<WRAP center round important 70%>
+===注意：刷机不会影响校准数据===
+</WRAP>
+
+<html>
+<iframe src="//player.bilibili.com/player.html?aid=36340736&cid=63799412&page=1" scrolling="no" border="0" frameborder="no" framespacing="0"  style="width: 800px; height: 640px;" allowfullscreen="true"> </iframe>
+</html>
+
+刷机固件下载地址：[[firmware]] \\
+刷机用于更新OpenWrt固件，更新Uboot或更新校准数据等等，Widora提供了在Uboot状态下的web页刷机功能，该刷机方式需要板子上WPS按键的配合以及一条网线。注意：此刷机方法在更新Uboot和Openwrt时不会覆盖无线校准数据。 操作步骤如下：
+
+  * 针对1.0.7及之后版本Uboot：Widora上电或者刚按完复位按钮后，按住WPS按钮，看到WLED灯闪大约10次，表明此时已经进入web刷机状态。
+  * 针对1.0.6及之前版本Uboot：在Widora刚上电或者刚按完复位按钮，WLED灯闪的时候按住WPS键1-2秒左右放开，WLED灯会快速闪几下，表明已经正常进入网页刷机状态。
+  * 设置电脑与Widora网线连接的网卡IP为同网段，例如192.168.1.10，子网掩码255.255.255.0。 打开浏览器（推荐Chrome和Safari，避免用IE），访问192.168.1.111，看到如下刷机界面
+{{ ::09.jpg?400 |}}
+可以看到有三排更新按钮，第一排用于刷系统固件，例如Widora固件、OpenWrt、SDK等等。 第二排用于升级Uboot，第三排用于刷无线校准文件。 刷机进行时页面如下（一直持续），刷完Widora会自动重启（网页不会自动刷新，WLED会闪10次左右表明刷机完成）。
+{{ ::10.jpg?400 |}}
+  * 注意：刷机完成后板子会重启进入新系统，进入新系统后可能有上一个系统的残留，建议执行一遍：firstboot -y命令进行恢复出厂设置，再重启就彻底全新了。

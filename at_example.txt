@@ -1,0 +1,1 @@
+使用Ting-01M时，这部分程序可以省去用户自己写AT交互底层，这里给出基于ebox的代码， 在源码[[https://github.com/eboxmaker/eBox_STM32F1]]的eBox_STM32F1/example/26.lora/位置

@@ -1,0 +1,71 @@
+
+
+=====芯片介绍=====
+联发科技 MT7688AN 系统单芯片可应用于家庭自动化的桥接中心。它集成了 1T1R 802.11n Wi-Fi radio、580MHz MIPS® 24KEc™ CPU、1-port fast Ethernet PHY、USB2.0 host、PCIe、SD-XC、 I2S/PCM，并支持多种低速输出入接口在单一颗系统单芯片当中。
+
+MT7688 支持两种运作模式：IoT gateway 模式（5个网口）与 IoT device 模式（单网口），并且没有处于两者之间的模式。
+
+在 IoT gateway 模式中，可透过 PCIe 界面连接至 802.11ac 芯片组，并作为双频 802.11ac 同步闸道。高速的 USB 2.0 接口可让 MT7688 连接至额外的 3G/LTE modem 硬件，或连接到 H.264 ISP 作为无线 IP 相机的应用。 IoT gateway 模式也支持触摸板、Bluetooth Low Energy、Zigbee/Z-Wave 和 Sub-1 GHz RF 等智能家庭应用所需的硬件。
+
+在 IoT device 模式下，MT7688 支持 eMMC、SD-XC 与 USB 2.0，并且可透过 192Kbps/24bits I2S 接口播放高音质的 Wi-Fi 音频，或是透过 PCM 进行 VoIP 应用。同时也支持各种周边接口，包含 PWM、 SPI slave、三组 UART 与更多 GPIO 接口。
+
+===功能特点===
+  * MIPS24KEc 580 MHz，具备 64 KB I-Cache 与 32 KB D-Cache 
+  * 支持最大达 256MB RAM ，并支持 SD-card 
+  * 1T1R 2.4 GHz，具备 150 Mbps PHY data rate 
+  * Legacy 802.11b/g and HT 802.11n modes 
+  * 1-port 10/100 FE PHY 
+  * SD-XC, eMMC, I2C, PCM, I2S(192K/24bits), PWM, SPI master/slave, UART lite, JTAG 与 GPIO 
+
+===手册===
+  * 数据手册和TRM {{ ::mt7688_datasheet_v1_4.pdf |}} {{ :zh:mt7628_datasheet_full.pdf |}}  {{ ::mt7628dan_datasheet_0831.pdf |}}
+  * 联发科私有WiFi驱动编程手册{{ ::mtk_wi-fi_softap_software_programming_guide_v4.6.pdf}} \\ 
+  * {{ ::spis_programming_guide_v1.0.pdf |}}   \\ 
+  * Factory分区数据表（包含WiFi校准数据、MAC地址以及WiFi功率设定等参数）{{ ::mt7628_eeprom_guideline_v2_00.pdf |}}
+
+
+
+====FLASH地址模式====
+  * 启动的SPI总线寻址地址格式分为3Byte和4Byte两种，3Byte最大寻址16MB。（以前一些路由器使用的3B地址模式能依靠扩展指令达到寻址32MB FLASH的目的，但这种方法有弊端）
+  * winbond的W25Q256 SPI-FLASH默认3B寻址，但可以通过设置ADP位为1将寻址改为4B模式，不受断电的影响。
+  * 同理，7688启动CS1拉低是3B，拉高是4B，不管如何选择，FLASH地址模式和7688启动地址模式必须有对应，即3B对应3B，4B对应4B，否则启动失败。
+  * 不同的地址模式需要烧录对应的Uboot，而OpenWrt已经都兼容。
+
+
+
+
+====MT7688启动模式相关引脚====
+具体7688启动模式如下图：
+{{ ::bootstrap.png?nolink |}}
+
+^ 描述 ^ 模组已做的处理 ^ 
+| I2S_SDO | 4.7K下拉 |
+| SPI_CS1 | 下拉代表3B地址模式，上拉代表4B地址模式 |
+| SPI_CLK | 4.7K上拉 |
+| SPI_MOSI | 4.7K下拉 |
+| UART_TXD0 | 4.7K下拉 |
+| UART_TXD1 | 4.7K上拉 |
+
+====必要说明====
+①：7688使用32MB FLASH时需要4B寻址，但以前有一种旧模式是Boot时3B寻址进系统后再切换到4B寻址。此模式下如果7688内部看门狗发起复位会导致无法启动。BIT3，BIT3.1，BIT5均可支持完全使用4B寻址的新模式。此模式需要FLASH固化成4B状态。欢迎用户选用这种模式的模组。 \\
+
+
+====型号详解====
+例如BIT32CYI1型号字段 \\
+1-3、代表系列。BIT：MT7688AN核心模块 \\
+4-5、FLASH大小。08:8MB，16:16MB，32:32MB \\
+6、RAM大小。B：64MB，C：128MB \\
+7、代表连接方式。Y：邮票半孔方式，H：排针，M：金手指方式 \\
+8、代表温度等级。C：常温，工作温度0～+55，I：宽温，工作温度-20～+55 \\
+9、若有第九位，比如1，则代表相应型号的模组版本+0.1，比如平时说的BIT3.1
+
+
+====工作温度范围====
+  * 运行温度：常温版本：0 ～ +55 度
+  * 运行温度：宽温版本：-20 ～ +55 度
+
+====电流消耗====
+  * NEO，供电5V，空载110mA左右
+  * BIT模组，供电3.3V，电流180mA左右
+
+

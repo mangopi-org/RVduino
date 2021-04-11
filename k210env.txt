@@ -1,0 +1,14 @@
+====搭建环境====
+
+
+===Kendryte IDE（Beta版本）===
+  * Beta下载页面：http://kendryte-ide.s3-website.cn-northwest-1.amazonaws.com.cn
+  * IDE说明： https://github.com/kendryte/kendryte-ide/wiki/README.cn
+  * IDE使用手册：{{ :zh:kendryte_ide使用手册.pdf |}}
+  * 如果官方渠道下载的IDE启动有问题，就到Q群：242127577的附件中下载绿色版本
+
+===Vscode 插件方式（长期未更新，暂不推荐）===
+  - 首先安装 VSCode。安装完毕后在 VSCode Extension 中搜索 Kendryte， 即可快速安装本插件
+  - 当前插件“Kendryte Dev Tools 0.2.1  ~ 0.3.0 ”在windows平台会有个小问题，就是可以编译但串口上传失效，临时解决方案就是安装python34，链接如下：
+  * 64位系统：{{ :undefined:python-3.4.4.amd64.msi.7z |}}
+  * 32位系统：{{ ::python-3.4.4.msi.7z |}}

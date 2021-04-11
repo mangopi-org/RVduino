@@ -1,0 +1,29 @@
+eSpeak是一款开源的语音合成软件，可以将英文和中文转化成语音输出。 用它来播放指令和短语还是很有用的。
+==== 1. 安装eSpeak ====
+   opkg update
+   opkg install espeak
+
+==== 2. 英文合成 ====
+运行：
+   espeak --stdout "hello, I am Widora NEO!" | aplay
+
+==== 3. 中文合成 ====
+运行：
+   espeak --stdout -v zh "大家好，我是歪朵拉！" | aplay
+
+==== 4. 文本转化成语音输出 ====
+可以将整个文本转化成语音输出：
+   espeak --stdout -f news.txt | aplay
+
+==== 5.语速 ==== 
+通过-s选项来调整语速, 默认(-s 175)每分钟175个词语: 
+      espeak --stdout -s 125 "hello" | aplay 
+
+==== 6.口音 ==== 
+通过-v选项来选择不同的口音，espeak --voice查看所有口音.
+      espeak --stdout -v en-wi "Country road, takes me home" | aplay 
+
+==== 7.其他 ==== 
+7.1 espeak使用portaudio来转换成语音，需要将其结果用--stdout输出,并通过无名管道传给aplay播放,直接播放会crash alsa!
+
+7.2 eSpeak目前已经有演进版本eSpeak-NG.

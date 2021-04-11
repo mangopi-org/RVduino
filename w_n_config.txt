@@ -1,0 +1,107 @@
+====1. 无线配置文件 /etc/config/wireless====
+wireless用来配置wifi无线设备和接口，典型的wireless配置文件如下：
+   config wifi-device 'radio0'
+        option type 'ralink'
+        option variant 'mt7628'
+        option country 'CN'
+        option hwmode '11bgn'
+        option htmode 'HT20'
+        option channel '11'
+        option disabled '0'
+   config wifi-iface 'ap'
+        option device 'radio0'
+        option mode 'ap'
+        option network 'lan'
+        option ifname 'ra0'
+        option ssid '本机热点SSID'
+        option encryption 'psk-mixed'
+        option key 'xxxxxxxxx'
+        option hidden '1'
+   config wifi-iface 'sta'
+        option device 'radio0'
+        option mode 'sta'
+        option ifname 'apcli0'
+        option ssid '上级热点SSID'
+        option key 'xxxxxxxxx'
+        option network 'wan'
+        option disabled '0'
+
+其中包含了wifi设备配置和wifi接口配置。具体说明如下：
+
+===1.1 wifi设备配置===
+包含了1个wifi 设备'radio0', 其主要选项有:                     
+  country      应用的国家
+  hwmode       无线协议，可选11a、11b、11g、11an、11bgn等, 对应IEEE 802.11标准
+  htmode       有效带宽，可选HT20和HT40, 40MHz带宽可应用于802.11n标准
+  channel      信道，可选 1 ~ 14
+  disable      是否关闭，1(关闭) 或0(开启)
+
+===1.2 wifi接口配置===
+包含了'ap'和'sta' 2个wifi 接口配置, 其主要选项有:
+  device       关联的wifi设备名称
+  mode         wifi工作模式，可选ap或sta。 ap--wifi热点模式，允许终端无线接入; sta--终端模式。
+  network      网络设备类型，对应/etc/config/network中的接口段，通常为lan或wan。
+  ifname       网络接口名称，和/etc/config/network中的接口名称一致。
+  ssid         wifi无线网络名称 (ap模式时为本机热点名称，sta模式时为上级接入点的名称)
+  encryption   加密方式，可选none, psk, psk2 和 psk-mixed。
+  key          密钥，至少8个字符长度。 encryption为none时无效。
+  hidden       是否隐藏wifi无线网络名称， 1(隐藏) 或0(显示)
+
+====2. 网络配置文件 /etc/config/network====
+network文件用来配置网络接口，典型的network配置文件如下：
+   config interface 'loopback'
+        option ifname 'lo'
+        option proto 'static'
+        option ipaddr '127.0.0.1'
+        option netmask '255.0.0.0'
+   config globals 'globals'
+        option ula_prefix 'fd7a:843a:14df::/48'
+   config interface 'lan'
+        option force_link '1'
+        option macaddr 'ff:ff:ff:ff:ff:ff'
+        option type 'bridge'
+        option ipaddr '192.168.1.1'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+        option proto 'static'
+        option ifname 'eth0'
+   config switch
+        option name 'switch0'
+        option reset '1'
+        option enable_vlan '0'
+   config interface 'wan'
+        option proto 'dhcp'
+        option ifname 'apcli0'
+
+通常包含1个本地回环接口loopback、1个局域网接口lan 、1个外网接口wan 和 1个交换段switch。具体说明如下：
+===2.1 interface网络接口配置===
+interface段包括loopback、lan和wan接口, 其主要选项有: 
+  ifname       接口名称
+  proto        接口协议, 可选 static(静态ip)、dhcp(动态ip)、ppp、pppoe等。
+  type         接口类型，如果设置为"bridge"，将建立一个包含ifname所述接口的网桥。
+  macaddr      接口的MAC地址
+
+对于'static'协议另有以下选项：
+  ipaddr       IP地址
+  netmask      子网掩码
+  gateway      默认网关
+  bcast        广播地址(默认自动生成)
+  ip6addr      IPv6地址
+  ip6gw        IPv6网关
+  dns          DNS服务器(可以多个)
+  ip6assign    IPv6网络前缀位
+
+===2.2 switch段的配置===
+switch负责虚拟网络VLAN的划分, 一般来说，虚拟交换设备switch的0、1、2、3端口是路由器LAN口，端口4是路由器WAN口，端口5表示CPU，switch段主要选项有: 
+  name           switch设备名称
+  reset          是否重置
+  enable_vlan    是否启用虚拟网络VLAN，1--启用，0--不启用。
+
+当enable_vlan 设置为'1' 时需要另外配置switch_vlan段, 常用的选项包括：
+  device       关联的网络设备名称
+  vlan         对应虚拟网络号
+  ports        对应switch端口
+===2.3 globals段的配置===
+globals段的ula_prefix选项设置了唯一的本地IPv6单播地址（ULA，Unique Local IPv6 Unicast Address）的网络前缀位。
+
+==== 3. 配置修改完成后，执行一下 /etc/init.d/network restart 使配置生效。 ====

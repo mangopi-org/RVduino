@@ -1,0 +1,37 @@
+======AIRV2/核心板+底板版本======
+  * BITK210模组（Kendryte K210 AI主控，主频400M，乘法操作算力0.23TOPS，总算力1TOPS）
+  * 板载基于CP2104的USB-TTL芯片，最高支持2Mbps波特率（稳定好用）
+  * 锂电池接口，锂电池充放电芯片ETA6093
+  * 锂电池升压放电电路（仅用单节锂离子电池即可获得5V对外输出电压）
+  * TF卡槽（MOLEX）
+  * 无WiFi芯片
+  * MicroUSB供电加转串口一体接口
+  * 24Pin DVP连接器
+  * 24Pin LCD连接器
+  * 复位按键、Boot按键
+  * 40Pin树莓派接口，理论上支持树莓派绝大部分外设
+  * 核心板预留了JTAG相关Pin
+  * 尺寸：65x30mm
+
+{{:zh:o1cn01hl2een2kbkgtzregu_479269519.png?300|}}
+
+==芯片资料==
+  * [[k210|K210芯片资料汇总]]
+  * [[bitk210|BITK210模组]]
+  * {{ ::eta6093.pdf |锂电池管理}}
+  * {{ ::cp2104.pdf|USB转TTL CP2104}}
+
+==主板==
+{{ :zh:airv2-silk.jpg?400 |}}
+  * BOM表 {{ ::airv2-bitk210-bom.xlsx |}}
+  * 工程 {{ :zh:airv-bitk210-prj.zip |}}
+  * 原理图PDF {{ :zh:airv-bitk210-sch.pdf |}}
+
+====外设====
+  * 2.4寸ST7789v液晶屏 {{ :zh:jlt24100b-pss.pdf |}}，{{ :zh:st7789s.pdf |}}
+  * ov2640摄像头{{:zh:ov2640尺寸跟引脚图.jpg?linkonly|}}，datasheet{{ :zh:ov2640ds.pdf |}}
+  * 摄像头模组 {{ :ov2640-camera_module.pdf |}}
+
+
+====外壳====
+  * https://sns.widora.io/topic/668

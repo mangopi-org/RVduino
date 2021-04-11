@@ -1,0 +1,64 @@
+====查看运行情况====
+乐鑫提供了一个make monitor工具来查看运行情况。 基本使用：
+  * Ctrl-] 可以退出monitor.
+  * 内置了addr2line神器，一旦log中出现0x4xxxxxxx地址，会被自动翻译到代码行。
+使用起来非常简单，敲命令进入，下面是完整的启动log：
+<code bash>
+$ make monitor
+GENCONFIG
+MONITOR
+--- idf_monitor on /dev/cu.SLAB_USBtoUART 115200 ---
+--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+ets Jun  8 2016 00:22:57
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+ets Jun  8 2016 00:22:57
+rst:0x10 (RTCWDT_RTC_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0010,len:4
+load:0x3fff0014,len:5404
+load:0x40078000,len:0
+load:0x40078000,len:12028
+entry 0x40078f24
+I (45) boot: ESP-IDF v3.0-dev-265-g969f1bb9 2nd stage bootloader
+I (45) boot: compile time 16:21:50
+I (78) boot: Enabling RNG early entropy source...
+I (78) boot: SPI Speed      : 40MHz
+I (78) boot: SPI Mode       : DIO
+I (88) boot: SPI Flash Size : 16MB
+I (101) boot: Partition Table:
+I (112) boot: ## Label            Usage          Type ST Offset   Length
+I (135) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (158) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (182) boot:  2 factory          factory app      00 00 00010000 00100000
+I (205) boot: End of partition table
+I (218) esp_image: segment 0: paddr=0x00010020 vaddr=0x3f400020 size=0x077b0 ( 30640) map
+I (279) esp_image: segment 1: paddr=0x000177d8 vaddr=0x3ffb0000 size=0x02d84 ( 11652) load
+I (293) esp_image: segment 2: paddr=0x0001a564 vaddr=0x40080000 size=0x00400 (  1024) load
+0x40080000: _iram_start at ??:?
+I (302) esp_image: segment 3: paddr=0x0001a96c vaddr=0x40080400 size=0x056a4 ( 22180) load
+I (356) esp_image: segment 4: paddr=0x00020018 vaddr=0x400d0018 size=0x263a8 (156584) map
+0x400d0018: _flash_cache_start at ??:?
+I (524) esp_image: segment 5: paddr=0x000463c8 vaddr=0x40085aa4 size=0x0d234 ( 53812) load
+0x40085aa4: prvProcessTimerOrBlockTask at /Users/mango/ESP/esp-idf/components/freertos/./timers.c:466
+I (593) esp_image: segment 6: paddr=0x00053604 vaddr=0x400c0000 size=0x00000 (     0) load
+I (627) boot: Loaded app from partition at offset 0x10000
+I (628) boot: Disabling RNG early entropy source...
+I (629) cpu_start: Pro cpu up.
+I (640) cpu_start: Starting app cpu, entry point is 0x40080dec
+0x40080dec: call_start_cpu1 at /Users/mango/ESP/esp-idf/components/esp32/./cpu_start.c:192
+I (0) cpu_start: App cpu up.
+I (673) heap_init: Initializing. RAM available for dynamic allocation:
+I (693) heap_init: At 3FFAE2A0 len 00001D60 (7 KiB): DRAM
+I (712) heap_init: At 3FFB66C0 len 00029940 (166 KiB): DRAM
+I (731) heap_init: At 3FFE0440 len 00003BC0 (14 KiB): D/IRAM
+I (751) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (770) heap_init: At 40092CD8 len 0000D328 (52 KiB): IRAM
+I (790) cpu_start: Pro cpu start user code
+I (848) cpu_start: Starting scheduler on PRO CPU.
+I (191) cpu_start: Starting scheduler on APP CPU.
+Hello world!
+This is ESP32 chip with 2 CPU cores, WiFi/BT/BLE, silicon revision 0, 16MB external flash
+Restarting in 10 seconds...
+</code>

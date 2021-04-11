@@ -1,0 +1,10 @@
+====最新固件====
+  * V0.4: {{ ::ting-01m-v0.4.bin |}}
+
+====LoRa开源资料====
+
+固件源码：https://github.com/eboxmaker/STM8L_Lora
+
+默认使用IAR编译master版本。IAR版本：2.10.4
+
+MCU型号：STM8L051F3P6

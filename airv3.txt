@@ -1,0 +1,140 @@
+=====AIRV3 简介 =====
+
+AIRV3属AIRV的第三批次，相比前两批次（树莓派0外观）进行大调整，这次主要是针对USB口、DVP双目兼容性、红外补光、增加音频输入输出、增加2MB满血版ESP8285 WiFi、增加用户按钮和LED、增加WS2812B的RGBLED。同时还将整版缩小，集成度更高。R1和R2都有一个不方便固定CAMERA和LCD的诟病，这次R3的设计是直接板载了一块1.14寸IPS小屏幕，显示效果很棒，也根据结构将OV2640摄像头设计为即可超前安装、又可朝后安装的方式。
+
+{{ ::airv_r3.jpg?500 |}}
+
+<WRAP group>
+<WRAP half column>
+===资源介绍===
+  * 基于BITK210 r2模组，只有2X1.8CM，使用Kendryte K210 AI主控，主频400M，峰值算力1T
+  * 板载CP2105芯片，USB转双串口，可分别操作K210和WiFi芯片，均带ISP自动下载电路。
+  * 锂电池接口，支持恒流充电
+  * 锂电池升压放电电路（仅用单节锂离子电池即可获得5V对外输出电压）
+  * TF卡槽（Molex）
+  * USB TYPEC供电+程序下载看LOG接口
+  * WiFi(ESP8285-2MB版,默认刷满血版AT固件)，板载陶瓷天线，与K210通过UART或SPI通信
+  * 硅麦*1
+  * 音频输出功放，可直接驱动1W扬声器
+  * DVP接口，摄像头可以很方便的前装或后装（默认出厂朝后），电路设计上已兼容普通单摄像头（OV2640， 5640，7725）以及双目摄像头（GC0308*2）
+  * 板载两颗红外补光（活体人脸识别用）
+  * 板载1.14寸屏幕
+  * 更强的扩展，LCD 24Pin连接座设计考虑了兼容3.5寸，3.6寸，4.6寸等屏幕及电阻、电容触摸屏
+  * 3个用户按键，1个系统复位按键
+  * 2个用户LED
+  * 1个RGB-LED（WS2812）
+  * 尺寸：32*51mm
+</WRAP>
+
+<WRAP half column>
+===硬件资料===
+  * R3主板SCH{{ ::airv-r3.pdf |}}
+  * R3WiFiSCH{{ ::wifi-r3.pdf |}}
+  * 开源工程：{{ ::airv3底板-外发.7z |}}
+  * R3 PCB丝印位置 {{ ::airv-r3-silk-b.pdf |}}{{ ::airv-r3-silk-t.pdf |}}
+  * 1.14LCD 控制器 {{ ::st7789vw芯片手册.pdf |}}
+  * 1.14LCD 规格书 {{ ::中景园1.14寸插接式ips显示屏规格书.pdf |}}
+  * WiFi-ESP8285 {{ ::0a-esp8285_datasheet_cn.pdf |}}
+  * 锂电池管理 {{ :eta6093.pdf |}}
+  * OV2640{{ :zh:ov2640尺寸跟引脚图.jpg?linkonly |}} {{ :zh:ov2640ds.pdf |}}
+  * {{ ::widora-ga4a4.4-v1.0.pdf |}} {{ ::gc0328c_datasheet_released_v1.0_20140930.pdf |gc0328ds.pdf}}
+  * DC-DC电源 {{ ::sy8008.pdf |}}
+  * USB转串口CP2105 {{ ::cp2105.pdf |}}
+  * LDO {{ ::xc6206_超低功耗ldo.pdf |}}
+  * 全彩LED内置WS2812 {{ ::ws2812-2020_v1.1_en_18062112183733.pdf |}}
+  * 硅麦{{ ::msm261s4030h0.pdf |}}
+  * I2S接口功放{{ ::ns4168.pdf |}}
+  * 扬声器接口、锂电池、WS2812级联数据输出接口{{::speaker锂电池.jpg?200|}}
+</WRAP>
+</WRAP>
+
+
+
+
+
+
+
+
+
+
+
+=====R3开箱 =====
+
+
+==== 1 ====
+安装串口驱动以及下载工具kflash.py 可参考页面： [[k210dev|k210dev]]
+
+
+
+==== 2 ====
+R3的USB连接到电脑上会出现两个串口，其中一个用户K210的程序下载，另一个则是WiFi通信，波特率都是115200bps，8数据位。
+{{ ::2uart.jpg |}}
+
+但会遇到一个问题，串口号和具体哪个通信并不总是固定的。此时可以使用串口终端等工具测试出来。
+比如用http://www.daxia.com/sscom/sscom5.13.1.rar 
+打开后，发送AT并勾选回车换行，碰到回应OK，就代表是和WiFi通信
+{{ ::sscom.jpg?400 |}}
+但如果没有回应，或者自动打印其他的log，那很可能就是和K210通信的串口了。
+
+只要这里将串口映射搞清楚，以后无论连到该电脑的哪个USB口，串口映射关系都不会错乱。
+
+==== 3 ====
+R3板子自带了ESP8285 WiFi芯片，并且内部FLASH是2MB版本，所以可以刷乐鑫最新的完整AT固件。 看到这里的小伙伴我就默认认为你已经使用SSCOM和WiFi芯片建立了沟通。 \\
+
+先来测试一下。
+
+发送AT+GMR 查询版本信息，回复：
+  AT version:1.7.4.0(May 11 2020 19:13:04)
+  SDK version:3.0.4(9532ceb)
+  compile time:May 27 2020 10:12:22
+  Bin version(Wroom 02):1.7.4
+  OK
+  
+发送AT+CWMODE_DEF=3 设置当前工作模式位AP+STA，回复：
+  [09:20:13.877]收←◆
+  OK
+  
+发送AT+CWMODE_CUR? 查询当前工作模式，回复：
+  +CWMODE_CUR:3
+
+发送AT+CWLAP 扫描周围WiFi，回复：
+  +CWLAP:(4,"204",-92,"cc:08:fb:c4:bc:1a",1,-11,0,5,3,7,0)
+  +CWLAP:(3,"xiaomiap",-75,"d4:5f:25:fd:07:24",13,-14,0,4,4,7,0)
+  +CWLAP:(3,"Lenovo_306275",-87,"5a:00:e3:30:62:75",13,32767,0,4,4,7,1)
+
+
+发送AT+CWJAP_CUR="ssid","12345678" 临时连接到AP，回复：
+
+  [20:53:25.213]收←◆WIFI CONNECTED
+  [20:53:30.889]收←◆WIFI GOT IP
+  [20:53:30.989]收←◆
+  OK
+
+发送AT+PING="192.168.123.1" 测试ping路由器网关地址，回复：
+  [20:55:19.792]收←◆AT+PING="192.168.123.1"
+  +2
+  OK
+
+更多的测试要参考乐鑫官方AT文档：  {{ ::4a-esp8266_at_instruction_set_cn.pdf |}}
+
+当然，如果涉及到WiFi部分的二次开发或刷WiFi固件，请到[[esp8285flash|重新烧录AT固件]]页面。
+
+<wrap hi>WiFi芯片工作时会比较热属正常现象</wrap>
+
+==== 4 ====
+测试完WiFi，就该测试另一个K210的ISP下载口了。
+
+打开另一个串口号，波特率仍然选择115200。如果AIRV没有烧录任何代码，按复位按钮RST，会看到如下打印：
+  interesting, something's wrong, boot failed with exit code 233, go to find your vendor.  
+  
+但如果烧录了测试固件或自己的程序，那就会正常打印log。类似以下这样子：
+  [22:42:58.792]收←◆LCD init
+  [22:42:59.054]收←◆DVP init
+  [22:42:59.353]收←◆manuf_id:0x7fa2,device_id:0x2642
+  DVP interrupt config
+  system start
+
+
+
+======外设映射图======
+

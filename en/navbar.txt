@@ -3,10 +3,7 @@
     * [[mangopi1|MangoPi 1]]
     * [[mangopi_r|MangoPi R]]
     * [[accessories]]
-  * MPi IoT
-    * 
  
-
-  * [[https://mangopi.club/viewforum.php?f=5|Forum]]
+  * [[https://mangopi.club|Forum]]
   * [[https://widora.taobao.com|Shop]]
-  * [[https://github.com/mangopi-sbc/mangopi-org|Co-Edited]]
+  * [[https://github.com/mangopi-sbc/mangopi-org/tree/main/en|Co-Edited]]

@@ -1,0 +1,115 @@
+====唠叨几句====
+MT7688这类“路由器”SOC最大的强项还是网络上，互联效果比普通SOC好很多，这一节讲讲常用的WI-FI操作。
+
+===扫描周围AP列表===
+aps命令运行之后大约5秒，在控制台打印扫描到的结果。
+<code bash>
+Widora AP scan.
+ra0       get_site_survey:
+Ch  SSID                             BSSID               Security               Signal(%)W-ModeD
+8   Widora-2-2-605                   9c:3d:cf:c0:28:18   WPA2PSK/AES            70       11b/g/ 
+3   0xE5B08FE7B1B3E585B1E4BAAB576946695F3641363766:09:80:7d:6a:68   NONE                   65   
+3   AndroidAP-2B1EA4                 64:09:80:7d:6a:68   WPA1PSKWPA2PSK/TKIPAES 65       11b/g/ 
+11  505                              f4:83:cd:45:65:50   WPA1PSKWPA2PSK/AES     24       11b/g/ 
+9   Xiaomi_10BC                      8c:be:be:2c:10:bd   WPA1PSKWPA2PSK/TKIPAES 23       11b/g/ 
+11  TP-LINK_4392                     ec:26:ca:e4:43:92   WPA1PSKWPA2PSK/AES     20       11b/g/ 
+8   HUAWEI-FU2D9Y                    f4:cb:52:00:99:3c   WPA1PSKWPA2PSK/AES     20       11b/g/ 
+7   WJQ-2.5G                         94:77:2b:6c:f3:74   WPA1PSKWPA2PSK/AES     13       11b/g/ 
+6   PDCN                             cc:81:da:5f:3f:48   WPA2PSK/AES            13       11b/g/ 
+7   Tenda_54D410                     c8:3a:35:54:d4:10   WPAPSK/AES             13       11b/g/ 
+1   shiwanghome                      44:6e:e5:8f:28:08   WPA2PSK/AES            10       11b/g/ 
+2   0xE5B08FE7B1B3E585B1E4BAAB576946695F4545393566:09:80:1d:ee:96   WPA1PSKWPA2PSK/TKIPAES 10   
+1   mylove1202                       20:76:93:30:f8:94   WPA1PSKWPA2PSK/AES     10       11b/g/ 
+9   BJDXB                            04:02:1f:54:6c:50   WPA1PSKWPA2PSK/AES     7        11b/g/ 
+7   Tenda_396938                     c8:3a:35:39:69:38   WPAPSK/AES             7        11b/g/ 
+1   GOD                              d0:c7:c0:72:b1:5e   WPA1PSKWPA2PSK/AES     7        11b/g/ 
+1   CU_ZxGN                          68:8a:f0:49:24:a8   WPA1PSKWPA2PSK/AES     5        11b/g/ 
+11  TP-LINK_3386                     b8:f8:83:cc:33:86   WPA1PSKWPA2PSK/TKIPAES 5        11b/g/ 
+11  TP-LINK_650A                     14:75:90:62:65:0a   WPA1PSKWPA2PSK/AES     2        11b/g/ 
+1   123456                           b8:55:10:12:0e:69   WPA2PSK/AES            0        11b/g/ 
+11  TP-LINK_1BFC                     80:89:17:62:1b:fc   WPA1PSKWPA2PSK/AES     0        11b/g/ 
+</code>
+
+===让MT7688通过WI-FI联网===
+wifimode apsta ssid key命令，ssid和key分别是你的家庭Wi-Fi用户名和密码。
+<code bash>
+root@Widora:/# widora_mode repeater Widora-2-2-605 xxxxxxxxxx
+[  351.770000] br-lan: port 2(ra0) entered disabled state
+[  351.780000] device ra0 left promiscuous mode
+[  351.780000] br-lan: port 2(ra0) entered disabled state
+uci: Entry not found
+[  352.410000] br-lan: port 1(eth0) entered disabled state
+[  352.500000] device eth0 left promiscuous mode
+[  352.510000] br-lan: port 1(eth0) entered disabled state
+[  352.530000] IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+root@Widora:/# [  354.470000] device eth0 entered promiscuous mode
+[  354.530000] br-lan: port 1(eth0) entered forwarding state
+[  354.530000] br-lan: port 1(eth0) entered forwarding state
+[  356.530000] br-lan: port 1(eth0) entered forwarding state
+[  357.760000] =====================================================
+[  357.760000] Channel 1 : Busy Time = 10409, Skip Channel = FALSE
+[  357.770000] Channel 2 : Busy Time = 7031, Skip Channel = FALSE
+[  357.770000] Channel 3 : Busy Time = 4505, Skip Channel = FALSE
+[  357.780000] Channel 4 : Busy Time = 7659, Skip Channel = FALSE
+[  357.790000] Channel 5 : Busy Time = 9640, Skip Channel = FALSE
+[  357.790000] Channel 6 : Busy Time = 11197, Skip Channel = FALSE
+[  357.800000] Channel 7 : Busy Time = 9685, Skip Channel = FALSE
+[  357.800000] Channel 8 : Busy Time = 6946, Skip Channel = FALSE
+[  357.810000] Channel 9 : Busy Time = 8711, Skip Channel = FALSE
+[  357.810000] Channel 10 : Busy Time = 16352, Skip Channel = FALSE
+[  357.820000] Channel 11 : Busy Time = 26003, Skip Channel = FALSE
+[  357.830000] Channel 12 : Busy Time = 22361, Skip Channel = TRUE
+[  357.830000] Channel 13 : Busy Time = 10416, Skip Channel = TRUE
+[  357.840000] =====================================================
+[  357.850000] Rule 3 Channel Busy time value : Min Channel Busy  ==> Select Channel 3 
+[  357.850000] Min Channel Busy = 4505
+[  357.860000] BW        = 20
+[  357.890000] |--------------------------------------------------------|
+[  357.890000] |------------Widora wifi driver--version:1.2-------------|
+[  357.900000] |Copyright 2016-2017 by YuanChenMang. All rights reserved|
+[  357.910000] |       This Driver licensing-only runs on Widora!       |
+[  357.910000] |  Found bug? Please contact widora@qq.com , thanks!     |
+[  357.920000] |--------------------------------------------------------|
+[  359.160000] device ra0 entered promiscuous mode
+[  359.160000] br-lan: port 2(ra0) entered forwarding state
+[  359.170000] br-lan: port 2(ra0) entered forwarding state
+[  359.180000] device apcli0 entered promiscuous mode
+[  361.170000] br-lan: port 2(ra0) entered forwarding state
+[  363.530000] br-lan: port 3(apcli0) entered forwarding state
+[  363.540000] br-lan: port 3(apcli0) entered forwarding state
+[  365.080000] AP-Client probe response: SSID=, BSSID=9c:3d:cf:c0:28:18
+[  365.090000] APCLI LINK UP - IF(apcli0) AuthMode(7)=WPA2PSK, WepStatus(6)=AES!
+[  365.540000] br-lan: port 3(apcli0) entered forwarding state
+[  365.550000] br-lan: received packet on apcli0 with own addr
+</code>
+看到了APCLI LINK UP，那么WIFI就连接上了。
+
+===检查是否链接好上级AP===
+ap_client命令用来检查是否连上上级AP，返回“ok”代表已经连接好，否则返回"no"
+<code bash>
+root@Widora:/# ap_client 
+ok
+root@Widora:/# ping qq.com
+PING qq.com (125.39.240.113): 56 data bytes
+64 bytes from 125.39.240.113: seq=0 ttl=47 time=7.877 ms
+64 bytes from 125.39.240.113: seq=1 ttl=47 time=13.103 ms
+^C
+--- qq.com ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 7.877/10.490/13.103 ms
+root@Widora:/# 
+</code>
+===检查有哪些客户端连接了Widora===
+有时，想要看有多少设备连接到Widora的WI-FI：
+<code bash>
+root@Widora:/# iwpriv ra0 show stainfo
+[  710.290000] 
+[  710.300000] HT Operating Mode : 0
+[  710.300000] 
+[  710.300000] 
+[  710.300000] MAC                MODE AID  BSS PSM WMM MIMOPS RSSI0/1/2 PhMd  BW  MCS   SGI   STBC  Idle   Rate   
+[  710.310000] A8:5B:78:7E:1B:CB  200012    0   1   1   0      -33/0  /0  HTMIX 20M 7     1   0    299    72     0         , 314, 100%
+[  710.330000]                                                  MaxCap:HTMIX     20M   7     1   0    
+[  710.330000] 
+root@Widora:/# 
+</code>

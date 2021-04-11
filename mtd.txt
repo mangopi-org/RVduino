@@ -1,0 +1,32 @@
+====启动LOG中看到的分区====
+<code bash>
+[    0.330000] Creating 4 MTD partitions on "spi32766.0":                       
+[    0.340000] 0x000000000000-0x000000030000 : "u-boot"                         
+[    0.350000] 0x000000030000-0x000000040000 : "u-boot-env"                     
+[    0.350000] 0x000000040000-0x000000050000 : "factory"                        
+[    0.360000] 0x000000050000-0x000001000000 : "firmware"                       
+[    0.390000] 2 uimage-fw partitions found on MTD device firmware              
+[    0.400000] 0x000000050000-0x00000017edba : "kernel"                         
+[    0.410000] 0x00000017edba-0x000001000000 : "rootfs"                         
+[    0.410000] mtd: device 5 (rootfs) set to be root filesystem                 
+[    0.420000] 1 squashfs-split partitions found on MTD device rootfs           
+[    0.420000] 0x000000640000-0x000001000000 : "rootfs_data" 
+</code>
+====各个分区====
+^ 分区ID ^ 分区位置 ^ 容量 ^ 作用 ^
+| u-boot | 0x000000000000-0x000000030000 | 192KB | 引导程序，Bootloader |
+| u-boot-env | 0x000000030000-0x000000040000 | 64KB | uboot的env存储，配置参数 |
+| factory | 0x000000040000-0x000000050000 | 64KB | MT7688校准、MAC地址等参数 |
+| firmware | 0x000000050000-0x000001000000 | 15.68MB | 固件分区 |
+| kernel | 0x000000050000-0x00000017edba | 1211KB | 固件分区内的Linux内核分区，大小会根据内核编译配置不同而有所变化 |
+| rootfs | 0x00000017edba-0x000001000000 | 14.5MB | 固件分区内的文件系统分区，包含rootfs_rom（只读）和rootfs_data（可写） |
+| rootfs_data | 0x000000640000-0x000001000000 | 9.74MB | 固件分区内的可写文件系统分区，常用做jffs2 |
+
+====OpenWrt文件系统挂载====
+  - 首先，引导程序启动内核完成后，会加载rootfs_rom只读分区部分来完成系统的初步启动。
+  - rootfs_rom一般采用的是squashFS文件系统，这是一种压缩只读文件系统，加载完毕后将其挂载到/rom目录（同时也挂在为/根目录）。
+  - 首次刷机系统会使用jffs2文件系统格式化rootfs_data分区，并挂在到/overlay目录。
+  - 系统再将/overlay目录挂在为/根目录。
+  - 最后将一部分内存挂在为/tmp目录。
+
+    

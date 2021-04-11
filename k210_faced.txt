@@ -1,0 +1,13 @@
+====人脸检测，对应R1，R2====
+{{ ::20200209143539.jpg?400 |}}
+
+  * 源码 ： {{ ::kendryte_3-standalone.zip |}}
+
+  * github: https://github.com/widora/facedetect-standalone.git 
+
+使用Kendryte-IDE编译，根据配置默认支持ov2640和ov5640。
+
+
+
+====R3====
+以上例程需要根据R3的IO分配进行细微调整。

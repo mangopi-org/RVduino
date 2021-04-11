@@ -1,0 +1,28 @@
+~~NOTOC~~
+~~NOCACHE~~
+
+//芒果派SBC//
+  * [[mangopi1|MangoPi 1]]
+  * [[mangopi_r|MangoPi R]]
+
+----
+//IOT//
+  * [[brief_bit_Q|BIT3.2(Q)]] 
+  * [[brief_bit31|BIT3.1]] 
+  * [[bit51|BIT5.1]]
+  * [[brief_neo|NEO-SEER]]
+  * [[7688dev|MT7688开发]]
+  * [[esp32|AIR-ESP32]]
+
+----
+//AI·RV//
+  * [[BITK210|BITK210]]
+  * [[airv3|AIRV3]]
+  * [[k210eco|K210开发]]
+
+----
+//配件//
+  * [[LCD]]
+  * [[SD-NAND]]
+  * [[CAMERA]]
+  * [[lora_dev|LoRa]]

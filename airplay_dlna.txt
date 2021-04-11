@@ -1,0 +1,60 @@
+====AIRPLAY====
+==简介==
+airplay适用于iphone、ipad、iturns客户端远程推送音乐。 使用前，先保证Widora以<wrap hi>repeater</wrap>方式（此方式与手机、ipad是平行的）连接路由器让Widora连接互联网，手机、ipad等和Widora在同一个路由器下边，或者手机、ipad直连Widora的WI-FI。 
+
+1. 在Widora上编辑/etc/config/shairport文件，将第二行的disabled修改为0。
+<code bash>
+config shairport main
+      option disabled '1'
+      option respawn '1'
+      option bname 'AirPort'
+      option password ''
+      option port '5002'
+      option buffer ''
+......
+</code>
+2. 重启shairport服务： # /etc/init.d/shairport restart
+
+3. 手机、ipad此时可以发现AirPort设备了。
+
+
+=====DLNA=====
+DLNA技术为数字媒体和内容服务提供了互联互通的途径, 通过DLNA可以实现在同一网络内对不同设备上的媒体文件进行搜索、浏览、上下传、播放等功能。我们可以把Widora-NEO设置成DLNA服务器,这样它就可以向其他安装有DLNA软件的设备推送媒体文件:
+
+1.安装minidlna, (默认)设置随系统启动/etc/init.d/minidlna enable.
+
+2.配置/etc/config/minidlna，典型参考如下： 
+   config minidlna config
+        option 'enabled' '1'
+        option port '8200'
+        option interface 'apcli0'
+        option friendly_name 'Widora-NEO miniDLNA Server'
+        option db_dir '/var/run/minidlna'
+        option log_dir '/var/log'
+        option inotify '1'
+        option enable_tivo '1'
+        option strict_dlna '1'
+        option presentation_url ''
+        option notify_interval '900'
+        option serial '12345678'
+        option model_number '1'
+        option root_container '.'
+        list media_dir '/tf/music'
+        option album_art_names   'Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg'
+这里要注意的是option interface项对应dlna的网络接口，同时需调整/etc/config/firewall的配置,以开放此接口对应的端口。最简单的方法就是将相应网络域的input,output都设置为ACCEPT.
+
+list_media_dir 是你存放媒体文件的目录。
+
+3. 在电脑或手机的浏览器地址栏中输入"IP地址:8200" 将显示如下：
+{{:minidlna.jpg}}
+
+如果无法显示，很可能是配置的问题。
+
+4. 在andriod手机上可以用MediaHouse软件来浏览和播放widora DNLA服务器上的媒体文件。MediaHouse会自动发现同一网络内的DLNA服务。
+{{:minitest.jpg}}
+
+5.其它
+   -iOS上客户端软件有mconnectFree。
+   -miniDLNA不支持rmvb视频文件。
+   -注意客户端的播放软件是否支持miniDLNA共享的媒体文件。
+   -minidlna和vsftpd同时运行可能会有冲突。

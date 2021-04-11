@@ -1,0 +1,143 @@
+~~NOTOC~~
+
+
+<WRAP center round important 70%>
+== 重要！BIT3.1模组配置调整计划 ==
+详情：[[bit31diff]]
+</WRAP>
+
+<WRAP center round tip 70%>
+==Console/LUCI用户名：root 密码：12345678 ==
+小伙伴们拿到NEO后为了得到最佳体验，请第一时间[[flash|刷机]]到[[firmware|最新版本固件]]，顺便[[backup|备份WI-FI校准数据]]
+</WRAP>
+
+
+
+<WRAP group>
+<WRAP half column>
+==== ①硬件 ====
+  * [[7688hdk|7688芯片资料]]
+  * [[brief_bit_Q|邮票孔模组(代号Q)]] 
+  * [[brief_bit31|邮票孔模组(代号3.1)]] 
+  * [[bit51|BIT5.1金手指模组·底板KIT]]
+  * [[bit5|BIT5.0金手指模组]]
+
+  金手指优势 \\
+  1. 省去邮票孔量产与焊接厂的磨合过程，100%良率。 
+  2. 邮票孔模组要考虑高TG板材，焊接温度曲线，制作昂贵的测试架，模组回流焊变型，以及与底板平整度契合等问题，金手指统统没这些问题，所以成本更低。 
+  3. 维护更方便，随时可拆下来更换配置。
+
+  * [[brief_neo|NEO-SEER【全开源】]]
+  * [[brief_bit3|邮票孔模组(老款,代号3.0)]] NRND
+  * [[brief_bit|排针模组(代号4.0)]] NRND
+  * [[qa_neobit|常见问题]]
+  * [[soft|SDK环境简介]]
+  * [[bit_ref|BIT外围设计参考]]
+
+</WRAP>
+
+<WRAP half column>
+==== ②开发之前 ====
+  * [[firmware|Uboot和OpenWrt固件(基于CC)]]
+  * [[fw_new|新主线固件(基于21.02)]]
+  * [[flash|刷机]]
+  * [[flashask|刷机常见问题]]
+  * [[resave|救砖(新)]]
+  * [[compile|编译]]
+  * [[compile_mainline|编译-主线]]
+  * [[git|GIT常用命令]]
+  * [[version|启动LOG]]
+==== ③基础操作 ====
+  * [[uart_console|串口控制台]]
+  * [[connect_net|让硬件联网]]
+  * [[telnet_ssh|Telnet、SSH登录]]
+  * [[scp|SCP网络文件传输]]
+  * [[sftp|SFTP文件传输]]
+  * [[backup|备份WI-FI校准数据，非常重要]]
+  * [[factory|恢复出厂设置]]
+  * [[openwrt|安装卸载软件]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ④外设编程 ====
+  * [[iot_router|IOT模式与5口路由模式]]
+  * [[gpio|GPIO]]
+  * [[uart|UART]]
+  * [[485|RS485]]
+  * [[pwm|PWM]]
+  * [[i2c|I2C]]
+  * [[spi|SPI]]
+  * [[usb|USB]]
+  * [[ant|天线]]
+  * [[ant1or2|BIT5的单、双天线切换]]
+  * [[reg|REG工具]]
+  * [[wifi|Wi-Fi]]
+  * [[watchdog|看门狗]]
+  * [[temp|芯片自身温度]]
+</WRAP>
+
+<WRAP half column>
+==== ⑤系统进阶 ====
+  * [[mtd|FLASH分区]]
+  * [[utf|U盘和TF卡]]
+  * [[extmount|ROOTFS扩容]]
+  * [[customize|系统定制化]]
+  * [[startup|程序自启动init脚本]]
+  * [[ntp|应用NTP网络时间同步服务]]
+  * [[uci|uci系统]]
+  * [[proc|procd系统进程管理]]
+  * [[ubus|ubus进程间通信]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ⑥网络进阶 ====
+  * [[wan_lan|WAN、LAN、NAT]]
+  * [[netmode|网络模式]]
+  * [[w_n_config|WIRELESS和NETWORK配置]]
+  * [[firewall|防火墙FIREWALL配置]]
+  * [[iwpriv|iwpriv常用命令]]
+  * [[proxy|反向代理]]
+  * [[testnet|检测网线插拔]]
+  * [[mt76|成长中的mt76开源wifi驱动]]
+
+</WRAP>
+<WRAP half column>
+==== ⑦更多玩法 ====
+  * [[usb_cam|USB摄像头]]
+  * [[motion|motion动态画面监控]]
+  * [[audio|基本音频玩法]]
+  * [[mpd|MPD音乐播放器]]
+  * [[espeak|eSpeak语音合成]]
+  * [[airplay_dlna|AIRPLAY和DLNA]]
+  * [[airkiss_elian|AIRKISS快速配网]]
+  * [[port5|5网口模式]]
+  * [[ser2net|网络转串口]]
+  * [[vsftpd|FTP服务器vsftpd]]
+  * [[ips|IPS液晶屏]]
+  * [[7688qt|7688QT]]
+  * [[2G3G4G|2G/3G/4G模块(含CAT1)]]
+  * [[biroll|试验平衡车]]
+  * [[5portwithsd|5网口与SD卡共存]]
+</WRAP>
+</WRAP>
+
+<WRAP group>
+<WRAP half column>
+==== ⑧量产指导 ====
+此部分位置逐渐移入[[7688HDK]]
+
+  * [[bit3_3bto4b|BIT3的3B/4B地址切换]]
+  * [[emmc|EMMC存储]]
+  * {{:zh:7688模组出厂检测流程.pdf |}}
+  * [[welding|邮票孔模组焊接温度曲线]]
+  * [[76x8QA|MT76x8定频相关]]
+</WRAP>
+
+<WRAP half column>
+
+</WRAP>
+</WRAP>

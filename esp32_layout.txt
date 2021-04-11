@@ -1,0 +1,12 @@
+====SPI FLASH中的分区排布====
+上一章提到了booloader，app，以及分区表的偏移。可以从make flash命令看端倪
+<code bash>
+esptool.py --chip esp32 --port /dev/cu.SLAB_USBtoUART --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 /Users/mango/ESP/esp-idf/examples/get-started/hello_world/build/bootloader/bootloader.bin 0x10000 /Users/mango/ESP/esp-idf/examples/get-started/hello_world/build/hello-world.bin 0x8000 /Users/mango/ESP/esp-idf/examples/get-started/hello_world/build/partitions_singleapp.bin
+</code>
+拆分一下：
+
+0x1000 bootloader.bin (4K偏移)
+
+0x10000 hello-world.bin （64K偏移）
+
+0x8000 partitions_singleapp.bin （32K偏移）

@@ -1,0 +1,13 @@
+====工程====
+  * Altium Designer格式，样板：{{ :bit5-kit.zip |}}
+  * Altium Designer格式，批量：{{ ::bit5-kit-pcb工程v2.zip |}}
+  * 丝印图：{{ ::kit-silk-丝印图.pdf |}}
+  * BOM：{{ ::bit5-kit-bom.xls |}}
+  * Gerber：{{ ::gerber-4in1.zip |}}
+  * 坐标文件：{{ ::坐标文件.zip |}}
+====样板图片====
+
+
+{{ ::top.jpg?600 |}}
+
+{{ ::bot.jpg?600 |}}

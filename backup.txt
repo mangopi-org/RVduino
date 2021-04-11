@@ -1,0 +1,31 @@
+<html> <iframe src="//player.bilibili.com/player.html?aid=36871974&cid=64761460&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" style="width: 640px; height: 430px; max-width: 100%" allowfullscreen="true"> </iframe> </html>
+====为什么要备份无线校准文件？====
+每一个路由器硬件，无线部分的硬件参数都是不同的，为了让不同的硬件参数都发挥出统一的性能，就需要一个校准过程，校准后会生成一个校准文件保存在每个板子FLASH的factory区域，所以每个板子的校准文件都是独一无二的。Widora出厂都已校准完毕，以防用户丢失ART数据，请自行导出保存。 当你拿到widora后，千万不要慌忙的用编程器刷机。
+
+  * 备份ART数据。每个widora板子都会有唯一的ART数据（无线参数校准数据），这个不通用，也不能混用。只要搞丢了基本是找不回来的。
+  * 别用常规的SPI编程器刷widora。玩路由器的朋友们很多，通常习惯是用SPI的编程器刷固件，这种方法是毁灭性质的。因为SPI编程器会把FLASH中的ART数据抹除，如果没有做过步骤1，千万不要用编程器。
+这里需要登录到NEO上操作，前几节已经介绍过登录方法。那这里就直接贴命令了。 首先，无线校准数据占了FLASH上一个独立的分区“factory”,我们先看一下究竟是哪个分区。
+<code bash>
+root@Widora:/# cat /proc/mtd
+dev: size erasesize name
+mtd0: 00030000 00010000 “u-boot”
+mtd1: 00010000 00010000 “u-boot-env”
+mtd2: 00010000 00010000 “factory”
+mtd3: 00fb0000 00010000 “firmware”
+mtd4: 00119d29 00010000 “kernel”
+mtd5: 00e962d7 00010000 “rootfs”
+mtd6: 00aa0000 00010000 “rootfs_data”
+</code>
+找到你啦，原来是mtd2，接下来，使用dd命令将该分区读取到一个文件中。
+<code bash>
+root@Widora:~# dd if=/dev/mtd2 of=/www/art.bin
+128+0 records in
+128+0 records out
+root@Widora:~# ls -l /www/art.bin
+-rw-r--r--    1 root     root         65536 May 17 08:50 /www/art.bin
+root@Widora:~#
+</code>
+既然已经知道了把校准数据暂时放到了/www/art.bin目录，那么我们可以用上一节的知识讲art.bin保存到电脑上了。 这里提供一个简单的方法：浏览器中访问 "http://widora.local/art.bin" 后，会自动弹出下载对话框，下载到电脑即可。
+
+====校准文件格式====
+{{ :mt7628_eeprom_guideline_v2_00.pdf |}}

@@ -1,0 +1,42 @@
+~~NOTOC~~
+[[https://github.com/openwrt/mt76]]
+====Basic information====
+  * Module name(s): mt76_pci
+  * Authorship tag: community
+  * License governing driver source code: GPL
+  * Status: in-kernel (WIP)
+====Function====
+  * MAC architecture / mode: SoftMAC
+  * Driver framework(s): mac80211
+  * Firmware status tags: required
+  * Firmware license tags: redistribution allowed, closed source
+====Limitations / unimplemented functionality NOS====
+  * Currently missing functionality:
+  * Notable limitations:
+====Supported modes====
+  * STA (Station) mode: supported
+  * IBSS (Ad-Hoc) mode: supported
+  * AP (Master) mode: supported
+  * Mesh (802.11s) mode: supported
+  * P2P mode: unsupported
+  * Monitor mode: supported
+  * Packet injection: supported
+====Hardware covered====
+Supported chips
+  * MT7603E, MT7603EN, MT7612E, MT7612EN, MT7662E, MT7662EN, MT7628, MT7628A, MT7628K, MT7628N, MT7628NN
+
+
+====See also====
+  * mt76 driver handles: MediaTek MT7603E, MT7612E, MT7662E, MT7628
+  * MT7603E - 802.11bgn 2T2R (300Mbps) 2.4GHz PCI Express Single Chip,
+  * MT7612E, MT7662E - 802.11abgn/ac 2T2R 2.4/5 GHz PCIe Single Chip,
+  * MT7628 (A/K/N) - 802.11bgn 2T2R 2.4GHz SoC devices (4.7+, WIP: mt76)
+  * mt7601u driver handles: MediaTek MT7601U
+  * MT7601U 802.11bgn 1T1R 2.4GHz USB Single Chip devices
+  chipset is supported in Linux kernel v4.2 (4.2+, git: mt7601u)
+  only station mode is supported initially
+
+====Unsupported chips====
+  * MT7610U, MT7612U - 802.11abgn/ac 1T1R/2T2R 2.4GHz USB Chip (WIP: mt7610u)
+  * MT7630E - 802.11bgn 1T1R 2.4GHz Combo Chip, Bluetooth support (WIP: mt7630e)
+  * Any new MediaTek chip. MediaTek drivers can be downloaded from: (DL: downloads)

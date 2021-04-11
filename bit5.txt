@@ -1,0 +1,80 @@
+~~NOTOC~~
+
+{{ :bit5only.jpg?200|}}
+=====BIT5简介=====
+BIT5是基于MT7628DAN的模块，几乎引出了所有PIN（除PCIE），最大限度的发挥MT7688的性能，软件基于OpenWrt等Linux发行版，提供了丰富的外设和存储空间。软件资源和NEO保持完全相同。硬件资源如下：
+  * MIPS CPU 580MHz
+  * 16M/32MB FLASH，64MByte RAM（注：7628DAN芯片内置64MByte DRAM，不可更改也不可扩展）
+  * 150Mbps Wi-Fi 1T1R 802.11bgn (默认提供的均为单天线版本)
+  * 100Mbps ETH，最多五路
+  * 若干GPIOS
+  * SPI CS0(FLASH占用)，CS1可接其他外设
+  * UART0(默认控制台)，UART1，UART2
+  * PWM0-3
+  * 硬件看门狗
+  * I2S 全双工
+  * USB2.0 HOST
+  * SDIO
+  * 22*30mm NGFF M.2 KEY E接口
+  * 供电3.3V，电流180mA左右
+  * 适合集成到产品中
+  * 运行温度：宽温版本：-20 ～ +55 度
+
+====技术参数====
+
+^ 协议与接口 ^ 详情 ^
+| WiFi标准 | IEEE 802.11b/g/n |
+| Ethernet接口 | 单个10/100M自适应或五个10/100M自适应 |
+| USB2.0 | 1路 |
+| SDIO | 1路 |
+| SPI | 1路 |
+| I2C | 1路 |
+| I2S | 1路 |
+| UART | 3路 |
+| PWM | 4路 |
+| GPIO | 若干 |
+| WIFI频率 | 2.4GHz ISM Band |
+| IPEX端子发射功率 | 15.5dB ~ 16.5dB |
+| 信道 | 1-14 |
+| 电源输入 | 3.3V±0.2V |
+| 空载电流 | 170mA±30mA |
+| 峰值电流 | 800mA(MT7688手册要求) |
+
+
+====硬件资料====
+  * {{ :zh:bit345lib-ad新增3-1和5.1.zip |}}
+  * {{ ::bit5.png }}
+
+====型号说明====
+例如：<wrap hi>BIT32BMI</wrap>，表示32MB FLASH，64MB RAM，金手指连接方式，宽温
+
+字段说明：
+
+1-3、代表系列。BIT：MT7688AN核心模块
+
+4-5、FLASH大小。16:16MB，32:32MB
+
+6、RAM大小。A：32MB，B：64MB，C：128MB
+
+7、代表连接方式。Y：邮票半孔方式，H：排针，M：金手指方式
+
+8、代表温度等级。C：常温，工作温度0～+55，I：宽温，工作温度-20～+55
+
+====外围电路设计====
+  * [[bit_ref|BIT外围设计]]
+
+
+
+
+======底板======
+{{::bit5-kit-t.jpg?400|}}
+
+{{::bit5-kit-b.jpg?400|}}
+
+====底板资料====
+  * BIT5-KIT Altium Designer格式，批量：{{ ::bit5-kit-pcb工程v2.zip |}}
+  * BIT5-KIT 丝印图：{{ ::kit-silk-丝印图.pdf |}}
+  * BIT5-KIT BOM：{{ ::bit5-kit-bom.xls |}}
+  * BIT5-KIT Gerber：{{ ::gerber-4in1.zip |}}
+  * BIT5-KIT 坐标文件：{{ ::坐标文件.zip |}}
+  * 金手指连接器规格书： {{ :zh:e-k_3.2h.pdf |}}

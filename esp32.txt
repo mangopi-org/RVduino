@@ -1,0 +1,47 @@
+~~NOTOC~~
+{{  ::air.jpg?300|}}
+=====芯片=====
+[[http://espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf|ESP32 技术参考手册]]
+
+[[http://espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf|ESP32技术规格书]]
+
+[[http://espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf|ESP32硬件设计指南]]
+
+[[http://espressif.com/sites/default/files/documentation/eco_and_workarounds_for_bugs_in_esp32_cn.pdf|ESP32 Bug描述及解决方法]]
+
+=====AIR系列开发板(esp32)=====
+
+
+=== SCH&DXF ===
+
+{{ ::airv4.pdf |  V4}}
+
+{{ ::airv5.pdf |  V5}}
+
+{{ ::airv6.pdf |V6}}
+
+{{ ::airv6-pcbprj.zip |V6 开源PCB工程(Altium格式)}}
+
+{{ ::air-spec.pdf |AIR英文参数文档}}
+
+{{ ::mic5219.pdf |}}
+
+{{ ::ltc4054.pdf |}}
+
+
+===== 开发 ====
+  * [[brief_air|AIR介绍]]
+  * [[esp32_eco|扩展阅读]]
+  * [[air_hardware|学习AIR的硬件设计]]
+  * [[air_env|搭建环境]]
+  * [[air_compile|编译和下载]]
+  * [[air_run|查看运行情况]]
+  * [[esp32_boot|ESP32启动详解]]
+
+
+
+
+
+
+
+

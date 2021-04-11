@@ -1,0 +1,46 @@
+~~NOTOC~~
+
+======AIRV1/一体化设计版本======
+  * Kendryte K210 AI主控，主频400M，乘法操作算力0.23TOPS，总算力1TOPS
+  * 板载基于新款CP2102N的USB-TTL芯片，最高支持3Mbps波特率（稳定好用）
+  * 锂电池接口，支持恒流充电
+  * 锂电池升压放电电路（仅用单节锂离子电池即可获得5V对外输出电压）
+  * TF卡槽（MOLEX）
+  * 板载WiFi芯片ESP8285
+  * 板载陶瓷WiFi天线以及Ipex端子位置
+  * MicroUSB供电加转串口一体接口
+  * 常规24Pin摄像头DVP接口
+  * 18Pin显示接口，配合显示转接小板可以驱动24Pin 8-Bit液晶屏7789v
+  * 复位按键、Boot按键（设计在显示转接小板）
+  * 40Pin树莓派接口，理论上支持树莓派绝大部分外设
+  * 引出JTAG相关Pin
+  * 尺寸：65x30mm
+
+{{:zh:zong.jpg?direct&200|}}
+
+==芯片资料==
+  * [[k210|K210芯片资料汇总]]
+  * {{ :zh:ea3036.pdf |三路2A电源芯片}}
+  * {{ ::eta6093.pdf |锂电池管理}}
+  * {{ :zh:esp8266_at_bin_v1.6.2.zip |WiFi AT固件}}
+  * {{ :zh:cp2102n-datasheet.pdf |USB转TTL CP2102N}}
+
+==主板==
+  * {{ :zh:k210.pdf |主控原理图}}
+  * {{ :zh:periph.pdf |外设原理图}}
+  * {{ :zh:210pi-丝印.pdf|丝印图}}
+  * {{ ::airv_r1开源.zip |开源工程-nologo}}  https://github.com/widora/AIRV
+
+==显示接口板==
+  * {{ :zh:disp.pdf |显示接口板原理图}}
+
+==WiFi芯片AT固件==
+  * {{ :zh:esp8266_at_bin_v1.6.2.zip |}}
+  * {{ :zh:flash_download_tools_v3.6.5.zip |}}
+  * {{:zh:wifidown.png?linkonly|截图-给ESP8285下载固件}}
+
+====外设====
+  * 2.4寸ST7789v液晶屏 {{ :zh:jlt24100b-pss.pdf |}}，{{ :zh:st7789s.pdf |}}
+  * ov2640摄像头{{:zh:ov2640尺寸跟引脚图.jpg?linkonly|}}，datasheet{{ :zh:ov2640ds.pdf |}}
+  * 摄像头模组 {{ :ov2640-camera_module.pdf |}}
+

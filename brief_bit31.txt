@@ -1,0 +1,166 @@
+======BIT3.1简介======
+BIT3、BIT3.1是基于MT7688AN的模块，引出了所有PIN，最大限度的发挥MT7688的性能，软件基于OpenWrt等Linux发行版，提供了丰富的外设和存储空间。软件资源和NEO保持共用，BIT3.1是BIT3的改良版。
+  * MT7688AN MIPS CPU 580MHz
+  * BIT16CY，16MB FLASH，SOP8封装
+  * BIT32CY，32MB FLASH，WSON-8封装
+  * 128MByte DDR2 RAM
+  * 150Mbps Wi-Fi 1T1R 802.11bgn
+  * 100Mbps 网口，一路或者五路
+  * 若干GPIOS
+  * SPI CS0(FLASH占用)，CS1可接其他外设
+  * UART0(默认控制台)，UART1，UART2
+  * PWM0-3
+  * I2S 全双工
+  * USB2.0 HOST
+  * SDIO
+  * PCI-E
+
+====BIT3.1是BIT3的改良版本，详情如下====
+  * ipex调了方向，防止手工焊接导致ipex端子短路
+  * 串口0的RX增加上拉电阻，防止悬空有干扰命令
+  * cs1根据16和32核心板自带上拉下拉（BIT3.1之后，FLASH在16M及以下均为3B地址模式，32MB均为4B地址模式）
+  * 原背面的电容都放到正面，以后的底板不用挖孔
+  * CPURST_N的RC复位电路已经涉及到核心板上
+  * WPS引脚的上拉电阻移至核心板
+  * VDD_FLASH供电二极管移至核心板
+  * 相对比BIT3价格没有变化
+  * 引脚完全兼容，尺寸没有变化
+
+====硬件资源整理====
+^ BIT3 ^ BIT3.1 ^ 
+|{{::bit3new.jpg|}} | {{::zh::front-07_1.jpg?350|}}  |
+|{{ ::widora-bit-datasheetv09.pdf |}} \\ {{ :wiki:bit3-per.jpg?linkonly|BIT3外设部分原理图}} \\ {{ ::700px-bit3-size.jpg?linkonly |size}} \\ {{ ::500px-bitpins.png?linkonly |pins}} \\ {{ ::bit3.dxf.zip |}} |  {{ :zh:tct190912c007-rohs.pdf |Rohs证书}} \\ {{ :zh:red_证书.pdf |CE证书}}  \\ {{ :zh:p19sz10068_fcc_id_2aulm-bit32cyi.pdf |FCC证书}} |  
+
+焊接温度曲线（点击放大）{{::温度曲线.jpg?400|}}
+
+====SCH-PCB库====
+{{ :zh:bit345lib-ad新增3-1和5.1.zip |}}
+
+
+
+====技术参数====
+
+^ 协议与接口 ^ 详情 ^
+| WiFi标准 | IEEE 802.11b/g/n |
+| Ethernet接口 | 单个10/100M自适应或五个10/100M自适应 |
+| USB2.0 | 1路 |
+| SDIO | 1路 |
+| SPI | 1路 |
+| I2C | 1路 |
+| I2S | 1路 |
+| UART | 3路 |
+| PWM | 4路 |
+| GPIO | 若干 |
+| WIFI频率 | 2.4GHz ISM Band |
+| IPEX端子发射功率 | 15.5dB ~ 16.5dB |
+| 信道 | 1-14 |
+| 无线校准 | 已校准，EVM在-30 |
+| 电源输入 | 3.3V±0.2V |
+| 空载电流 | 170mA±30mA |
+| 峰值电流 | 800mA |
+
+====BIT3.1邮票孔版本尺寸及引脚排列====
+尺寸图：
+
+
+{{ ::500px-bitpins.png |}}
+====BIT针脚定义====
+
+^ 引脚 ^ 功能 ^ 电器特性 ^ 说明 ^
+|A1	|I2S_SDI | I | I2S数据输入端 |
+|A2	|I2S_SDO | O | I2S数据输出端 |
+|A3	|I2S_WS  | O | I2S声道选择，0：左声道，1：右声道 |
+|A4	|I2S_CLK | O | I2S数据位时钟 |
+|A5	|I2C_SCLK | O | I2C总线时钟 |
+|A6	|I2C_SD | I/O | I2C总线数据 |
+|A7 |VDD_FLASH | I | FLASH独立供电端，3.3V |
+|A8	|SPI_CS1 | O | SPI总线片选信号1 |
+|A9	|SPI_CLK | O | SPI总线时钟信号 |
+|A10  |SPI_MISO | I | SPI总线数据主入从出 |
+|A11	|SPI_MOSI | O | SPI总线数据主出从入 |
+|A12  |SPI_CS0 | O | SPI总线片选信号0 |
+|A13	|GPIO_O | I/O | 通用输入输出口，实际为GPIO11 |
+
+^ 引脚 ^ 功能 ^ 电器特性 ^ 说明 ^
+|B1	 |UART_TXD0 | O | 串口0数据输出 |
+|B2	|UART_RXD0 | I | 串口0数据输入 |
+|B3	|RXI_P | A | PORT0网络信号接收正 |
+|B4	|RXI_N | A | PORT0网络信号接收负 |
+|B5	|TXO_P | A | PORT0网络信号发送正 |
+|B6	|TXO_N | A | PORT0网络信号发送负 |
+|B7	|GPIO14/TXO_P | I/O | 通用输入输出口/PORT1网络信号发送正 |
+|B8	|GPIO15/TXO_N | I/O | 通用输入输出口/PORT1网络信号发送负 |
+|B9	|GPIO16/RXI_P | I/O | 通用输入输出口/PORT1网络信号接收正 |
+|B10	|GPIO17/RXI_N | I/O | 通用输入输出口/PORT1网络信号接收负 |
+|B11	|PWM_CH0 | O | PWM通道0 |
+|B12	|PWM_CH1 | O |PWM通道1 |
+|B13	|TXD2/PWM2 | O |串口2数据发送/PWM通道2 |
+|B14    |RXD2/PWM3 | I/O | 串口2数据接收/PWM通道3 |
+|B15	|SD_WP | I | 写保护，1：写保护，0：未写保护 |
+|B16	|SD_CD | I | 插卡检测，1：无TF卡；0：有TF卡（不可悬空） |
+|B17	|SD_D1 | I/O | SDIO数据1 |
+|B18	|SD_D0 | I/O | SDIO数据0 |
+|B19    |SD_CLK | O | SDIO时钟 |
+|B20    |SD_CMD | O | SDIO命令 |
+|B21	|SD_D3  | I/O | SDIO数据3 |
+|B22    |SD_D2 | I/O | SDIO数据2 |
+|B23    |GND | P | 电路地 |
+|B24    |UD_P | I/O | USB数据正 |
+|B25    |UD_N  | I/O | USB数据负 |
+
+^ 引脚 ^ 功能 ^ 电器特性 ^ 说明 ^
+|C1 |GND | P | 电路地 |
+|C2 |RF | A | 射频输出信号 |
+|C3 |GND | P | 电路地 |
+|C4 |GND | P | 电路地 |
+|C5 |UART_RXD1 | I | 串口1数据接收 |
+|C6 |UART_TXD1 | O | 串口1数据发送 |
+|C7 |WLED_N | O	| WIFI LED，低有效 |
+|C8 |LINK0 | O | PORT0 LED，低有效 |
+|C9 |GPIO42/LINK1 | I/O | 通用输入输出口/PORT1 LED，低有效 |
+|C10 |GPIO41/LINK2 | I/O | 通用输入输出口/PORT2 LED，低有效 |
+|C11 |PCIE_CKP0 | O | PCIE总线时钟输出正 |
+|C12 |PCIE_CKN0 | O | PCIE总线时钟输出负 |
+|C13 |PCIE_RXN0	| I | PCIE总线数据接收负 |
+|C14 |PCIE_RXP0 | I | PCIE总线数据接收正 |
+|C15 |PCIE_TXP0 | O | PCIE总线数据发送正 |
+|C16 |PCIE_TXN0	| O | PCIE总线数据发送负 |
+|C17 |3.3VD | P | 3.3V电源 |
+|C18 |GND | P | 电路地 |
+|C19 |GPIO40/LINK3 | I/O | 通用输入输出口/PORT3 LED，低有效 |
+|C20 |GPIO39/LINK4 | I/O | 通用输入输出口/PORT4 LED，低有效 |
+|C21 |CPURST_N | I | CPU复位输入，低有效 |
+|C22 |WPS_RST_PBC | I | 用户按键，WPS输入信号，GPIO38 |
+|C23 |REF_CLK | O | 基准时钟输出，默认12MHz |
+|C24 |PERST_N | O | PCIE复位输出端 |
+|C25 |GND | P | 电路地 |
+
+======BIT3.1外围设计======
+====地址模式和启动相关====
+[[7688hdk#flash地址模式]]
+
+
+
+
+====免焊救砖====
+免焊救砖指的是如果UBOOT损坏了，我们就称板子变砖了，虽然几率极小，但也只能使用SPI编程器对板子进行“救砖操作” \\
+而免焊救砖指的是在不需要把FLASH芯片焊接下来的情况下，利用SPI编程器的<wrap hi>SPI接口</wrap>连接BIT模块的<wrap hi>SPI0对应管脚</wrap>进行救砖。 \\
+BIT模块相较市面上其他模块，这部分特性把FLASH的供电独立了出来。推荐用户为了量产后维护方便，可以将SPI_MISO、SPI_MOSI、SPI_CLK、SPI_CS0、VDD_FLASH预留焊盘。
+
+
+
+
+
+
+====复位电路====
+^ 低成本RC复位电路 ^ 高可靠MAX809复位芯片 ^
+| {{ ::rc.png?200 |}} | {{ ::max809seur.png?200 |}} |
+
+====电源去藕====
+适用一大一小电容对电源干扰去藕，PCB步线时尽可能靠近BIT模块的3.3V供电引脚。
+{{ ::powercap.png?200 |}}
+
+====网口====
+7688的网口自适应，T和R可根据PCB布线任意交换，注意P和N不可交换。
+^ 简易电容耦合设计（不适用于工业环境） ^ 变压器耦合设计 ^
+| 要点：RXI_P/N TXO_P/N为核心板引出的网口信号，需要5个0.1uF电容，4个50欧电阻，网口不带变压器，只用到网线的1，2，3，6。 \\ {{ ::capnet.png |}} | 要点：连接网络变压器或HR911105 ，中心抽头仅对地0.1uF电容即可。 \\ {{ ::net.png |}} |

@@ -1,0 +1,51 @@
+~~NOTOC~~
+
+<WRAP center round tip 70%>
+===注意：AIRV全系列均不支持K-FLASH.exe===
+刷固件有两种方式，一个是kflash.py脚本，另一个是官方IDE内置的下载
+</WRAP>
+
+
+======开发准备======
+
+1、microUSB线兼顾了供电与USB转串口，连接到电脑的原生USB口 \\
+2、按照图片将AIRV的液晶屏和摄像头连接好 \\
+3、若还没装驱动，以下是下载链接
+  * macOS：http://www.silabs.com/documents/public/software/Mac_OSX_VCP_Driver.zip
+  * Linux：自带，无需安装
+  * Windows10：https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip
+  * Windows7,8：https://www.silabs.com/documents/public/software/CP210x_Windows_Drivers.zip
+4、准备下载工具 \\
+Windows Ubuntu macOS下都推荐使用官方下载脚本{{ ::kflash.py.zip |}} ,需要提前安装python3环境以及pyserial扩展
+<code>
+sudo apt update
+sudo apt install git python3 python3-pip
+sudo pip3 install pyserial
+git clone https://github.com/widora/kflash.py.git 
+</code>
+
+====下载工具的使用====
+这部分作为备用工具安装，下一节我们下载IDE后，IDE内已集成了该工具。
+
+比如要下载的固件是xxxx.kfpkg, 则用如下命令
+===Windows10===
+命令行可以使用Powershell或git bash，串口号需要到“设备管理器”中查看，例如我的电脑上是COM29，则命令如下：
+<code>
+    python3 kflash.py -p COM29 -B airv xxxx.kfpkg -b 2000000
+</code>
+如果系统此时只有一个串口设备，则可以省略-p参数。
+<code>
+    python3 kflash.py -B airv xxxx.kfpkg -b 2000000
+</code>
+===Ubuntu===
+具体的串口号提前用ls /dev/ttyU*查看。
+<code>
+    sudo python3 kflash.py -p /dev/ttyUSB0 -B airv xxxx.kfpkg -b 2000000
+</code>
+
+===MacOS===
+具体的串口号提前用ls /dev/tty.*查看。
+<code>
+    python3 kflash.py -p /dev/tty.SLAB_USBtoUART -B airv xxxx.kfpkg -b 2000000
+</code>
+

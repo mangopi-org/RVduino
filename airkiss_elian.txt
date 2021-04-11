@@ -1,0 +1,31 @@
+====微信配网说明====
+
+===扫码===
+目前该模式的触发是aac命令，暂未关联外部按钮。配网手机支持IOS和安卓，安装了最新版本微信，再就是连接家庭路由器的2.4G WI-FI。 widora进入配网模式：
+<code bash>
+root@widora:/# aac
+</code>
+手机打开微信，扫一扫如下二维码：
+
+{{ :1489233470343-img_1049.png?300 |}}
+
+输入当前网络的密码，等待片刻，Widora会以client模式连上网络。
+
+===检查联网===
+依然是用ap_client命令，返回ok代表联网，返回error代表未联网。
+<code bash>
+root@widora:/# ap_client
+ok
+</code>
+
+
+====ELIAN配网====
+这是联发科开发的一种配置WI-FI密码的方式，暂只支持安卓手机，手机需要安装{{ ::elian-1.0.16.zip |}}
+
+  - Widora进入elian模式: root@Widora:/# iwpriv ra0 elian start
+  - 手机发送: 安卓手机打开elian客户端后，填写SSID和KEY，点send V4
+  - 获取结果（如没获取就多次执行该命令）: root@Widora:/# iwpriv ra0 elian result
+  - 退出elian模式:   root@Widora:/# iwpriv ra0 elian stop
+  - 连接外部AP: 获取SSID和KEY后，手动执行connect2ap ssid key
+
+
