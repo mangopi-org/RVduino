@@ -2,6 +2,5 @@
 
   * [[products|产品]]
   * [[https://mangopi.club|社区]]
-  * [[explore|探索]]
   * [[https://widora.taobao.com|商城]]
-  * [[https://github.com/mangopi-sbc/mangopi-org/|参与编辑]]
+  * [[https://gitee.com/mangopi-sbc/mangopi-org|参与编辑]]

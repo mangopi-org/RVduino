@@ -1,24 +1,20 @@
 <WRAP group>
 <WRAP half column>
-//交流社群//
-
-[[https://qm.qq.com/cgi-bin/qm/qr?k=0LAGnKz_n318RVZaHKcb2d2TVm4XW-gX&jump_from=webapi|芒果派主群: 662381849]]
-
-[[https://qm.qq.com/cgi-bin/qm/qr?k=5nDahYuY6nCJnYeP5d5QXX99__z3bafT&jump_from=webapi|AI:242127577]]
-
-[[https://qm.qq.com/cgi-bin/qm/qr?k=UIKSgwo-cNnVldEZUrVfX40vye7ZTvgi&jump_from=webapi|DL:663926178]]
+//交流社群(非技术支持)//
+  * [[https://qm.qq.com/cgi-bin/qm/qr?k=0LAGnKz_n318RVZaHKcb2d2TVm4XW-gX&jump_from=webapi|芒果派: 662381849]]
+  * [[https://qm.qq.com/cgi-bin/qm/qr?k=67ZnfwApm7fAsusBHyGL2jkv-8hPQJEK&jump_from=webapi|歪朵拉: 299381903]]
+  * [[https://qm.qq.com/cgi-bin/qm/qr?k=5nDahYuY6nCJnYeP5d5QXX99__z3bafT&jump_from=webapi|AI群1:242127577]] [[https://qm.qq.com/cgi-bin/qm/qr?k=kcOpqWD5Jg38YUIz7grf75kqNmfiq54u&jump_from=webapi|AI群2:145809155]] [[https://qm.qq.com/cgi-bin/qm/qr?k=UIKSgwo-cNnVldEZUrVfX40vye7ZTvgi&jump_from=webapi|AI群3:663926178]]
+  * [[https://qm.qq.com/cgi-bin/qm/qr?k=abo8j6IRiFEnMXMYjTrA9ymkBGmUJ7T2&jump_from=webapi|GitHub互助群1]]
+  * [[https://qm.qq.com/cgi-bin/qm/qr?k=oQnLTtKVJSuANcpKrXsKGnx1inxgK0Qw&jump_from=webapi|GitHub互助群2]]
 </WRAP>
 
 <WRAP half column>
 //支持//
-
-[[about|关于我们]]
-
-[[https://github.com/mangopi-sbc|GitHub]]
-
-[[https://twitter.com/mangopi_widora|推特]]
-
-[[https://www.zhihu.com/people/widora|知乎芒果派]]
+  * [[https://mangopi.club|技术支持社区]]
+  * [[about|关于我们]]
+  * [[https://github.com/mangopi-sbc|GitHub]]
+  * [[https://twitter.com/mangopi_widora|推特]]
+  * [[CopyRight]]
 
 </WRAP>
 

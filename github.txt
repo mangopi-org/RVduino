@@ -1,0 +1,9 @@
+====Github加速====
+方法1：gitclone时使用代理，将github.com替换为github.mangopi.org，例如：
+
+  git clone https://github.com/lvgl/lvgl   速度不稳定时，使用如下命令
+  git clone https://github.mangopi.org/lvgl/lvgl    大约100KB/s
+  
+  
+
+方法2：代下载网站： [[http://gitd.cc]] ，在这个网站上提交要clone的git链接，等一会服务器就帮你下载好啦

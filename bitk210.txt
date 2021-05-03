@@ -1,5 +1,9 @@
 ~~NOTOC~~
 
+<WRAP center round info 60%>
+据不完全统计，BITK210仍是当前业界最小的K210模组，简单易用，易于批产
+</WRAP>
+
 
 旧版 BITK210-16M0 代号：小K  尺寸 22*18MM
 {{:zh:未命名.png?300| }}

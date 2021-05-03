@@ -1,3 +1,9 @@
+~~NOTOC~~
+
+<WRAP center round info 60%>
+===离谱！BITS202DY模组只需45元===
+</WRAP>
+
 
 <html>
 <style type="text/css">
@@ -23,10 +29,9 @@
     <section class="company">
         <div class="company-desc">
             <p><span style="color: #b318f0">你的下一个Linux电脑，有可能是个芒果派~</span></p>
-            <img src="https://mangopi.org/_media/mangopi.png?w=100&tok=e8cfce"> </img>
             <p><span style="color: #b318f0">更硬核，更漂亮，更优雅，更好用</span></p>
             <p><span style="color:#13684f">想要什么特性？</span></p>
-            <p>(四核·√) (>1GB运存·√) (桌面Linux·√)(1.2～5T的AI算力·√) </p>
+            <p>(四核/六核·√) (>2GB/4GB运存·√) (桌面Linux·√)(1.2～5T的AI算力·√) </p>
             <p>(千兆+5GWiFi·√) (PCIE扩展·√) </p>
             <p>(比树莓派小一半·√) (性价比高·√)  <span style="color:#0318ff">......好消息是：MangoPi 1 即将到来</span></p>
         </div>        
@@ -34,6 +39,7 @@
     </div>
 </html>
 
+{{ :mangopi.png?150|}}
 
 =====MangoPi是什么>>> =====
 芒果派是针对创客、极客的单板机系列，划分以下产线
@@ -46,7 +52,7 @@
 单纯的想提供一系列基于国产SOC并且能摆脱“山寨派”、“吃灰派”的精品SBC，国货之光。 
 
 ==== 选型>>> ====
-AIoT时代已来，众多落地场景加速了边缘计算芯片算力能耗比的提高，也同时对新架构的算力利用率有更高的需求（例如非常典型的大规模投入市场的人脸识别测温方案大多数算力在1～3Tops）。
+AIoT时代已来，众多落地场景加速了边缘计算芯片算力能耗比的提高，也同时对新架构的算力利用率有更高的需求（例如典型的大规模投入市场端侧人脸识别方案算力1～3Tops）。
 
 <wrap hi>所以，芒果派在选型上跳过了低于1Tops算力的鸡肋AI芯，从而转向制程更高、算力更强、应用更成熟的Linux-AI芯片，同时依靠成熟量产的合作供应链来做到超高性价比。</wrap>
 

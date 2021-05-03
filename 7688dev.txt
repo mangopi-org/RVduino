@@ -29,7 +29,7 @@
 
   * [[brief_neo|NEO-SEER【全开源】]]
   * [[brief_bit3|邮票孔模组(老款,代号3.0)]] NRND
-  * [[brief_bit|排针模组(代号4.0)]] NRND
+  * [[brief_bit|排针模组(代号4.0)]]
   * [[qa_neobit|常见问题]]
   * [[soft|SDK环境简介]]
   * [[bit_ref|BIT外围设计参考]]
@@ -38,7 +38,7 @@
 
 <WRAP half column>
 ==== ②开发之前 ====
-  * [[firmware|Uboot和OpenWrt固件(基于CC)]]
+  * [[firmware|Uboot和OpenWrt固件(openwrt_widora)]]
   * [[fw_new|新主线固件(基于21.02)]]
   * [[flash|刷机]]
   * [[flashask|刷机常见问题]]

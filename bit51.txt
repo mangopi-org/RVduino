@@ -1,3 +1,8 @@
+<WRAP center round info 60%>
+该模组最新版本为BIT5.1b
+
+</WRAP>
+
 
 =====BIT5.1简介=====
 BIT5.1是基于MT7688AN的模块，引出了所有PIN，最大限度的发挥MT7688的性能，软件基于OpenWrt等Linux发行版，提供了丰富的外设和存储空间。软件资源和NEO保持完全相同。硬件资源如下：

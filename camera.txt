@@ -1,3 +1,4 @@
+~~NOTOC~~
 =====单摄=====
   * 接口：CSI，24Pin，0.5mm间距
   * {{ :zh:ov2640ds.pdf |}}
@@ -9,4 +10,6 @@
 
 =====双摄=====
   * 接口：CSI，24Pin，0.5mm间距
-  * 
+  * 型号：widora-ga4a4.4
+  * IC：GC0328 x 2，{{ :gc0328c_datasheet_released_v1.0_20140930.pdf |}}
+  * Datasheet：{{ :widora-ga4a4.4-v1.0.pdf |}}

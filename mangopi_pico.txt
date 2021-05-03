@@ -1,0 +1,43 @@
+=====MPi-Pico=====
+
+
+
+
+
+<WRAP group>
+<WRAP half column>
+====V1探索====
+\\
+探索记录： https://mangopi.club/topic/767
+
+图片：{{::pico探索.jpg?300|}}
+</WRAP>
+
+<WRAP half column>
+====V2量产====
+
+MPi-C系列是基于SSD210设计的一体化ARM硬件原型平台, 突出特点是轻巧+极致迷你,25.4mm*22.82mm, 可方便驱动4寸电容触摸屏, 面向轻量HMI设计，硬件资源:  \\
+  - 主控 双核 Cortex-A7 800MHz
+  - 运存 64MByte
+  - 存储 TF接口NAND芯片 512MByte (背面)
+  - 外部存储 TF卡接口
+  - 下载 USB-OTG
+  - 扩展 22Pins 2.54双排针
+  - 显示/触摸 RGB 40Pin（内含触摸）
+  - 音频 立体声耳机、MIC一体化音频接口
+  - USB microUSB OTG接口
+  - 按键 Reset*1 Boot*1 (背面)
+</WRAP>
+</WRAP>
+
+
+
+\\
+\\
+\\
+====硬件资料====
+
+
+
+
+====开发====

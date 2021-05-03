@@ -1,18 +1,7 @@
-====我们从未停止探索====
-//此页面放置整理的新方案资料//
+===我们从未停止探索===
 
-//有什么想法一起讨论：https://mangopi.club/category/52 //
+芒果派俱乐部新开的[[https://mangopi.club/category/52|探索版块]]，欢迎来这里交流有意思的芯片或方案，各种稀奇古怪的想法。
 
-
-<WRAP group>
-<WRAP half column>
-===MT7621区===
-</WRAP>
-
-<WRAP half column>
-===SSD210/212/202区===
-</WRAP>
-</WRAP>
 
 
 

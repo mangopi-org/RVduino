@@ -4,15 +4,20 @@
 //芒果派SBC//
   * [[mangopi1|MangoPi 1]]
   * [[mangopi_r|MangoPi R]]
+  * [[mangopi_pico|MPi Pico]]
 
 ----
-//IOT//
+//歪朵拉IoT生态//
+  * [[bit31diff|重要：7688模组主控调整]]
   * [[brief_bit_Q|BIT3.2(Q)]] 
   * [[brief_bit31|BIT3.1]] 
   * [[bit51|BIT5.1]]
   * [[brief_neo|NEO-SEER]]
-  * [[7688dev|MT7688开发]]
+  * [[7688dev|MT7688开发汇总]]
   * [[esp32|AIR-ESP32]]
+  * [[bits202|BITS202(晓)即将发售]]
+  * [[bits210|BITS210(晓)即将发售]]
+  * [[sigma|SigmaStar开发汇总]]
 
 ----
 //AI·RV//
@@ -26,3 +31,9 @@
   * [[SD-NAND]]
   * [[CAMERA]]
   * [[lora_dev|LoRa]]
+
+
+----
+//其他//
+  * [[github|Git加速]]
+  * [[git|Git教程]]

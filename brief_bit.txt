@@ -1,10 +1,10 @@
-<wrap hi>停产！不推荐用于新设计</wrap>
+
 {{ :zh:bit4only.jpg?300|}}
 ~~NOTOC~~
 ====BIT4简介====
 BIT是基于MT7688AN的模块，几乎引出了所有PIN，最大限度的发挥MT7688的性能，软件基于OpenWrt等Linux发行版，提供了丰富的外设和存储空间。软件资源和NEO保持完全相同。硬件资源如下：
   * MIPS CPU 580MHz
-  * 16M/32MB FLASH配置，128MB DRAM配置
+  * 16M/32MB FLASH配置，128MB/64MB DRAM配置
   * 150Mbps Wi-Fi 1T1R 802.11bgn
   * 100Mbps ETH，最多五路
   * 若干GPIOS
